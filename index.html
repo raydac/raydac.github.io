@@ -1,5 +1,90 @@
+<!DOCTYPE html>
 <html>
-<body>
-<p>here will be Igor Maznitsa's page</p>
-</body>
+  <head>
+    <title>IgorMaznitsa.com</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="igor, maznitsa, zx-poly, developer, cv, java">
+
+    <link rel="shortcut icon" href="images/ico.png">
+    <link rel="stylesheet" href="css/my.css" />
+    <script src="js/jquery-2.1.3.min.js"></script> 
+
+    <script>
+      $(document).ready(function () {
+        $('.oldstyled').each(function (index) {
+          var text = $(this).text();
+          var capital = text[0];
+          text = text.substring(1);
+          $(this).text(text);
+          var newcap = $('<div>');
+          newcap.text(capital);
+          newcap.addClass('oldtextcap');
+          $(this).prepend(newcap);
+          $(this).addClass('oldtext');
+        });
+      });
+    </script>
+   
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-43974441-7', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <h1>Igor Maznitsa's home page</h1>
+    <div class="oldstyled">Hello, I am a programming engineer from Tallinn (Estonia, it is a very very small Baltic country) where I have been living with my family since 2013, before I lived in Saint-Petersburg (Russia) where I was born in 1975. Programming is not only my daily work but also my main hobby. I started programming in 1988 when I was a pupil in a soviet 421 school of Leningrad city and we used BK-0010-01 school computers to learn computer science, then I spent many years to develop miscellaneous software as an amateur and only since 1997 I have been working as a professional software engineer. Mainly since 1999 I use Java platform as the base for my software developments from mobile projects to enterprise government level solutions. Also I have experience in different computer languages and even have experience in development of enterprise we based system in FORTH language. I am very lazy person and believe that programming is the main tool which sent by The God to laziness people, I am not programming for my pleasure but I am trying to transfer my daily tasks to computer's back through my knowledge and skills. Sometime I think that modern programmers are successors of medieval alchemist because mainly they have the same targets: both development of philosopher's stone and creation of homunculus (the last one I like much more than the first one).</div>
+    <div class="miniature"><img src="./images/skeptikdigi.png" alt="Flammarion engraving"></div>
+    <hr>
+    <div class="oldstyled">I am presented in the main social networks (but not very active in them because it takes too much time). I have listed some links below and you can visit them if you wish. All my published programming stuff and pet-projects I keep in GitHub and if you have interest to any my project (for instance ZX-Poly), you can find all open information in my GitHub repository.</div>
+    <table>
+      <tr>
+        <td>
+          <a href="https://github.com/raydac" target="_blank"><img alt="GitHub" src="images/logo_github.png"></a>
+        </td>
+        <td>
+          <a href="https://plus.google.com/u/0/+IgorMaznitsa" target="_blank"><img alt="Google+" src="images/logo_googleplus.png"></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://ee.linkedin.com/in/igormaznitsa" target="_blank"><img alt="LinkedIn" src="images/logo_linkedin.png"></a>
+        </td>
+        <td>
+          <a href="https://www.facebook.com/igor.maznitsa" target="_blank"><img alt="Facebook" src="images/logo_facebook.png"></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://raydac.blogspot.com/" target="_blank"><img alt="Blogger" src="images/logo_blogger.png"></a>
+        </td>
+        <td>
+          <a href="https://twitter.com/IgorMaznitsa" target="_blank"><img alt="Twitter" src="images/logo_twitter.png"></a>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <div class="oldstyled">Just in case If you want contact me directly and you don't have account in social networks, then you can just drop me email, my email igor.maznitsa[at]igormaznitsa.com also I have Skype account 'raydac' but please provide me extra information about yourself and your purposes if you ask me to add you into contacts.</div>
+    <hr>
+    <div class="oldstyled">The Last section contains links to misc old and very old stuff which may be is still interesting for somebody and I keep it mainly for back compatibility with the previous version of my home page. I just made some small descriptions and screen-shots from old developments and applications in which development I took a part and which had some more or less rich GUI. For non-game applications I made some small reference, but for games only screen-shots.</div>
+    <div class="links">
+    <ul>
+      <li><a class="somelink" href="./projects/battleships/index.html">Page of the client-server game "Battleships" (2001)</a></li>
+      <li><a class="somelink" href="./gui/guidev.html">Screenshots of old GUI based applications and systems (1999-2004)</a></li>
+      <li><a class="somelink" href="./mgames/games2002_2003.html">Screenshots of mobile games (2002-2003)</a></li>
+      <li><a class="somelink" href="./mgames2/games2003_2006.html">Screenshots of mobile games (2003-2006)</a></li>
+      <li><a class="somelink" href="./itv/itvapps.html">Screenshots of iTV games (2003-2006)</a></li>
+    </ul>
+    </div>
+    <p class='footer'>
+    Designed by Igor Maznitsa, 2015
+    </p>
+  </body>
 </html>
