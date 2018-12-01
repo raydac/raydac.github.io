@@ -44,6 +44,7 @@ table {
 a img:hover{
   -webkit-filter: drop-shadow(3px 3px 3px #ff6600);
   filter: drop-shadow(3px 3px 3px #ff6600);
+  cursor: pointer;
 }
 
 td:first-child {
