@@ -1,97 +1,118 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
+
+<head>
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <title>Misc old GUI applications (igormaznitsa.com)</title>
     <meta content="Igor Maznitsa" name="author">
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-43974441-7', 'auto');
-      ga('send', 'pageview');
+    <!-- Google Analytics -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-43974441-7', 'auto');
+        ga('send', 'pageview');
 
     </script>
-  </head>
-  <body>
-    <p>This page contains short references and screen-shots from old GUI projects developed for different customers.</p>
+    <!-- End Google Analytics -->
+
+</head>
+
+<body>
+    <p>I have collected some screenshots and short reserences of my very old developments on this page.</p>
     <h2>Drevo-M</h2>
     <div>
-      The Application was develioped when I was working in OTIS Elevator Company. The Main Purpose of the application is to allow to an operator to enter some parameters of an elevator delivering contract and press a button to get full package of documents for the contract. The Application had its own domain specific language and mainly its work was based on prepared templates which were modified by scripts written in the DSL. The Application allowed to form text files, AutoCAD sketches (through AutoLisp interface) and even prepare binary files. It was entirely developed in Delphi 3 and was actively used in processes of the Saint-Petersburg OTIS Elevator factory.
+        I was hired by OTIS Elevator Company (Saint-Petersburg branch, Russia)in 1999 to continue development of a system for contract department. The System was started by previous developer but he had left company and the system was not in work state, I decided that it would be good idea just to rewrite the system and developed own Delphi based version called "Drevo" (it means "Tree" in ancient Russian). The system was developed during several months and contract department started very actively use it to generate contract documentation and ROMs for elevators. It was even included into internal learning courses of the company. The system contained some internal domain-specific language "RSL", nothing special and complexity level on the level of BASIC.
     </div>
     <div>
-      <img style="width: 200px; height: 150px;" alt="drevo1" src="drevo1.jpg">
-      <img style="width: 200px; height: 150px;" alt="drevo2" src="drevo2.jpg">
-      <img style="width: 200px; height: 150px;" alt="drevo3" src="drevo4.jpg">
-      <img style="width: 200px; height: 150px;" alt="drevo4" src="drevo5.jpg">
-    </div>
-    <h2>COP (Car Operating Panel) tester</h2>
-    <div>
-      Because OTIS Elevator company produces elevators, it had needs in easy and powerful tool for its SPB factory to allow to a worker to test COP panels during assembling. I had got the order and implemented some software-hardware complex based on Atmel AVR microcontroller connected to COP and PC. The PC software part was developed in FORTH and could be started under DOS on PC AT 386 with 1MB memory, and microcontroller software was developed in AVR assembler. The Heart of the system was Atmel AVR AT4414. its power was enough for the system. As I know the complex was in very hard usage as minimum for 2 years.
-    </div>
-    <div>
-      <img style="width: 128px; height: 202px;" alt="coptester1" src="device.jpg">
-      <img style="width: 300px; height: 225px;" alt="coptester2" src="tstcop1.jpg">
-      <img style="width: 300px; height: 225px;" alt="coptester3" src="tstcop2.jpg">
-      <img style="width: 300px; height: 225px;" alt="coptester4" src="tstcop3.jpg">
+        <img style="width: 200px; height: 150px;" alt="drevo1" src="drevo1.jpg">
+        <img style="width: 200px; height: 150px;" alt="drevo2" src="drevo2.jpg">
+        <img style="width: 200px; height: 150px;" alt="drevo3" src="drevo4.jpg">
+        <img style="width: 200px; height: 150px;" alt="drevo4" src="drevo5.jpg">
     </div>
 
-    <h2>Load diagram</h2>
+    <h2>Project network</h2>
     <div>
-      During my job for OTIS Elevator Company I also implemented some information system to provide control for top-management of the SPB factory for elevator contract promotion. The Project is interesting because it was my first Java project (in Java 1.1) and for it I developed dedicated HTTP server (it was called Titmouse, about 200 kB JAR) which had functions to work with DB. Inside of the server, FORTH interpreter was implemented and all dynamic web pages and scripts on the server side, were written in FORTH language (I called the technology Forth Server Pages). As DB server we used MS Access and it was interesting that Pentium 2 200 Mhz and Java 1.1 server with interpreting scripts was enough for work of about 15 386 clients (working uner Windows 3.11).  The System was in usage for 2 years and then it was rewritten under Pearl.
+        All works for projects in OTIS Elevator Company were organized in project network, and because management decided to automate processes in contract processing, I got order to develop some intranet based system (because we had some network including a lot of 386 PC) for common work by contract teams over data. I decided that it would be no good to develop such system in Delphi and decided to taste Java 1.1 (which was actually new technology and I bought its SDK on CD with some book dedicated to Java). Java provided very easy way to develop multi-threaded applications than Delphi. I developed some HTTP server (I called the server "Titmouse") with embedded domain-specific language based on FORTH (I called it Forth Server Pages (FSP)), the full size of JAR of the server was about 200 kB. As contract data base we used MS Access and my server was connected to the DB through JDBC-ODBC bridge. Development of whole system from the scratch took about four months. That's interesting that Java 1.1 was enough strong to implement server and successfully process requests from many machines (about 15 386 PCs woking under windows 3.11), server was started on Pentium II 200 Mhz (under Windows 98), I even didn't make strong optimizations in DSL implementation and mainly it worked in interpretator mode. The System was in active use during pair years without problems and then it was rewritten to Pearl.
     </div>
     <div>
-      <img style="width: 200px; height: 150px;" alt="szg1" src="szg2.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg2" src="szg3.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg3" src="szg4.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg4" src="szg5.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg5" src="szg7.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg6" src="szg8.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg7" src="szg9.jpg">
-      <img style="width: 200px; height: 150px;" alt="szg8" src="szg10.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg1" src="szg2.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg2" src="szg3.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg3" src="szg4.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg4" src="szg5.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg5" src="szg7.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg6" src="szg8.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg7" src="szg9.jpg">
+        <img style="width: 200px; height: 150px;" alt="szg8" src="szg10.jpg">
     </div>
+
+
+    <h2>COP (Car Operating Panel) tester</h2>
+    <div>
+        In 2001 I got order from OTIS Eleveator Compamy to develop software-hardware complex to automate testing of COP (car operating panel) panels and provide way for workers to use it. Workers had no so strong hardware, just a 486 PC computer with MS-DOS and 2 Mb RAM so that I decided to use FORTH language for software part development. Hardware part included conector to COP and microcontroller based adapter to be connected to PC, as the core of the adapter I used Atmel AVR AT4414. The complex was successfully developed and worked without problems and even support during pair years. The Biggest enemy of the system were mice but even they couldn't kill the system quickly.
+    </div>
+    <div>
+        <img style="width: 128px; height: 202px;" alt="coptester1" src="device.jpg">
+        <img style="width: 300px; height: 225px;" alt="coptester2" src="tstcop1.jpg">
+        <img style="width: 300px; height: 225px;" alt="coptester3" src="tstcop2.jpg">
+        <img style="width: 300px; height: 225px;" alt="coptester4" src="tstcop3.jpg">
+    </div>
+
     <h2>Logotone</h2>
     <div>
-      In 2001 I was working for well-known (in that time) brand INFON and I had task to develop pair online applications to provide online editing of mobile content to our users. The First one was online player of OTT tones (format for Nokia mobile phones), a user could hear a melody online through the applet.
+        Since 2001 I started work for brand "INFON", it was the first one and the biggets provder of SMS services and content in Russia and one of my first task was to develop online (Java applet based) tools for users to edit and preview content before send to mobile devices. The whole project had title "Logotone".<br>
+        The First online application was the online player of OTT tones (Nokia sound format delivered by SMS), it provided way for users to check melody online before sending to mobile phones.
     </div>
     <div>
-      <img style="width: 190px; height: 178px;" alt="OTT player" src="tone_player.gif">
+        <img style="width: 190px; height: 178px;" alt="OTT player" src="tone_player.gif">
     </div>
     <div>
-      The Second application was a Java applet to allow conversion of uploaded images into format compatible with SMS. It supported several algorithms for conversion.
+        The Second online application was a converter of uploaded images into black-white visual format compatibles with SMS delivering. It provided several converting algorithms and worked well.
     </div>
     <div>
-      <img style="width: 300px; height: 317px;" alt="photolab" src="photolab.jpg">
+        <img style="width: 300px; height: 317px;" alt="photolab" src="photolab.jpg">
     </div>
     <div>
-      The Third one was online editor to provide online editing and creation of black-white images which then could be delivered to user's mobile phone.
+        The Third application was an online graphic editor where users could create own content and use some predefined patterns, created image could be delivered to mobile phones through SMS.
     </div>
     <div>
-      <img style="width: 380px; height: 254px;" alt="logo maker" src="logo_editor.jpg">
+        <img style="width: 380px; height: 254px;" alt="logo maker" src="logo_editor.jpg">
     </div>
-    <h2>Form editor</h2>
+    <h2>Form editor tool</h2>
     <div>
-      Since 2003 I was involved in game development for mobile phones and iTV devices and UI is super-important part of such kind of software. I developed some IDE to prepare and edit UI for different devices, it generated binary files and assets based on entered data. For long time it was the main tool in RRG Ltd. which saved huge time for us.
-    </div>
-    <div>
-      <img style="width: 480px; height: 346px;" alt="form edittor1" src="formeditor.jpg">
-      <img style="width: 480px; height: 347px;" alt="form edittor2" src="formeditor2.jpg">
-    </div>
-    <h2>SMS Catalog IDE</h2>
-    <div>
-      Once upon a time I was on weekend and caught an idea that it would be possible to automate process of SMS sending and form that as some catalog where user could just select needed service. I developed the first version for weekend and testing showed me that it worked just brilliant! I improved the J2ME part, added support of small embedded games and notified some of my partners (mobile content providers) about such solution. The IDE part was developed to automate generation process of such universal catalogs delivered to mobile phones. The System worked well and brought a lot of money but lately it was lost in hard fighting with clones on market.
+        Since 2003 I was strongly involved in game development for mobile phones and iTV devices, for automation of processes I developed GUI application which provided easy way to create and edit game forms and their animation, it was a Java tool and helped my company RRG Ltd. dramatically decrease development price and time.
     </div>
     <div>
-      <img style="width: 400px; height: 288px;" alt="sms catalog" src="smscatalog.jpg">
+        <img style="width: 480px; height: 346px;" alt="form edittor1" src="formeditor.jpg">
+        <img style="width: 480px; height: 347px;" alt="form edittor2" src="formeditor2.jpg">
     </div>
-    <h2>Video preview IDE</h2>
-    <div>ZED company asked me to develop some tool to generate mobile application based on several video frames from video and provide possibility to buy the full video through SMS. So the IDE was born. It loaded video file and extracted it to frames, then it converted frames into images supported in mobile devices, connected player and produced into single J2ME application.
+
+    <h2>SMS Catalog generator</h2>
+    <div>
+        In the start of 2000th SMS services were super popular ones and we had a lot of magazines where SMS content was provided with titles "send XXX to get such picture/sound to your mobile". In 2003, I was on weekend and come up with the idea that a J2ME application could be used to provide comfortable and fast way for users to send SMS and order needed content. During weekend I developed some prototype and presented to my partners from a SMS service providing company, they were amazed by the prototype and started action "SMS catalog" for their users, I asked only about 10% of pure profit, we worked together with the system several months but the application was easy enough and my partners made clone (even embedded game was cloned) and pushed me out from the business, also competitors started make their own variants, the idea was not patented but may be I am the first one who made as minimum in Russia such application.
     </div>
     <div>
-      <img style="width: 400px; height: 288px;" alt="videoide1" src="videoprev1.jpg">
-      <img style="width: 400px; height: 288px;" alt="videoide2" src="videoprev2.jpg">
+        <img style="width: 400px; height: 288px;" alt="sms catalog" src="smscatalog.jpg">
     </div>
-  </body>
+    
+    <h2>Video preview generator</h2>
+    <div>
+        After many years in business, Russian brand "INFON" was bought by ZED company but I had strong links with my former collegues. Once I got order from them to develop GUI application to generate J2ME application provides preview of video with feature of SMS sending if user want see whole video. I developed some Java based solution which supported J2ME application generation for wide spectre of mobile devices and my customer was happy by its use.
+    </div>
+    <div>
+        <img style="width: 400px; height: 288px;" alt="videoide1" src="videoprev1.jpg">
+        <img style="width: 400px; height: 288px;" alt="videoide2" src="videoprev2.jpg">
+    </div>
+</body>
+
 </html>
