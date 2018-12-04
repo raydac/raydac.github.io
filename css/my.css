@@ -1,109 +1,108 @@
 @font-face {
-  font-family: 'OldGothic';
-  src: url('fonts/CloisterBlack.ttf');
+    font-family: 'OldGothic';
+    src: url('fonts/CloisterBlack.ttf');
 }
 
 @font-face {
-  font-family: 'Camelot';
-  src: url('fonts/CamelotCaps.ttf');
+    font-family: 'Camelot';
+    src: url('fonts/CamelotCaps.ttf');
 }
 
 h1 {
-  font-family: 'OldGothic';
-  font-size: 300%;
-  text-align: center;
-  color: #cc3300;
+    font-family: 'OldGothic';
+    font-size: 300%;
+    text-align: center;
+    color: #cc3300;
 }
 
 table {
-  width: 100%;
-  border: none;
+    width: 100%;
+    border: none;
 }
 
 .miniature {
-  text-align: center;
-  margin-top: 1em;
+    text-align: center;
+    margin-top: 1em;
 }
 
 .links {
-  font-size: 100%;
-  overflow: hidden;
+    font-size: 18pt;
+    overflow: hidden;
 }
 
 .somelink {
-  font-family: 'OldGothic';
-  color: darkblue;
-  font-weight: bold;
-  text-decoration: underline; 
+    font-family: 'OldGothic';
+    color: darkblue;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .somelink:hover {
-  color: #cc3300;
+    color: #cc3300;
 }
 
-a img:hover{
-  -webkit-filter: drop-shadow(3px 3px 3px #ff6600);
-  filter: drop-shadow(3px 3px 3px #ff6600);
-  cursor: pointer;
+a img:hover {
+    -webkit-filter: drop-shadow(3px 3px 3px #ff6600);
+    filter: drop-shadow(3px 3px 3px #ff6600);
+    cursor: pointer;
 }
 
 td:first-child {
-  text-align: right;
-  vertical-align: middle;
-  padding-right: 1em;
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 1em;
 }
 
 td:not(:first-child) {
-  text-align: left;
-  vertical-align: middle;
-  padding-left: 1em;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 1em;
 }
 
 hr {
-  border: none;
-  background-color: #cc3300;
-  height: 0.3em;
-  width: 70%;
-  alignment-adjust: central;
-  vertical-align: central;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  clear: both;
+    border: none;
+    background-color: #cc3300;
+    height: 3pt;
+    width: 70%;
+    alignment-adjust: central;
+    vertical-align: central;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    clear: both;
 }
 
-.oldstyled {
-}
+.oldstyled {}
 
 .oldtext {
-  font-family: 'OldGothic';
-  color: black;
-  font-size: 150%;
-  text-align: justify;
-  line-height: 0.9em;
-  font-weight: normal;
+    font-family: 'OldGothic';
+    color: black;
+    font-size: 18pt;
+    text-align: justify;
+    line-height: 18pt;
+    font-weight: normal;
 }
 
 .oldtextcap {
-  font-family: 'Camelot';
-  color: #cc3300;
-  font-size: 450%;
-  /*margin-top: 0.08em;*/
-  margin-bottom: -0.3em;
-  line-height: 100%;
-  position: relative;
-  vertical-align: text-top;
-  float: left;
+    font-family: 'Camelot';
+    color: #cc3300;
+    font-size: 82pt;
+    margin-top: 13pt;
+    margin-bottom: -12pt;
+    line-height: 64pt;
+    position: relative;
+    vertical-align: text-top;
+    float: left;
 }
 
 body {
-  background-image: url('images/back.jpg');
-  margin-left: 10%;
-  margin-right: 10%;
+    background-image: url('images/back.jpg');
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
-.footer{
-  color: #666666;
-  padding-top: 10pt;
-  text-align: right;
-  font-size: x-small;
+.footer {
+    color: #666666;
+    padding-top: 10pt;
+    text-align: right;
+    font-size: x-small;
 }
