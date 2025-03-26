@@ -32,7 +32,8 @@
     <p>I have collected some screenshots and short reserences of my very old developments on this page.</p>
     <h2>Drevo-M</h2>
     <div>
-        I was hired by OTIS Elevator Company (Saint-Petersburg branch, Russia)in 1999 to continue development of a system for contract department. The System was started by previous developer but he had left company and the system was not in work state, I decided that it would be good idea just to rewrite the system and developed own Delphi based version called "Drevo" (it means "Tree" in ancient Russian). The system was developed during several months and contract department started very actively use it to generate contract documentation and ROMs for elevators. It was even included into internal learning courses of the company. The system contained some internal domain-specific language "RSL", nothing special and complexity level on the level of BASIC.
+        <p>I was hired by OTIS Elevator Company (Saint Petersburg branch, Russia) in 1999 to continue the development of a system for the contract department. The system had been started by a previous developer, but after he left the company, it was no longer functional. I decided that the best approach would be to rewrite the system from scratch and developed my own Delphi-based version, which I named "Drevo" (meaning "Tree" in ancient Russian).</p>
+        <p>Over the course of several months, I built the system, and the contract department quickly adopted it for generating contract documentation and ROMs for elevators. It became an integral tool within the company and was even incorporated into internal training courses. The system also featured a simple domain-specific language called "RSL", which had a complexity level similar to BASIC.</p>
     </div>
     <div>
         <img style="width: 200px; height: 150px;" alt="drevo1" src="drevo1.jpg">
@@ -43,7 +44,11 @@
 
     <h2>Project network</h2>
     <div>
-        All works for projects in OTIS Elevator Company were organized in project network, and because management decided to automate processes in contract processing, I got order to develop some intranet based system (because we had some network including a lot of 386 PC) for common work by contract teams over data. I decided that it would be no good to develop such system in Delphi and decided to taste Java 1.1 (which was actually new technology and I bought its SDK on CD with some book dedicated to Java). Java provided very easy way to develop multi-threaded applications than Delphi. I developed some HTTP server (I called the server "Titmouse") with embedded domain-specific language based on FORTH (I called it Forth Server Pages (FSP)), the full size of JAR of the server was about 200 kB. As contract data base we used MS Access and my server was connected to the DB through JDBC-ODBC bridge. Development of whole system from the scratch took about four months. That's interesting that Java 1.1 was enough strong to implement server and successfully process requests from many machines (about 15 386 PCs woking under windows 3.11), server was started on Pentium II 200 Mhz (under Windows 98), I even didn't make strong optimizations in DSL implementation and mainly it worked in interpretator mode. The System was in active use during pair years without problems and then it was rewritten to Pearl.
+        <p>All project work at OTIS Elevator Company was organized within a project network. When management decided to automate contract processing, I was tasked with developing an intranet-based system to enable contract teams to collaborate on data. Since our network consisted mainly of 386 PCs, I needed a solution that could run efficiently in that environment.</p>
+        <p>Rather than using Delphi, I chose to experiment with Java 1.1, which was a relatively new technology at the time. I purchased its SDK on CD along with a Java programming book and found that Java provided a much easier way to develop multi-threaded applications compared to Delphi.</p>
+        <p>For this project, I developed a custom HTTP server, which I named "Titmouse." It featured an embedded domain-specific language inspired by FORTH, which I called "Forth Server Pages (FSP)." The entire server was compact, with a JAR file size of approximately 200 kB. We used MS Access as the contract database, and the server connected to it via the JDBC-ODBC bridge.</p>
+        <p>Developing the entire system from scratch took about four months. Remarkably, Java 1.1 was powerful enough to handle multiple requests efficiently, even from around 15 networked 386 PCs running Windows 3.11. The server itself ran on a Pentium II 200 MHz with Windows 98. Despite working mostly in interpreter mode and without extensive optimizations in the DSL implementation, the system performed reliably.</p>
+        <p>The system was actively used for a couple of years without issues before eventually being rewritten in Perl.</p>
     </div>
     <div>
         <img style="width: 200px; height: 150px;" alt="szg1" src="szg2.jpg">
@@ -59,7 +64,10 @@
 
     <h2>COP (Car Operating Panel) tester</h2>
     <div>
-        In 2001 I got order from OTIS Eleveator Compamy to develop software-hardware complex to automate testing of COP (car operating panel) panels and provide way for workers to use it. Workers had no so strong hardware, just a 486 PC computer with MS-DOS and 2 Mb RAM so that I decided to use FORTH language for software part development. Hardware part included conector to COP and microcontroller based adapter to be connected to PC, as the core of the adapter I used Atmel AVR AT4414. The complex was successfully developed and worked without problems and even support during pair years. The Biggest enemy of the system were mice but even they couldn't kill the system quickly.
+        <p>In 2001, I received a request from OTIS Elevator Company to develop a software-hardware system to automate the testing of COP (Car Operating Panel) panels and provide an easy-to-use interface for workers.</p>
+        <p>The available hardware was quite limited—workers only had 486 PCs running MS-DOS with 2MB of RAM—so I chose FORTH as the programming language due to its efficiency and low resource requirements.</p>    
+        <p>The hardware component included a connector to the COP and a microcontroller-based adapter that interfaced with the PC. For the core of the adapter, I used an Atmel AVR AT4414 microcontroller.</p>
+        <p>The system was successfully developed and operated without issues—or even the need for support—for several years. Interestingly, the biggest threat to the system turned out to be mice (the rodents, not the peripherals), but even they couldn’t take it down easily.</p>
     </div>
     <div>
         <img style="width: 128px; height: 202px;" alt="coptester1" src="device.jpg">
@@ -70,27 +78,26 @@
 
     <h2>Logotone</h2>
     <div>
-        Since 2001 I started work for brand "INFON", it was the first one and the biggets provder of SMS services and content in Russia and one of my first task was to develop online (Java applet based) tools for users to edit and preview content before send to mobile devices. The whole project had title "Logotone".<br>
-        The First online application was the online player of OTT tones (Nokia sound format delivered by SMS), it provided way for users to check melody online before sending to mobile phones.
+        <p>In 2001, I began working for the INFON brand, which was the first and largest provider of SMS services and mobile content in Russia. One of my first tasks was to develop online tools (using Java applets) that allowed users to edit and preview content before sending it to mobile devices. The project was called "Logotone."</p>
+        <p>The first online application I developed was an OTT tone player (for Nokia’s SMS-delivered sound format), enabling users to preview melodies online before sending them to their mobile phones.</p>
     </div>
     <div>
         <img style="width: 190px; height: 178px;" alt="OTT player" src="tone_player.gif">
     </div>
     <div>
-        The Second online application was a converter of uploaded images into black-white visual format compatibles with SMS delivering. It provided several converting algorithms and worked well.
-    </div>
+        The second online application I developed was an image converter that transformed uploaded images into a black-and-white format compatible with SMS delivery. It featured multiple conversion algorithms and performed efficiently, ensuring high-quality image rendering for mobile devices.    </div>
     <div>
         <img style="width: 300px; height: 317px;" alt="photolab" src="photolab.jpg">
     </div>
     <div>
-        The Third application was an online graphic editor where users could create own content and use some predefined patterns, created image could be delivered to mobile phones through SMS.
+        The third online application was an online graphic editor that allowed users to create their own content and apply predefined patterns. The generated images could then be sent to mobile phones via SMS delivery.
     </div>
     <div>
         <img style="width: 380px; height: 254px;" alt="logo maker" src="logo_editor.jpg">
     </div>
     <h2>Form editor tool</h2>
     <div>
-        Since 2003 I was strongly involved in game development for mobile phones and iTV devices, for automation of processes I developed GUI application which provided easy way to create and edit game forms and their animation, it was a Java tool and helped my company RRG Ltd. dramatically decrease development price and time.
+        Since 2003, I became deeply involved in game development for mobile phones and iTV devices. To streamline the development process, I created a GUI application that simplified the creation and editing of game forms and animations. This Java-based tool significantly reduced both development costs and time for my company, RRG Ltd.
     </div>
     <div>
         <img style="width: 480px; height: 346px;" alt="form edittor1" src="formeditor.jpg">
@@ -99,7 +106,9 @@
 
     <h2>SMS Catalog generator</h2>
     <div>
-        In the start of 2000th SMS services were super popular ones and we had a lot of magazines where SMS content was provided with titles "send XXX to get such picture/sound to your mobile". In 2003, I was on weekend and come up with the idea that a J2ME application could be used to provide comfortable and fast way for users to send SMS and order needed content. During weekend I developed some prototype and presented to my partners from a SMS service providing company, they were amazed by the prototype and started action "SMS catalog" for their users, I asked only about 10% of pure profit, we worked together with the system several months but the application was easy enough and my partners made clone (even embedded game was cloned) and pushed me out from the business, also competitors started make their own variants, the idea was not patented but may be I am the first one who made as minimum in Russia such application.
+        <p>In the early 2000s, SMS services were extremely popular, with magazines regularly advertising content like “Send XXX to get this picture/sound on your mobile.”</p>
+        <p>In 2003, during a weekend, I came up with the idea of using a J2ME application to provide users with a more convenient and faster way to send SMS messages and order content. Over that same weekend, I developed a prototype and presented it to my partners from an SMS service provider. They were amazed by the concept and quickly launched the “SMS Catalog” service for their users.</p>
+        <p>I requested only 10% of the net profit, and we successfully ran the system for several months. However, the application was simple enough that my partners eventually cloned it, including even an embedded game, and pushed me out of the business. Soon after, competitors also started developing their own versions. The idea was never patented, but I may have been the first in Russia to create such an application.</p>
     </div>
     <div>
         <img style="width: 400px; height: 288px;" alt="sms catalog" src="smscatalog.jpg">
@@ -107,7 +116,9 @@
     
     <h2>Video preview generator</h2>
     <div>
-        After many years in business, Russian brand "INFON" was bought by ZED company but I had strong links with my former collegues. Once I got order from them to develop GUI application to generate J2ME application provides preview of video with feature of SMS sending if user want see whole video. I developed some Java based solution which supported J2ME application generation for wide spectre of mobile devices and my customer was happy by its use.
+        <p>After many years in business, the Russian brand INFON was acquired by ZED, but I maintained strong connections with my former colleagues.</p>
+        <p>At one point, they approached me with a request to develop a GUI application that could generate J2ME applications for previewing videos. The app would allow users to watch a video preview and send an SMS if they wanted to access the full version.</p>
+        <p>I developed a Java-based solution that supported J2ME application generation for a wide range of mobile devices. My client was highly satisfied with its performance and usability.</p>
     </div>
     <div>
         <img style="width: 400px; height: 288px;" alt="videoide1" src="videoprev1.jpg">
