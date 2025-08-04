@@ -83,15 +83,62 @@ hr {
 }
 
 .oldtextcap {
-    font-family: 'Camelot';
+    /* Font and Color */
+    font-family: 'Camelot', 'Times New Roman', serif;
     color: #cc3300;
-    font-size: 82pt;
-    margin-top: 13pt;
-    margin-bottom: -12pt;
-    line-height: 64pt;
-    position: relative;
-    vertical-align: text-top;
+    
+    /* Size */
+    font-size: 5.73em;
+    line-height: 0.78;
+    
+    /* Positioning */
     float: left;
+    display: block;
+    position: relative;
+    
+    /* Spacing with transform for precise alignment */
+    margin-right: 0.05em;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    
+    /* Cross-browser transform for vertical alignment */
+    -webkit-transform: translateY(0.16em);
+    -moz-transform: translateY(0.16em);
+    -ms-transform: translateY(0.16em);
+    -o-transform: translateY(0.16em);
+    transform: translateY(0.16em);
+    
+    /* Font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: always;
+    text-rendering: optimizeLegibility;
+    
+    /* Prevent selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    /* Box model */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    /* Clear inherited styles */
+    padding: 0;
+    border: none;
+    background: transparent;
+    vertical-align: baseline;
+    
+    /* Mobile fixes */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    
+    /* IE fixes */
+    zoom: 1;
 }
 
 body {
