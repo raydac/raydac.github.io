@@ -103,11 +103,11 @@ hr {
     margin-bottom: 0;
     
     /* Cross-browser transform for vertical alignment */
-    -webkit-transform: translateY(0.16em);
-    -moz-transform: translateY(0.16em);
-    -ms-transform: translateY(0.16em);
-    -o-transform: translateY(0.16em);
-    transform: translateY(0.16em);
+    -webkit-transform: translateY(0.05em);
+    -moz-transform: translateY(0.05em);
+    -ms-transform: translateY(0.05em);
+    -o-transform: translateY(0.05em);
+    transform: translateY(0.05em);
     
     /* Font rendering */
     -webkit-font-smoothing: antialiased;
