@@ -104,9 +104,9 @@ hr {
     
     /* Cross-browser transform for vertical alignment */
     transform: translateY(0.05em);
-    -webkit-transform: translateY(0.05em);
+    -webkit-transform: translateY(0.16em);
     -ms-transform: translateY(0.05em);
-    -o-transform: translateY(0.05em);
+    -o-transform: translateY(0.16em);
     -moz-transform: translateY(0.16em);
 
     /* Font rendering */
