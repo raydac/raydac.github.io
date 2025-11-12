@@ -26,8 +26,15 @@ table {
 }
 
 .links {
-    font-size: 18pt;
+    font-size: 2rem;
     overflow: hidden;
+}
+
+.links li::marker {
+  font-family: 'OldGothic';
+  content: "☼ ";
+  color: darkblue;
+  font-size: 1.8rem;
 }
 
 .somelink {
@@ -76,9 +83,9 @@ hr {
 .oldtext {
     font-family: 'OldGothic';
     color: black;
-    font-size: 18pt;
+    font-size: 2rem;
     text-align: justify;
-    line-height: 18pt;
+    line-height: 2rem;
     font-weight: normal;
 }
 
@@ -88,7 +95,7 @@ hr {
     color: #cc3300;
     
     /* Size */
-    font-size: 5.73em;
+    font-size: 10rem;
     line-height: 0.78;
     
     /* Positioning */
@@ -97,17 +104,17 @@ hr {
     position: relative;
     
     /* Spacing with transform for precise alignment */
-    margin-right: 0.05em;
+    margin-right: 0.1rem;
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 0;
     
     /* Cross-browser transform for vertical alignment */
-    transform:  translate3d(0, 0.16em, 0);
-    -webkit-transform:  translate3d(0, 0.16em, 0);
-    -ms-transform:  translate3d(0, 0.16em, 0);
-    -o-transform:  translate3d(0, 0.16em, 0);
-    -moz-transform:  translate3d(0, 0.16em, 0);
+    transform:  translate3d(0, 1.2rem, 0);
+    -webkit-transform:  translate3d(1.2rem, 0);
+    -ms-transform:  translate3d(0, 1.2rem, 0);
+    -o-transform:  translate3d(0, 1.2rem, 0);
+    -moz-transform:  translate3d(0, 1.2rem, 0);
 
     /* Font rendering */
     -webkit-font-smoothing: antialiased;
@@ -153,3 +160,4 @@ body {
     text-align: right;
     font-size: x-small;
 }
+
