@@ -148,6 +148,65 @@ hr {
     zoom: 1;
 }
 
+.oldtextcap_win {
+    /* Font and Color */
+    font-family: 'Camelot', 'Times New Roman', serif;
+    color: #cc3300;
+    
+    /* Size */
+    font-size: 10rem;
+    line-height: 0.78;
+    
+    /* Positioning */
+    float: left;
+    display: block;
+    position: relative;
+    
+    /* Spacing with transform for precise alignment */
+    margin-right: 0.1rem;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    
+    /* Cross-browser transform for vertical alignment */
+    transform:  translate3d(0, 0.3rem, 0);
+    -webkit-transform:  translate3d(0.3rem, 0);
+    -ms-transform:  translate3d(0, 0.3rem, 0);
+    -o-transform:  translate3d(0, 0.3rem, 0);
+    -moz-transform:  translate3d(0, 0.3rem, 0);
+
+    /* Font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: always;
+    text-rendering: optimizeLegibility;
+    
+    /* Prevent selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    /* Box model */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    /* Clear inherited styles */
+    padding: 0;
+    border: none;
+    background: transparent;
+    vertical-align: baseline;
+    
+    /* Mobile fixes */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    
+    /* IE fixes */
+    zoom: 1;
+}
+
 body {
     background-image: url('images/back.jpg');
     margin-left: 10%;
