@@ -22,7 +22,7 @@
             return /win/i.test(navigator.platform) || /win/i.test(navigator.userAgent);
         }
 
-        const oldCapClass = isWindows ? "oldtextcap_win" : "oldtextcap";
+        const oldCapClass = isWindows() ? "oldtextcap_win" : "oldtextcap";
 
         $(document).ready(function () {
             $('.oldstyled').each(function (index) {
