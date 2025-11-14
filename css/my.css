@@ -15,11 +15,6 @@ h1 {
     color: #cc3300;
 }
 
-table {
-    width: 100%;
-    border: none;
-}
-
 .miniature {
     text-align: center;
     margin-top: 1em;
@@ -31,10 +26,10 @@ table {
 }
 
 .links li::marker {
-  font-family: 'OldGothic';
-  content: "☼ ";
-  color: darkblue;
-  font-size: 1.8rem;
+    font-family: 'OldGothic';
+    content: "☼ ";
+    color: darkblue;
+    font-size: 1.8rem;
 }
 
 .somelink {
@@ -48,22 +43,15 @@ table {
     color: #cc3300;
 }
 
+img {
+  max-width: 100%;
+  display: inline-block;
+}
+
 a img:hover {
     -webkit-filter: drop-shadow(3px 3px 3px #ff6600);
     filter: drop-shadow(3px 3px 3px #ff6600);
     cursor: pointer;
-}
-
-td:first-child {
-    text-align: right;
-    vertical-align: middle;
-    padding-right: 1em;
-}
-
-td:not(:first-child) {
-    text-align: left;
-    vertical-align: middle;
-    padding-left: 1em;
 }
 
 hr {
@@ -71,11 +59,31 @@ hr {
     background-color: #cc3300;
     height: 3pt;
     width: 70%;
-    alignment-adjust: central;
-    vertical-align: central;
+    justify-content: center;
+    vertical-align: baseline;
     margin-top: 2em;
     margin-bottom: 2em;
     clear: both;
+}
+
+.centered_container {
+    display: block;
+    justify-content: center;
+}
+
+.flex_container {
+    display: flex;
+    flex-wrap: wrap;
+    vertical-align: central;
+}
+
+.flex_element {
+    flex: 1 1;
+    text-align: center;
+    justify-content: center;
+    vertical-align: baseline;
+    background: transparent;
+    margin: 0.5rem;
 }
 
 .oldstyled {}
@@ -93,57 +101,57 @@ hr {
     /* Font and Color */
     font-family: 'Camelot', 'Times New Roman', serif;
     color: #cc3300;
-    
+
     /* Size */
     font-size: 10rem;
     line-height: 0.78;
-    
+
     /* Positioning */
     float: left;
     display: block;
     position: relative;
-    
+
     /* Spacing with transform for precise alignment */
     margin-right: 0.1rem;
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 0;
-    
+
     /* Cross-browser transform for vertical alignment */
-    transform:  translate3d(0, 1.2rem, 0);
-    -webkit-transform:  translate3d(1.2rem, 0);
-    -ms-transform:  translate3d(0, 1.2rem, 0);
-    -o-transform:  translate3d(0, 1.2rem, 0);
-    -moz-transform:  translate3d(0, 1.2rem, 0);
+    transform: translate3d(0, 1.2rem, 0);
+    -webkit-transform: translate3d(1.2rem, 0);
+    -ms-transform: translate3d(0, 1.2rem, 0);
+    -o-transform: translate3d(0, 1.2rem, 0);
+    -moz-transform: translate3d(0, 1.2rem, 0);
 
     /* Font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: always;
     text-rendering: optimizeLegibility;
-    
+
     /* Prevent selection */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     /* Box model */
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    
+
     /* Clear inherited styles */
     padding: 0;
     border: none;
     background: transparent;
     vertical-align: baseline;
-    
+
     /* Mobile fixes */
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    
+
     /* IE fixes */
     zoom: 1;
 }
@@ -152,65 +160,67 @@ hr {
     /* Font and Color */
     font-family: 'Camelot', 'Times New Roman', serif;
     color: #cc3300;
-    
+
     /* Size */
     font-size: 10rem;
     line-height: 0.78;
-    
+
     /* Positioning */
     float: left;
     display: block;
     position: relative;
-    
+
     /* Spacing with transform for precise alignment */
     margin-right: 0.1rem;
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 0;
-    
+
     /* Cross-browser transform for vertical alignment */
-    transform:  translate3d(0, 0.3rem, 0);
-    -webkit-transform:  translate3d(0.3rem, 0);
-    -ms-transform:  translate3d(0, 0.3rem, 0);
-    -o-transform:  translate3d(0, 0.3rem, 0);
-    -moz-transform:  translate3d(0, 0.3rem, 0);
+    transform: translate3d(0, 0.3rem, 0);
+    -webkit-transform: translate3d(0.3rem, 0);
+    -ms-transform: translate3d(0, 0.3rem, 0);
+    -o-transform: translate3d(0, 0.3rem, 0);
+    -moz-transform: translate3d(0, 0.3rem, 0);
 
     /* Font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: always;
     text-rendering: optimizeLegibility;
-    
+
     /* Prevent selection */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     /* Box model */
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    
+
     /* Clear inherited styles */
     padding: 0;
     border: none;
     background: transparent;
     vertical-align: baseline;
-    
+
     /* Mobile fixes */
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    
+
     /* IE fixes */
     zoom: 1;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    display: flex;
     background-image: url('images/back.jpg');
-    margin-left: 10%;
-    margin-right: 10%;
+    justify-content: center;
 }
 
 .footer {
@@ -220,3 +230,6 @@ body {
     font-size: x-small;
 }
 
+article {
+    max-width: 60rem;
+}
