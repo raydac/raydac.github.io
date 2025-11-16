@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.A.M. Whiteboard</title>
+
+    <meta name="description"
+        content="Free WASM serverless whiteboard. Draw and share images as just links">
+    <meta name="keywords"
+        content="serverless, whiteboard, editor, drawboard, wasm">
+    <meta name="author" content="https://www.igormaznitsa.com/">
+    <link rel="icon" href="./favicon/favicon.ico" type="image/x-icon">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        canvas {
+            border: 2px solid #333;
+            cursor: crosshair;
+            display: block;
+            margin: 20px 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 3px;
+        }
+
+        .color {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #333;
+            cursor: pointer;
+        }
+
+        .color.active {
+            border-color: #00f;
+            border-width: 3px;
+        }
+
+        .width-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="range"] {
+            width: 120px;
+        }
+
+        #widthValue {
+            min-width: 40px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #output {
+            word-break: break-all;
+            background: #f0f0f0;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        #passwordModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #passwordModal.show {
+            display: flex;
+        }
+
+        #exportModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #exportModal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: 2px solid #333;
+        }
+
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+            font-family: monospace;
+            border: 2px solid #333;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-content button {
+            margin: 5px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+
+        #exportOptions {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            display: none;
+        }
+
+        #exportOptions label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        #exportOptions input[type="password"] {
+            width: 200px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        .main_container {
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main_container">
+        <h2>I.A.M. Whiteboard</h2>
+
+        <p style="font-size: 12px; color: #666;">
+            Custom size: add <code>?w=800&h=600</code> to URL (64-2048px range, default 512x512)
+        </p>
+
+        <div class="controls">
+            <label>Color:</label>
+            <div class="color-picker">
+                <div class="color active" style="background:#000" data-r="0" data-g="0" data-b="0"></div>
+                <div class="color" style="background:#f00" data-r="255" data-g="0" data-b="0"></div>
+                <div class="color" style="background:#0f0" data-r="0" data-g="255" data-b="0"></div>
+                <div class="color" style="background:#00f" data-r="0" data-g="0" data-b="255"></div>
+                <div class="color" style="background:#ff0" data-r="255" data-g="255" data-b="0"></div>
+                <div class="color" style="background:#f0f" data-r="255" data-g="0" data-b="255"></div>
+                <div class="color" style="background:#0ff" data-r="0" data-g="255" data-b="255"></div>
+                <div class="color" style="background:#fff" data-r="255" data-g="255" data-b="255"></div>
+            </div>
+
+            <div class="width-control">
+                <input type="range" id="widthSlider" min="1" max="32" value="2" title="Pen width">
+                <span id="widthValue">2px</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="handleClear()">Clear Canvas</button>
+            <button onclick="handleFill()">Fill with Color</button>
+            <button onclick="handleExport()">Export Image</button>
+            <label style="margin-left: 10px;">
+                <input type="checkbox" id="usePassword"> Password protect
+            </label>
+        </div>
+
+        <div id="passwordField" style="display:none; margin: 10px 0;">
+            <label>
+                Password: <input type="password" id="exportPassword" placeholder="Enter password"
+                    style="width: 200px; padding: 5px;">
+            </label>
+        </div>
+
+        <canvas id="canvas" width="512" height="512"></canvas>
+
+        <div id="exportOptions" style="display: none;">
+            <label>
+                <input type="checkbox" id="usePassword"> Password protect export
+            </label>
+            <div id="passwordField" style="display:none; margin-top: 10px;">
+                <label>
+                    Password: <input type="password" id="exportPassword" placeholder="Enter password">
+                </label>
+            </div>
+        </div>
+
+        <div id="passwordModal">
+            <div class="modal-content">
+                <h3>Password Required</h3>
+                <p>This image is password protected. Enter the password to view:</p>
+                <input type="password" id="unlockPassword" placeholder="Enter password">
+                <div>
+                    <button onclick="tryUnlock()">Unlock</button>
+                    <button onclick="closePasswordModal()">Cancel</button>
+                </div>
+                <div id="passwordError" class="error"></div>
+            </div>
+        </div>
+
+        <div id="exportModal">
+            <div class="modal-content">
+                <h3>Image Exported Successfully!</h3>
+                <p>Copy the URL below to share your drawing:</p>
+                <textarea id="exportUrl" readonly></textarea>
+                <div>
+                    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+                    <button onclick="closeExportModal()">Close</button>
+                </div>
+                <div id="copyStatus"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./wasm_exec.js"></script>
+    <script>
+        let wasmReady = false;
+
+        const go = new Go();
+
+        // Fallback for servers without correct MIME type
+        fetch("./iam_whiteboard_wasm.wasm")
+            .then(response => response.arrayBuffer())
+            .then(bytes => WebAssembly.instantiate(bytes, go.importObject))
+            .then(async (result) => {
+                // Don't await - let it run in background
+                go.run(result.instance);
+                // Wait a bit for initialization
+                await new Promise(resolve => setTimeout(resolve, 100));
+                wasmReady = true;
+            })
+            .catch(err => {
+                console.error('WASM load error:', err);
+                alert('Failed to load WASM module. Make sure main.wasm is in the same directory.');
+            });
+
+        document.querySelectorAll('.color').forEach(el => {
+            el.addEventListener('click', () => {
+                if (!wasmReady) return;
+                document.querySelectorAll('.color').forEach(c => c.classList.remove('active'));
+                el.classList.add('active');
+                const r = parseInt(el.dataset.r);
+                const g = parseInt(el.dataset.g);
+                const b = parseInt(el.dataset.b);
+                setColor(r, g, b);
+            });
+        });
+
+        document.getElementById('widthSlider').addEventListener('input', (e) => {
+            if (!wasmReady) return;
+            const w = parseInt(e.target.value);
+            document.getElementById('widthValue').textContent = w + 'px';
+            setWidth(w);
+        });
+
+        document.getElementById('usePassword').addEventListener('change', (e) => {
+            document.getElementById('passwordField').style.display = e.target.checked ? 'block' : 'none';
+        });
+
+        function handleExport() {
+            if (!wasmReady) {
+                alert('WASM not ready yet, please wait...');
+                return;
+            }
+
+            const usePassword = document.getElementById('usePassword').checked;
+            const password = usePassword ? document.getElementById('exportPassword').value : null;
+
+            if (usePassword && !password) {
+                alert('Please enter a password');
+                return;
+            }
+
+            const data = exportImage(password);
+            if (!data) {
+                alert('No content to export');
+                return;
+            }
+
+            // Get current size parameters if they're set
+            const urlParams = new URLSearchParams(window.location.search);
+            let sizeParams = '';
+            if (urlParams.has('w') || urlParams.has('h')) {
+                const w = urlParams.get('w') || '512';
+                const h = urlParams.get('h') || '512';
+                sizeParams = `w=${w}&h=${h}&`;
+            }
+
+            const url = window.location.origin + window.location.pathname + '?' + sizeParams + 'img=' + encodeURIComponent(data);
+
+            // Show export modal
+            document.getElementById('exportUrl').value = url;
+            document.getElementById('exportModal').style.display = 'flex';
+            document.getElementById('copyStatus').textContent = '';
+        }
+
+        function copyToClipboard() {
+            const textarea = document.getElementById('exportUrl');
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                document.execCommand('copy');
+                document.getElementById('copyStatus').textContent = '✓ Copied to clipboard!';
+                document.getElementById('copyStatus').className = 'success';
+            } catch (err) {
+                // Fallback for modern browsers
+                navigator.clipboard.writeText(textarea.value).then(() => {
+                    document.getElementById('copyStatus').textContent = '✓ Copied to clipboard!';
+                    document.getElementById('copyStatus').className = 'success';
+                }).catch(() => {
+                    document.getElementById('copyStatus').textContent = 'Failed to copy. Please select and copy manually.';
+                    document.getElementById('copyStatus').className = 'error';
+                });
+            }
+        }
+
+        function closeExportModal() {
+            document.getElementById('exportModal').style.display = 'none';
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+
+        function tryUnlock() {
+            const password = document.getElementById('unlockPassword').value;
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'Please enter a password';
+                return;
+            }
+
+            const success = tryLoadWithPassword(password);
+            if (!success) {
+                document.getElementById('passwordError').textContent = 'Incorrect password';
+            } else {
+                document.getElementById('passwordError').textContent = '';
+            }
+        }
+
+        document.getElementById('unlockPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                tryUnlock();
+            }
+        });
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeExportModal();
+                closePasswordModal();
+            }
+        });
+
+        // Auto-select URL text when export modal opens
+        document.getElementById('exportModal').addEventListener('transitionend', () => {
+            if (document.getElementById('exportModal').style.display === 'flex') {
+                document.getElementById('exportUrl').select();
+            }
+        });
+
+        function handleClear() {
+            if (!wasmReady) {
+                alert('WASM not ready yet, please wait...');
+                return;
+            }
+            if (confirm('Clear the entire canvas?')) {
+                clearCanvas();
+            }
+        }
+
+        function handleFill() {
+            if (!wasmReady) {
+                alert('WASM not ready yet, please wait...');
+                return;
+            }
+            fillCanvas();
+        }
+    </script>
+</body>
+
+</html>
