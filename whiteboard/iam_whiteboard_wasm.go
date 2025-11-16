@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"compress/gzip"
+	compress "compress/flate"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
@@ -16,13 +16,13 @@ import (
 )
 
 var (
-	canvas    js.Value
-	ctx       js.Value
-	drawing   bool
-	lastX, lastY int
-	penColor  color.RGBA = color.RGBA{0, 0, 0, 255}
-	penWidth  int = 2
-	imgData   *image.RGBA
+	canvas                    js.Value
+	ctx                       js.Value
+	drawing                   bool
+	lastX, lastY              int
+	penColor                  color.RGBA = color.RGBA{0, 0, 0, 255}
+	penWidth                  int        = 2
+	imgData                   *image.RGBA
 	canvasWidth, canvasHeight int
 )
 
@@ -42,7 +42,7 @@ func main() {
 			canvasHeight = val
 		}
 	}
-	
+
 	imgData = image.NewRGBA(image.Rect(0, 0, canvasWidth, canvasHeight))
 	for i := range imgData.Pix {
 		imgData.Pix[i] = 255
@@ -53,7 +53,7 @@ func main() {
 	canvas.Set("width", canvasWidth)
 	canvas.Set("height", canvasHeight)
 	ctx = canvas.Call("getContext", "2d")
-	
+
 	ctx.Set("fillStyle", "white")
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
 
@@ -208,12 +208,12 @@ func clearCanvas(this js.Value, args []js.Value) interface{} {
 	// Clear to white
 	ctx.Set("fillStyle", "white")
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
-	
+
 	// Reset image data to white
 	for i := range imgData.Pix {
 		imgData.Pix[i] = 255
 	}
-	
+
 	return nil
 }
 
@@ -221,7 +221,7 @@ func fillCanvas(this js.Value, args []js.Value) interface{} {
 	// Fill with current pen color
 	ctx.Set("fillStyle", colorToHex(penColor))
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
-	
+
 	// Update image data
 	for y := 0; y < canvasHeight; y++ {
 		for x := 0; x < canvasWidth; x++ {
@@ -232,13 +232,13 @@ func fillCanvas(this js.Value, args []js.Value) interface{} {
 			imgData.Pix[idx+3] = penColor.A
 		}
 	}
-	
+
 	return nil
 }
 
 func colorToHex(c color.RGBA) string {
 	hexDigits := "0123456789abcdef"
-	return "#" + 
+	return "#" +
 		string(hexDigits[c.R>>4]) + string(hexDigits[c.R&0xf]) +
 		string(hexDigits[c.G>>4]) + string(hexDigits[c.G&0xf]) +
 		string(hexDigits[c.B>>4]) + string(hexDigits[c.B&0xf])
@@ -249,12 +249,12 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 	if len(args) > 0 && !args[0].IsNull() && !args[0].IsUndefined() {
 		password = args[0].String()
 	}
-	
+
 	// Find bounding box of non-white pixels
 	minX, minY := canvasWidth, canvasHeight
 	maxX, maxY := 0, 0
 	hasContent := false
-	
+
 	for y := 0; y < canvasHeight; y++ {
 		for x := 0; x < canvasWidth; x++ {
 			idx := y*imgData.Stride + x*4
@@ -275,28 +275,28 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 			}
 		}
 	}
-	
+
 	if !hasContent {
 		return ""
 	}
-	
+
 	// Crop to bounding box with small padding
 	minX = max(0, minX-2)
 	minY = max(0, minY-2)
 	maxX = min(canvasWidth-1, maxX+2)
 	maxY = min(canvasHeight-1, maxY+2)
-	
+
 	width := maxX - minX + 1
 	height := maxY - minY + 1
-	
+
 	// Create binary planes for R, G, B channels
 	numPixels := width * height
 	numBytes := (numPixels + 7) / 8
-	
+
 	rPlane := make([]byte, numBytes)
 	gPlane := make([]byte, numBytes)
 	bPlane := make([]byte, numBytes)
-	
+
 	bitIdx := 0
 	for y := 0; y < height; y++ {
 		for x := 0; x < width; x++ {
@@ -304,11 +304,11 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 			r := imgData.Pix[srcIdx]
 			g := imgData.Pix[srcIdx+1]
 			b := imgData.Pix[srcIdx+2]
-			
+
 			// Binarize: threshold at 128
 			byteIdx := bitIdx / 8
 			bitPos := uint(7 - (bitIdx % 8))
-			
+
 			if r > 128 {
 				rPlane[byteIdx] |= (1 << bitPos)
 			}
@@ -318,35 +318,35 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 			if b > 128 {
 				bPlane[byteIdx] |= (1 << bitPos)
 			}
-			
+
 			bitIdx++
 		}
 	}
-	
+
 	// Compress each plane separately
 	var buf bytes.Buffer
-	
+
 	// Write header: width, height (2 bytes each)
 	binary.Write(&buf, binary.LittleEndian, uint16(width))
 	binary.Write(&buf, binary.LittleEndian, uint16(height))
-	
+
 	// Compress and write R plane
 	compressedR := compressPlane(rPlane)
 	binary.Write(&buf, binary.LittleEndian, uint32(len(compressedR)))
 	buf.Write(compressedR)
-	
+
 	// Compress and write G plane
 	compressedG := compressPlane(gPlane)
 	binary.Write(&buf, binary.LittleEndian, uint32(len(compressedG)))
 	buf.Write(compressedG)
-	
+
 	// Compress and write B plane
 	compressedB := compressPlane(bPlane)
 	binary.Write(&buf, binary.LittleEndian, uint32(len(compressedB)))
 	buf.Write(compressedB)
-	
+
 	data := buf.Bytes()
-	
+
 	// Encrypt if password provided
 	if password != "" {
 		encrypted, err := encrypt(data, password)
@@ -357,26 +357,23 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 		marker := []byte("ENC:")
 		data = append(marker, encrypted...)
 	}
-	
+
 	encoded := base64.RawURLEncoding.EncodeToString(data)
 	return encoded
 }
 
 func compressPlane(data []byte) []byte {
 	var buf bytes.Buffer
-	gzw, _ := gzip.NewWriterLevel(&buf, gzip.BestCompression)
+	gzw, _ := compress.NewWriter(&buf, 9)
 	gzw.Write(data)
 	gzw.Close()
 	return buf.Bytes()
 }
 
 func decompressPlane(data []byte) ([]byte, error) {
-	gzr, err := gzip.NewReader(bytes.NewReader(data))
-	if err != nil {
-		return nil, err
-	}
+	gzr := compress.NewReader(bytes.NewReader(data))
 	defer gzr.Close()
-	
+
 	var buf bytes.Buffer
 	buf.ReadFrom(gzr)
 	return buf.Bytes(), nil
@@ -385,25 +382,25 @@ func decompressPlane(data []byte) ([]byte, error) {
 func encrypt(data []byte, password string) ([]byte, error) {
 	// Use PBKDF2-like key derivation (SHA-256 is stable and well-tested)
 	key := sha256.Sum256([]byte(password))
-	
+
 	// AES-256-GCM is a NIST-approved, stable encryption algorithm
 	block, err := aes.NewCipher(key[:])
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// GCM provides authenticated encryption (prevents tampering)
 	gcm, err := cipher.NewGCM(block)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// Generate cryptographically secure random nonce
 	nonce := make([]byte, gcm.NonceSize())
 	if _, err := rand.Read(nonce); err != nil {
 		return nil, err
 	}
-	
+
 	// Encrypt and authenticate: nonce || ciphertext || auth_tag
 	ciphertext := gcm.Seal(nonce, nonce, data, nil)
 	return ciphertext, nil
@@ -412,43 +409,43 @@ func encrypt(data []byte, password string) ([]byte, error) {
 func decrypt(data []byte, password string) ([]byte, error) {
 	// Derive same key from password
 	key := sha256.Sum256([]byte(password))
-	
+
 	block, err := aes.NewCipher(key[:])
 	if err != nil {
 		return nil, err
 	}
-	
+
 	gcm, err := cipher.NewGCM(block)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	nonceSize := gcm.NonceSize()
 	if len(data) < nonceSize {
 		return nil, errors.New("invalid ciphertext")
 	}
-	
+
 	// Extract nonce and ciphertext
 	nonce, ciphertext := data[:nonceSize], data[nonceSize:]
-	
+
 	// Decrypt and verify authentication tag
 	plaintext, err := gcm.Open(nil, nonce, ciphertext, nil)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return plaintext, nil
 }
 
 func loadFromURL() {
 	urlParams := js.Global().Get("URLSearchParams").New(js.Global().Get("location").Get("search"))
-	
+
 	if !urlParams.Call("has", "img").Bool() {
 		return
 	}
-	
+
 	data := urlParams.Call("get", "img").String()
-	
+
 	decoded, err := base64.RawURLEncoding.DecodeString(data)
 	if err != nil {
 		decoded, err = base64.StdEncoding.DecodeString(data)
@@ -456,14 +453,14 @@ func loadFromURL() {
 			return
 		}
 	}
-	
+
 	// Check if data is encrypted (starts with "ENC:" marker)
 	if len(decoded) >= 4 && string(decoded[:4]) == "ENC:" {
 		// Password protected - show password prompt
 		js.Global().Get("document").Call("getElementById", "passwordModal").Get("style").Set("display", "flex")
 		return
 	}
-	
+
 	// Not encrypted - load directly
 	loadImageData(decoded)
 }
@@ -472,12 +469,12 @@ func tryLoadWithPassword(this js.Value, args []js.Value) interface{} {
 	if len(args) == 0 {
 		return false
 	}
-	
+
 	password := args[0].String()
-	
+
 	urlParams := js.Global().Get("URLSearchParams").New(js.Global().Get("location").Get("search"))
 	data := urlParams.Call("get", "img").String()
-	
+
 	decoded, err := base64.RawURLEncoding.DecodeString(data)
 	if err != nil {
 		decoded, err = base64.StdEncoding.DecodeString(data)
@@ -485,30 +482,30 @@ func tryLoadWithPassword(this js.Value, args []js.Value) interface{} {
 			return false
 		}
 	}
-	
+
 	// Remove "ENC:" marker
 	if len(decoded) < 4 || string(decoded[:4]) != "ENC:" {
 		return false
 	}
 	decoded = decoded[4:]
-	
+
 	// Try to decrypt
 	decrypted, err := decrypt(decoded, password)
 	if err != nil {
 		return false
 	}
-	
+
 	if loadImageData(decrypted) {
 		js.Global().Get("document").Call("getElementById", "passwordModal").Get("style").Set("display", "none")
 		return true
 	}
-	
+
 	return false
 }
 
 func loadImageData(data []byte) bool {
 	buf := bytes.NewReader(data)
-	
+
 	// Read header: width, height
 	var width, height uint16
 	if err := binary.Read(buf, binary.LittleEndian, &width); err != nil {
@@ -517,7 +514,7 @@ func loadImageData(data []byte) bool {
 	if err := binary.Read(buf, binary.LittleEndian, &height); err != nil {
 		return false
 	}
-	
+
 	// Read R plane
 	var rLen uint32
 	if err := binary.Read(buf, binary.LittleEndian, &rLen); err != nil {
@@ -531,7 +528,7 @@ func loadImageData(data []byte) bool {
 	if err != nil {
 		return false
 	}
-	
+
 	// Read G plane
 	var gLen uint32
 	if err := binary.Read(buf, binary.LittleEndian, &gLen); err != nil {
@@ -545,7 +542,7 @@ func loadImageData(data []byte) bool {
 	if err != nil {
 		return false
 	}
-	
+
 	// Read B plane
 	var bLen uint32
 	if err := binary.Read(buf, binary.LittleEndian, &bLen); err != nil {
@@ -559,14 +556,14 @@ func loadImageData(data []byte) bool {
 	if err != nil {
 		return false
 	}
-	
+
 	// Clear canvas first
 	ctx.Set("fillStyle", "white")
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
 	for i := range imgData.Pix {
 		imgData.Pix[i] = 255
 	}
-	
+
 	// Center the image if it's smaller than canvas
 	offsetX := (canvasWidth - int(width)) / 2
 	offsetY := (canvasHeight - int(height)) / 2
@@ -576,30 +573,30 @@ func loadImageData(data []byte) bool {
 	if offsetY < 0 {
 		offsetY = 0
 	}
-	
+
 	// Reconstruct image from binary planes
 	bitIdx := 0
 	for y := 0; y < int(height); y++ {
 		for x := 0; x < int(width); x++ {
 			byteIdx := bitIdx / 8
 			bitPos := uint(7 - (bitIdx % 8))
-			
+
 			// Extract bits and convert to 0 or 255
 			r := byte(0)
 			if (rPlane[byteIdx] & (1 << bitPos)) != 0 {
 				r = 255
 			}
-			
+
 			g := byte(0)
 			if (gPlane[byteIdx] & (1 << bitPos)) != 0 {
 				g = 255
 			}
-			
+
 			b := byte(0)
 			if (bPlane[byteIdx] & (1 << bitPos)) != 0 {
 				b = 255
 			}
-			
+
 			destX := x + offsetX
 			destY := y + offsetY
 			if destX < canvasWidth && destY < canvasHeight {
@@ -609,16 +606,16 @@ func loadImageData(data []byte) bool {
 				imgData.Pix[idx+2] = b
 				imgData.Pix[idx+3] = 255
 			}
-			
+
 			bitIdx++
 		}
 	}
-	
+
 	imgJSData := ctx.Call("createImageData", canvasWidth, canvasHeight)
 	data8 := imgJSData.Get("data")
 	js.CopyBytesToJS(data8, imgData.Pix)
 	ctx.Call("putImageData", imgJSData, 0, 0)
-	
+
 	return true
 }
 
