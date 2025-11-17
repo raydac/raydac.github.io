@@ -63,7 +63,8 @@ func main() {
 	canvas.Call("addEventListener", "mousedown", js.FuncOf(mouseDown))
 	canvas.Call("addEventListener", "mousemove", js.FuncOf(mouseMove))
 	canvas.Call("addEventListener", "mouseup", js.FuncOf(mouseUp))
-	canvas.Call("addEventListener", "mouseleave", js.FuncOf(mouseUp))
+	canvas.Call("addEventListener", "mouseleave", js.FuncOf(mouseLeave))
+	canvas.Call("addEventListener", "mouseenter", js.FuncOf(mouseEnter))
 
 	js.Global().Set("setColor", js.FuncOf(setColor))
 	js.Global().Set("setWidth", js.FuncOf(setWidth))
@@ -155,6 +156,72 @@ func mouseMove(this js.Value, args []js.Value) interface{} {
 
 func mouseUp(this js.Value, args []js.Value) interface{} {
 	drawing = false
+	return nil
+}
+
+func mouseLeave(this js.Value, args []js.Value) interface{} {
+	// Don't stop drawing when mouse leaves canvas
+	// Just update the last position if we're drawing
+	if drawing {
+		e := args[0]
+		rect := canvas.Call("getBoundingClientRect")
+		
+		clientX := e.Get("clientX").Int()
+		clientY := e.Get("clientY").Int()
+		rectLeft := rect.Get("left").Int()
+		rectTop := rect.Get("top").Int()
+		rectWidth := rect.Get("width").Float()
+		rectHeight := rect.Get("height").Float()
+		
+		scaleX := float64(canvasWidth) / rectWidth
+		scaleY := float64(canvasHeight) / rectHeight
+		
+		lastX = int(float64(clientX-rectLeft) * scaleX)
+		lastY = int(float64(clientY-rectTop) * scaleY)
+		
+		// Clamp to canvas boundaries
+		if lastX < 0 {
+			lastX = 0
+		}
+		if lastX >= canvasWidth {
+			lastX = canvasWidth - 1
+		}
+		if lastY < 0 {
+			lastY = 0
+		}
+		if lastY >= canvasHeight {
+			lastY = canvasHeight - 1
+		}
+	}
+	return nil
+}
+
+func mouseEnter(this js.Value, args []js.Value) interface{} {
+	// Continue drawing if mouse button is still pressed when re-entering
+	e := args[0]
+	buttons := e.Get("buttons").Int()
+	
+	// buttons == 1 means left mouse button is pressed
+	if buttons == 1 && drawing {
+		rect := canvas.Call("getBoundingClientRect")
+		
+		clientX := e.Get("clientX").Int()
+		clientY := e.Get("clientY").Int()
+		rectLeft := rect.Get("left").Int()
+		rectTop := rect.Get("top").Int()
+		rectWidth := rect.Get("width").Float()
+		rectHeight := rect.Get("height").Float()
+		
+		scaleX := float64(canvasWidth) / rectWidth
+		scaleY := float64(canvasHeight) / rectHeight
+		
+		x := int(float64(clientX-rectLeft) * scaleX)
+		y := int(float64(clientY-rectTop) * scaleY)
+		
+		// Draw line from last position to current position
+		drawLine(lastX, lastY, x, y)
+		lastX, lastY = x, y
+	}
 	return nil
 }
 

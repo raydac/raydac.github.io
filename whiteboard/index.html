@@ -50,7 +50,7 @@
             display: block;
             margin: 1rem auto;
             width: 100%;
-            max-width: 512px;
+            max-width: 100%;
             height: auto;
             border-radius: 8px;
             touch-action: none;
@@ -169,10 +169,13 @@
                 <div class="col-6 col-md-2">
                     <button class="btn btn-outline-primary w-100" onclick="handleFill()">Fill</button>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-2">
+                    <button class="btn btn-outline-success w-100" onclick="handleSavePNG()">Save PNG</button>
+                </div>
+                <div class="col-6 col-md-2">
                     <button class="btn btn-gradient w-100" onclick="handleImport()">Import</button>
                 </div>
-                <div class="col-12 col-md-3">
+                <div class="col-6 col-md-2">
                     <button class="btn btn-success w-100" onclick="handleExport()">Export</button>
                 </div>
             </div>
@@ -648,6 +651,23 @@
                 return;
             }
             fillCanvas();
+        }
+
+        function handleSavePNG() {
+            const canvas = document.getElementById('canvas');
+            
+            // Create a download link
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+                link.download = `whiteboard-${timestamp}.png`;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }, 'image/png');
         }
 
         function handleSize() {
