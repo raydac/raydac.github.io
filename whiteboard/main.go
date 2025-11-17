@@ -72,6 +72,7 @@ func main() {
 	js.Global().Set("clearCanvas", js.FuncOf(clearCanvas))
 	js.Global().Set("fillCanvas", js.FuncOf(fillCanvas))
 	js.Global().Set("loadImageData", js.FuncOf(loadImageDataJS))
+	js.Global().Set("resizeCanvas", js.FuncOf(resizeCanvasJS))
 
 	select {}
 }
@@ -695,6 +696,83 @@ func loadImageDataJS(this js.Value, args []js.Value) interface{} {
 	js.CopyBytesToGo(data, jsArray)
 	
 	return loadImageData(data)
+}
+
+func resizeCanvasJS(this js.Value, args []js.Value) interface{} {
+	if len(args) < 2 {
+		return false
+	}
+	
+	newWidth := args[0].Int()
+	newHeight := args[1].Int()
+	
+	// Validate dimensions
+	if newWidth < 64 || newWidth > 2048 || newHeight < 64 || newHeight > 2048 {
+		return false
+	}
+	
+	// Save current image data
+	oldData := make([]byte, len(imgData.Pix))
+	copy(oldData, imgData.Pix)
+	oldWidth := canvasWidth
+	oldHeight := canvasHeight
+	
+	// Update canvas dimensions
+	canvasWidth = newWidth
+	canvasHeight = newHeight
+	
+	// Create new image data
+	imgData = image.NewRGBA(image.Rect(0, 0, canvasWidth, canvasHeight))
+	
+	// Fill with white
+	for i := range imgData.Pix {
+		imgData.Pix[i] = 255
+	}
+	
+	// Update canvas element
+	canvas.Set("width", canvasWidth)
+	canvas.Set("height", canvasHeight)
+	
+	// Clear canvas
+	ctx.Set("fillStyle", "white")
+	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
+	
+	// Copy old image centered
+	offsetX := (canvasWidth - oldWidth) / 2
+	offsetY := (canvasHeight - oldHeight) / 2
+	if offsetX < 0 {
+		offsetX = 0
+	}
+	if offsetY < 0 {
+		offsetY = 0
+	}
+	
+	// Copy pixel data
+	for y := 0; y < oldHeight && y < canvasHeight; y++ {
+		for x := 0; x < oldWidth && x < canvasWidth; x++ {
+			srcIdx := y*oldWidth*4 + x*4
+			destX := x + offsetX
+			destY := y + offsetY
+			
+			if destX >= 0 && destX < canvasWidth && destY >= 0 && destY < canvasHeight {
+				dstIdx := destY*imgData.Stride + destX*4
+				if srcIdx+3 < len(oldData) {
+					imgData.Pix[dstIdx] = oldData[srcIdx]
+					imgData.Pix[dstIdx+1] = oldData[srcIdx+1]
+					imgData.Pix[dstIdx+2] = oldData[srcIdx+2]
+					imgData.Pix[dstIdx+3] = oldData[srcIdx+3]
+				}
+			}
+		}
+	}
+	
+	// Update canvas display
+	imgJSData := ctx.Call("createImageData", canvasWidth, canvasHeight)
+	data8 := imgJSData.Get("data")
+	js.CopyBytesToJS(data8, imgData.Pix)
+	ctx.Call("putImageData", imgJSData, 0, 0)
+	
+	return true
 }
 
 func max(a, b int) int {

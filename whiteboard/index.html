@@ -50,13 +50,14 @@
             display: block;
             margin: 1rem auto;
             width: 100%;
+            max-width: 512px;
             height: auto;
             border-radius: 8px;
             touch-action: none;
         }
         .color-picker {
             display: flex;
-            gap: 4px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -464,16 +465,18 @@
 
             try {
                 let imgData = '';
+                let newWidth = null;
+                let newHeight = null;
+                
                 if (url.includes('?')) {
                     const urlObj = new URL(url);
                     imgData = urlObj.searchParams.get('img');
                     
+                    // Get dimensions if present
                     const w = urlObj.searchParams.get('w');
                     const h = urlObj.searchParams.get('h');
-                    if (w || h) {
-                        window.location.href = url;
-                        return;
-                    }
+                    if (w) newWidth = parseInt(w);
+                    if (h) newHeight = parseInt(h);
                 } else {
                     imgData = url;
                 }
@@ -483,6 +486,21 @@
                     return;
                 }
 
+                // Check if we need to resize canvas first
+                const urlParams = new URLSearchParams(window.location.search);
+                const currentW = parseInt(urlParams.get('w') || '512');
+                const currentH = parseInt(urlParams.get('h') || '512');
+                
+                if (newWidth && newHeight && (newWidth !== currentW || newHeight !== currentH)) {
+                    // Need to resize - use internal resize then load
+                    if (confirm(`This image requires canvas size ${newWidth}×${newHeight}. Resize canvas?`)) {
+                        resizeCanvasInternal(newWidth, newHeight, imgData);
+                        importModalInstance.hide();
+                    }
+                    return;
+                }
+
+                // Decode and check if encrypted
                 let decoded;
                 try {
                     decoded = atob(imgData.replace(/-/g, '+').replace(/_/g, '/'));
@@ -512,6 +530,51 @@
                 }
             } catch (error) {
                 document.getElementById('importStatus').innerHTML = '<div class="alert alert-danger py-2">Error: ' + error.message + '</div>';
+            }
+        }
+
+        function resizeCanvasInternal(newWidth, newHeight, imgDataToLoad) {
+            if (!wasmReady) {
+                alert('WASM not ready yet, please wait...');
+                return;
+            }
+            
+            // Call Go function to resize canvas
+            if (typeof resizeCanvas !== 'undefined') {
+                resizeCanvas(newWidth, newHeight);
+                
+                // Update navbar
+                document.getElementById('canvasInfo').textContent = `${newWidth}×${newHeight}`;
+                
+                // Update URL without reload
+                const newUrl = new URL(window.location);
+                newUrl.searchParams.set('w', newWidth);
+                newUrl.searchParams.set('h', newHeight);
+                window.history.replaceState({}, '', newUrl);
+                
+                // Load the image data if provided
+                if (imgDataToLoad) {
+                    setTimeout(() => {
+                        try {
+                            const decoded = atob(imgDataToLoad.replace(/-/g, '+').replace(/_/g, '/'));
+                            
+                            if (decoded.startsWith('ENC:')) {
+                                window.tempImgData = imgDataToLoad;
+                                passwordModalInstance.show();
+                            } else {
+                                const decodedBytes = new Uint8Array(decoded.length);
+                                for (let i = 0; i < decoded.length; i++) {
+                                    decodedBytes[i] = decoded.charCodeAt(i);
+                                }
+                                loadImageData(decodedBytes);
+                            }
+                        } catch (e) {
+                            alert('Failed to load image after resize: ' + e.message);
+                        }
+                    }, 100);
+                }
+            } else {
+                alert('Resize function not available');
             }
         }
 
