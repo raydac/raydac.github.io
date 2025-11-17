@@ -94,8 +94,27 @@ func parseIntSafe(s string, defaultVal int) int {
 func mouseDown(this js.Value, args []js.Value) interface{} {
 	e := args[0]
 	rect := canvas.Call("getBoundingClientRect")
-	lastX = e.Get("clientX").Int() - rect.Get("left").Int()
-	lastY = e.Get("clientY").Int() - rect.Get("top").Int()
+	
+	// Get client coordinates
+	clientX := e.Get("clientX").Int()
+	clientY := e.Get("clientY").Int()
+	
+	// Get canvas position
+	rectLeft := rect.Get("left").Int()
+	rectTop := rect.Get("top").Int()
+	
+	// Get canvas display size and actual size
+	rectWidth := rect.Get("width").Float()
+	rectHeight := rect.Get("height").Float()
+	
+	// Calculate scale factors
+	scaleX := float64(canvasWidth) / rectWidth
+	scaleY := float64(canvasHeight) / rectHeight
+	
+	// Calculate actual canvas coordinates
+	lastX = int(float64(clientX-rectLeft) * scaleX)
+	lastY = int(float64(clientY-rectTop) * scaleY)
+	
 	drawing = true
 	drawPoint(lastX, lastY)
 	return nil
@@ -107,8 +126,27 @@ func mouseMove(this js.Value, args []js.Value) interface{} {
 	}
 	e := args[0]
 	rect := canvas.Call("getBoundingClientRect")
-	x := e.Get("clientX").Int() - rect.Get("left").Int()
-	y := e.Get("clientY").Int() - rect.Get("top").Int()
+	
+	// Get client coordinates
+	clientX := e.Get("clientX").Int()
+	clientY := e.Get("clientY").Int()
+	
+	// Get canvas position
+	rectLeft := rect.Get("left").Int()
+	rectTop := rect.Get("top").Int()
+	
+	// Get canvas display size and actual size
+	rectWidth := rect.Get("width").Float()
+	rectHeight := rect.Get("height").Float()
+	
+	// Calculate scale factors
+	scaleX := float64(canvasWidth) / rectWidth
+	scaleY := float64(canvasHeight) / rectHeight
+	
+	// Calculate actual canvas coordinates
+	x := int(float64(clientX-rectLeft) * scaleX)
+	y := int(float64(clientY-rectTop) * scaleY)
+	
 	drawLine(lastX, lastY, x, y)
 	lastX, lastY = x, y
 	return nil
