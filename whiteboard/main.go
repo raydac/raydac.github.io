@@ -434,7 +434,9 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 	// Compress each plane separately
 	var buf bytes.Buffer
 	
-	// Write header: width, height (2 bytes each)
+	// Write header: offsetX, offsetY, width, height (4 x uint16)
+	binary.Write(&buf, binary.LittleEndian, uint16(minX))
+	binary.Write(&buf, binary.LittleEndian, uint16(minY))
 	binary.Write(&buf, binary.LittleEndian, uint16(width))
 	binary.Write(&buf, binary.LittleEndian, uint16(height))
 	
@@ -638,8 +640,14 @@ func tryLoadWithPassword(this js.Value, args []js.Value) interface{} {
 func loadImageData(data []byte) bool {
 	buf := bytes.NewReader(data)
 	
-	// Read header: width, height
-	var width, height uint16
+	// Read header: offsetX, offsetY, width, height
+	var offsetX, offsetY, width, height uint16
+	if err := binary.Read(buf, binary.LittleEndian, &offsetX); err != nil {
+		return false
+	}
+	if err := binary.Read(buf, binary.LittleEndian, &offsetY); err != nil {
+		return false
+	}
 	if err := binary.Read(buf, binary.LittleEndian, &width); err != nil {
 		return false
 	}
@@ -696,17 +704,7 @@ func loadImageData(data []byte) bool {
 		imgData.Pix[i] = 255
 	}
 	
-	// Center the image if it's smaller than canvas
-	offsetX := (canvasWidth - int(width)) / 2
-	offsetY := (canvasHeight - int(height)) / 2
-	if offsetX < 0 {
-		offsetX = 0
-	}
-	if offsetY < 0 {
-		offsetY = 0
-	}
-	
-	// Reconstruct image from binary planes
+	// Reconstruct image from binary planes at original position
 	bitIdx := 0
 	for y := 0; y < int(height); y++ {
 		for x := 0; x < int(width); x++ {
@@ -729,8 +727,9 @@ func loadImageData(data []byte) bool {
 				b = 255
 			}
 			
-			destX := x + offsetX
-			destY := y + offsetY
+			// Place at original position using stored offset
+			destX := int(offsetX) + x
+			destY := int(offsetY) + y
 			if destX < canvasWidth && destY < canvasHeight {
 				idx := destY*imgData.Stride + destX*4
 				imgData.Pix[idx] = r

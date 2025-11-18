@@ -691,8 +691,8 @@
             
             // Get current URL params
             const urlParams = new URLSearchParams(window.location.search);
-            const currentW = urlParams.get('w') || '512';
-            const currentH = urlParams.get('h') || '512';
+            const currentW = parseInt(urlParams.get('w') || '512');
+            const currentH = parseInt(urlParams.get('h') || '512');
             
             // Check if size changed
             if (width == currentW && height == currentH) {
@@ -700,22 +700,33 @@
                 return;
             }
             
-            // Export current image if exists
             if (!wasmReady) {
                 alert('WASM not ready yet, please wait...');
                 return;
             }
             
-            const data = exportImage(null);
-            
-            // Build new URL with new dimensions
-            let newUrl = window.location.pathname + '?w=' + width + '&h=' + height;
-            if (data) {
-                newUrl += '&img=' + encodeURIComponent(data);
+            // Resize canvas internally without reload
+            if (typeof resizeCanvas !== 'undefined') {
+                const success = resizeCanvas(width, height);
+                
+                if (success) {
+                    // Update navbar
+                    document.getElementById('canvasInfo').textContent = `${width}×${height}`;
+                    
+                    // Update URL without reload (only update w and h params, keep img if exists)
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('w', width);
+                    newUrl.searchParams.set('h', height);
+                    window.history.replaceState({}, '', newUrl);
+                    
+                    // Close modal
+                    sizeModalInstance.hide();
+                } else {
+                    document.getElementById('sizeError').textContent = 'Failed to resize canvas';
+                }
+            } else {
+                alert('Resize function not available');
             }
-            
-            // Reload with new size
-            window.location.href = newUrl;
         }
 
         // Touch support for mobile
