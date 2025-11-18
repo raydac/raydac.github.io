@@ -32,56 +32,74 @@
         body {
             background: #f8f9fa;
             min-height: 100vh;
-            padding-bottom: 2rem;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
         }
-        .navbar {
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        body.auto-resize-active {
+            overflow-y: hidden;
         }
         .canvas-container {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,.1);
-            padding: 1.5rem;
-            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            padding: 0.5rem;
+            margin: 0.5rem auto;
             max-width: 100%;
+        }
+        .canvas-container.auto-resize-active {
+            margin: 0.5rem;
+            height: calc(100vh - 1rem);
+            display: flex;
+            flex-direction: column;
         }
         .canvas-wrapper {
             width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
+        .canvas-wrapper.auto-resize-wrapper {
+            flex: 1;
+            min-height: 0;
+        }
+        .canvas-size-info {
+            font-size: 0.875rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
         canvas {
-            border: 2px solid #dee2e6;
+            border: 1px solid #dee2e6;
             cursor: crosshair;
             display: block;
-            margin: 1rem auto;
+            margin: 0.25rem auto;
             width: 100%;
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 4px;
             touch-action: none;
         }
         canvas.auto-resize {
-            max-height: calc(100vh - 350px);
+            max-height: 100%;
+            max-width: 100%;
             width: auto !important;
             height: auto !important;
-            max-width: 100%;
             object-fit: contain;
         }
         .color-picker {
             display: flex;
-            gap: 8px;
+            gap: 4px;
             flex-wrap: wrap;
             justify-content: center;
         }
         .color {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #dee2e6;
+            width: 28px;
+            height: 28px;
+            border: 2px solid #dee2e6;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: all 0.2s;
         }
         .color:hover {
@@ -89,38 +107,67 @@
         }
         .color.active {
             border-color: #0d6efd;
-            border-width: 4px;
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+            border-width: 3px;
+            box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
         }
         .width-control {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
         }
         .width-value {
-            min-width: 50px;
+            min-width: 45px;
             text-align: center;
             font-weight: 600;
+            font-size: 0.875rem;
             color: #212529;
             background: #f8f9fa;
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 2px 8px;
+            border-radius: 4px;
             border: 1px solid #dee2e6;
         }
+        .btn {
+            padding: 0.375rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        .form-check {
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+        .form-check-inline {
+            margin-right: 0.5rem;
+        }
+        .form-control {
+            padding: 0.375rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        .form-range {
+            height: 1.2rem;
+        }
         .modal-content {
-            border-radius: 12px;
+            border-radius: 8px;
         }
         .modal-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-radius: 12px 12px 0 0;
+            border-radius: 8px 8px 0 0;
+            padding: 0.75rem 1rem;
         }
         .modal-header .btn-close {
             filter: brightness(0) invert(1);
         }
+        .modal-body {
+            padding: 1rem;
+        }
+        .modal-footer {
+            padding: 0.75rem;
+        }
+        .modal-title {
+            font-size: 1rem;
+        }
         textarea.form-control {
             font-family: 'Courier New', monospace;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
         }
         .btn-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -131,50 +178,37 @@
             background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
             color: white;
         }
+        hr {
+            margin: 0.5rem 0;
+        }
         @media (max-width: 768px) {
             .color {
-                width: 35px;
-                height: 35px;
+                width: 24px;
+                height: 24px;
             }
             canvas {
                 max-width: 100%;
                 touch-action: none;
             }
-            .btn-sm-block {
-                width: 100%;
-                margin-bottom: 0.5rem;
+            canvas.auto-resize {
+                max-height: 100%;
+            }
+            .canvas-wrapper.auto-resize-wrapper {
+                flex: 1;
+                min-height: 0;
+            }
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.4rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                <svg width="24" height="24" fill="currentColor" class="me-2" viewBox="0 0 16 16">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg>
-                I.A.M. Whiteboard
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <span class="nav-link text-light" id="canvasInfo">512×512</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="canvas-container">
             <!-- Action Buttons - Moved to top -->
-            <div class="row g-2 mb-3">
+            <div class="row g-1 mb-2">
                 <div class="col-6 col-md-2">
                     <button class="btn btn-outline-secondary w-100" onclick="handleSize()">Size</button>
                 </div>
@@ -195,30 +229,31 @@
                 </div>
             </div>
 
-            <!-- Password Protection - Moved to top -->
-            <div class="mb-3">
-                <div class="form-check form-check-inline">
+            <!-- Password Protection and Canvas Info -->
+            <div class="mb-2 d-flex flex-wrap align-items-center gap-2">
+                <div class="form-check form-check-inline mb-0">
                     <input class="form-check-input" type="checkbox" id="usePassword">
                     <label class="form-check-label" for="usePassword">
-                        Password protect export
+                        Password protect
                     </label>
                 </div>
-                <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline mb-0">
                     <input class="form-check-input" type="checkbox" id="autoResize">
                     <label class="form-check-label" for="autoResize">
-                        Auto-resize canvas to fit screen
+                        Auto-resize to fit
                     </label>
                 </div>
-                <div id="passwordField" style="display:none;" class="mt-2">
-                    <input type="password" class="form-control" id="exportPassword" placeholder="Enter password">
-                </div>
+                <span class="canvas-size-info ms-auto" id="canvasInfo">512×512</span>
+            </div>
+            <div id="passwordField" style="display:none;" class="mb-2">
+                <input type="password" class="form-control form-control-sm" id="exportPassword" placeholder="Enter password" style="max-width: 250px;">
             </div>
 
-            <hr class="my-3">
+            <hr class="my-2">
 
             <!-- Color and Width Controls -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-lg-8 mb-2 mb-lg-0">
+            <div class="row mb-2 align-items-center">
+                <div class="col-lg-8 mb-1 mb-lg-0">
                     <div class="color-picker" title="Select pen color">
                         <div class="color active" style="background:#000" data-r="0" data-g="0" data-b="0" title="Black"></div>
                         <div class="color" style="background:#f00" data-r="255" data-g="0" data-b="0" title="Red"></div>
@@ -411,10 +446,20 @@
 
         document.getElementById('autoResize').addEventListener('change', (e) => {
             const canvas = document.getElementById('canvas');
+            const wrapper = canvas.parentElement;
+            const container = wrapper.parentElement;
+            const body = document.body;
+            
             if (e.target.checked) {
                 canvas.classList.add('auto-resize');
+                wrapper.classList.add('auto-resize-wrapper');
+                container.classList.add('auto-resize-active');
+                body.classList.add('auto-resize-active');
             } else {
                 canvas.classList.remove('auto-resize');
+                wrapper.classList.remove('auto-resize-wrapper');
+                container.classList.remove('auto-resize-active');
+                body.classList.remove('auto-resize-active');
             }
             // Save preference
             localStorage.setItem('autoResize', e.target.checked);
@@ -424,7 +469,11 @@
         const savedAutoResize = localStorage.getItem('autoResize') === 'true';
         if (savedAutoResize) {
             document.getElementById('autoResize').checked = true;
-            document.getElementById('canvas').classList.add('auto-resize');
+            const canvas = document.getElementById('canvas');
+            canvas.classList.add('auto-resize');
+            canvas.parentElement.classList.add('auto-resize-wrapper');
+            canvas.parentElement.parentElement.classList.add('auto-resize-active');
+            document.body.classList.add('auto-resize-active');
         }
 
         // Handle window resize - no actual canvas resize, just display adjustment via CSS
