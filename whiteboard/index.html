@@ -243,7 +243,7 @@
                         Auto-resize to fit
                     </label>
                 </div>
-                <span class="canvas-size-info ms-auto" id="canvasInfo">512×512</span>
+                <span class="canvas-size-info ms-auto" id="canvasInfo">640×480</span>
             </div>
             <div id="passwordField" style="display:none;" class="mb-2">
                 <input type="password" class="form-control form-control-sm" id="exportPassword" placeholder="Enter password" style="max-width: 250px;">
@@ -275,7 +275,7 @@
 
             <!-- Canvas -->
             <div class="canvas-wrapper">
-                <canvas id="canvas" width="512" height="512"></canvas>
+                <canvas id="canvas" width="640" height="480"></canvas>
             </div>
         </div>
     </div>
@@ -357,11 +357,11 @@
                     <div class="row g-3">
                         <div class="col-6">
                             <label for="canvasWidth" class="form-label">Width</label>
-                            <input type="number" class="form-control" id="canvasWidth" min="64" max="2048" value="512">
+                            <input type="number" class="form-control" id="canvasWidth" min="64" max="2048" value="640">
                         </div>
                         <div class="col-6">
                             <label for="canvasHeight" class="form-label">Height</label>
-                            <input type="number" class="form-control" id="canvasHeight" min="64" max="2048" value="512">
+                            <input type="number" class="form-control" id="canvasHeight" min="64" max="2048" value="480">
                         </div>
                     </div>
                     <div class="form-text mt-2">Current image will be centered on the new canvas</div>
@@ -410,8 +410,8 @@
 
         function updateCanvasInfo() {
             const urlParams = new URLSearchParams(window.location.search);
-            const w = urlParams.get('w') || '512';
-            const h = urlParams.get('h') || '512';
+            const w = urlParams.get('w') || '640';
+            const h = urlParams.get('h') || '480';
             document.getElementById('canvasInfo').textContent = `${w}×${h}`;
             
             // Update size modal inputs
@@ -466,7 +466,17 @@
         });
 
         // Restore auto-resize preference
-        const savedAutoResize = localStorage.getItem('autoResize') === 'true';
+        const urlParams = new URLSearchParams(window.location.search);
+        const autoResizeParam = urlParams.get('autofit');
+        let savedAutoResize = localStorage.getItem('autoResize') === 'true';
+        
+        // URL parameter overrides localStorage
+        if (autoResizeParam !== null) {
+            savedAutoResize = autoResizeParam === '1' || autoResizeParam === 'true';
+            // Save to localStorage for future visits
+            localStorage.setItem('autoResize', savedAutoResize);
+        }
+        
         if (savedAutoResize) {
             document.getElementById('autoResize').checked = true;
             const canvas = document.getElementById('canvas');

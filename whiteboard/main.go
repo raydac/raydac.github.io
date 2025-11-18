@@ -29,17 +29,17 @@ var (
 
 func main() {
 	// Parse canvas size from URL params
-	canvasWidth, canvasHeight = 512, 512
+	canvasWidth, canvasHeight = 640, 480
 	urlParams := js.Global().Get("URLSearchParams").New(js.Global().Get("location").Get("search"))
 	if urlParams.Call("has", "w").Bool() {
 		w := urlParams.Call("get", "w").String()
-		if val := parseIntSafe(w, 512); val >= 64 && val <= 2048 {
+		if val := parseIntSafe(w, 640); val >= 64 && val <= 2048 {
 			canvasWidth = val
 		}
 	}
 	if urlParams.Call("has", "h").Bool() {
 		h := urlParams.Call("get", "h").String()
-		if val := parseIntSafe(h, 512); val >= 64 && val <= 2048 {
+		if val := parseIntSafe(h, 480); val >= 64 && val <= 2048 {
 			canvasHeight = val
 		}
 	}
