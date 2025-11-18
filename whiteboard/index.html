@@ -22,6 +22,9 @@
     <meta name="twitter:title" content="I.A.M. Whiteboard - Online Drawing Tool">
     <meta name="twitter:description" content="Free online whiteboard for drawing and sketching. Share your creations with secure links.">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./favicon/favicon.ico">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -69,6 +72,30 @@
             font-size: 0.875rem;
             color: #6c757d;
             font-weight: 500;
+        }
+        .btn-help {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            line-height: 1;
+            flex-shrink: 0;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+        .btn-help:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+            color: white;
+        }
+        .btn-help svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
         }
         canvas {
             border: 1px solid #dee2e6;
@@ -243,6 +270,12 @@
                         Auto-resize to fit
                     </label>
                 </div>
+                <button class="btn btn-help" onclick="showHelp()" title="Help" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                </button>
                 <span class="canvas-size-info ms-auto" id="canvasInfo">640×480</span>
             </div>
             <div id="passwordField" style="display:none;" class="mb-2">
@@ -375,13 +408,90 @@
         </div>
     </div>
 
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">I.A.M. Whiteboard - Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="fw-bold">How to Use</h6>
+                    <ul class="small">
+                        <li><strong>Drawing:</strong> Click and drag to draw. Select color and pen width before drawing.</li>
+                        <li><strong>Clear:</strong> Removes all content from canvas (requires confirmation).</li>
+                        <li><strong>Fill:</strong> Fills entire canvas with selected color.</li>
+                        <li><strong>Save PNG:</strong> Downloads canvas as PNG image file.</li>
+                        <li><strong>Import:</strong> Load image from URL (paste exported URL or base64 data).</li>
+                        <li><strong>Export:</strong> Generate shareable URL with canvas data (optional password protection).</li>
+                        <li><strong>Size:</strong> Change canvas dimensions while preserving drawing position.</li>
+                    </ul>
+
+                    <h6 class="fw-bold mt-3">URL Parameters</h6>
+                    <table class="table table-sm small">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>w</code></td>
+                                <td>Canvas width (64-2048)</td>
+                                <td><code>?w=800</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>h</code></td>
+                                <td>Canvas height (64-2048)</td>
+                                <td><code>?h=600</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>img</code></td>
+                                <td>Encoded image data</td>
+                                <td><code>?img=base64data...</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>autofit</code></td>
+                                <td>Enable auto-resize (1/true)</td>
+                                <td><code>?autofit=1</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 class="fw-bold mt-3">Examples</h6>
+                    <ul class="small mb-0">
+                        <li><code>?w=1024&h=768</code> - Open with 1024×768 canvas</li>
+                        <li><code>?autofit=1</code> - Open with auto-resize enabled</li>
+                        <li><code>?w=800&h=600&autofit=true</code> - Custom size with auto-resize</li>
+                        <li><code>?img=H4sI...</code> - Open with exported image data</li>
+                    </ul>
+
+                    <h6 class="fw-bold mt-3">Features</h6>
+                    <ul class="small mb-0">
+                        <li><strong>Password Protection:</strong> Encrypt exported URLs with AES-256-GCM</li>
+                        <li><strong>Auto-resize:</strong> Scale canvas to fit screen while maintaining aspect ratio</li>
+                        <li><strong>Binary Compression:</strong> Efficient FLATE compression for minimal URL size</li>
+                        <li><strong>Position Preservation:</strong> Drawings maintain exact position on import/export</li>
+                        <li><strong>Touch Support:</strong> Works on mobile devices with touch drawing</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="wasm_exec.js"></script>
     <script>
         let wasmReady = false;
-        let exportModalInstance, importModalInstance, passwordModalInstance, sizeModalInstance;
+        let exportModalInstance, importModalInstance, passwordModalInstance, sizeModalInstance, helpModalInstance;
 
         const go = new Go();
         
@@ -403,6 +513,7 @@
             importModalInstance = new bootstrap.Modal(document.getElementById('importModal'));
             passwordModalInstance = new bootstrap.Modal(document.getElementById('passwordModal'));
             sizeModalInstance = new bootstrap.Modal(document.getElementById('sizeModal'));
+            helpModalInstance = new bootstrap.Modal(document.getElementById('helpModal'));
             
             // Update canvas info
             updateCanvasInfo();
@@ -774,6 +885,10 @@
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
             }, 'image/png');
+        }
+
+        function showHelp() {
+            helpModalInstance.show();
         }
 
         function handleSize() {
