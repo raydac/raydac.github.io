@@ -397,13 +397,11 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 	width := maxX - minX + 1
 	height := maxY - minY + 1
 	
-	// Create binary planes for R, G, B channels
+	// Create binary planes for R, G, B channels - interleaved for better compression
 	numPixels := width * height
-	numBytes := (numPixels + 7) / 8
 	
-	rPlane := make([]byte, numBytes)
-	gPlane := make([]byte, numBytes)
-	bPlane := make([]byte, numBytes)
+	// Interleave RGB bits: R0G0B0 R1G1B1 R2G2B2... for better compression
+	interleavedBits := make([]byte, (numPixels*3+7)/8)
 	
 	bitIdx := 0
 	for y := 0; y < height; y++ {
@@ -413,25 +411,31 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 			g := imgData.Pix[srcIdx+1]
 			b := imgData.Pix[srcIdx+2]
 			
-			// Binarize: threshold at 128
-			byteIdx := bitIdx / 8
-			bitPos := uint(7 - (bitIdx % 8))
-			
+			// Binarize and interleave: RGB for each pixel
 			if r > 128 {
-				rPlane[byteIdx] |= (1 << bitPos)
+				byteIdx := bitIdx / 8
+				bitPos := uint(7 - (bitIdx % 8))
+				interleavedBits[byteIdx] |= (1 << bitPos)
 			}
-			if g > 128 {
-				gPlane[byteIdx] |= (1 << bitPos)
-			}
-			if b > 128 {
-				bPlane[byteIdx] |= (1 << bitPos)
-			}
+			bitIdx++
 			
+			if g > 128 {
+				byteIdx := bitIdx / 8
+				bitPos := uint(7 - (bitIdx % 8))
+				interleavedBits[byteIdx] |= (1 << bitPos)
+			}
+			bitIdx++
+			
+			if b > 128 {
+				byteIdx := bitIdx / 8
+				bitPos := uint(7 - (bitIdx % 8))
+				interleavedBits[byteIdx] |= (1 << bitPos)
+			}
 			bitIdx++
 		}
 	}
 	
-	// Compress each plane separately
+	// Compress interleaved data
 	var buf bytes.Buffer
 	
 	// Write header: offsetX, offsetY, width, height (4 x uint16)
@@ -440,20 +444,9 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 	binary.Write(&buf, binary.LittleEndian, uint16(width))
 	binary.Write(&buf, binary.LittleEndian, uint16(height))
 	
-	// Compress and write R plane
-	compressedR := compressPlane(rPlane)
-	binary.Write(&buf, binary.LittleEndian, uint32(len(compressedR)))
-	buf.Write(compressedR)
-	
-	// Compress and write G plane
-	compressedG := compressPlane(gPlane)
-	binary.Write(&buf, binary.LittleEndian, uint32(len(compressedG)))
-	buf.Write(compressedG)
-	
-	// Compress and write B plane
-	compressedB := compressPlane(bPlane)
-	binary.Write(&buf, binary.LittleEndian, uint32(len(compressedB)))
-	buf.Write(compressedB)
+	// Compress interleaved RGB data
+	compressedData := compressPlane(interleavedBits)
+	buf.Write(compressedData)
 	
 	data := buf.Bytes()
 	
@@ -473,15 +466,20 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 }
 
 func compressPlane(data []byte) []byte {
+	// Apply RLE first for runs of identical bytes
+	rleData := runLengthEncode(data)
+	
+	// Then compress with FLATE
 	var buf bytes.Buffer
 	// FLATE compression with level 9 (best compression)
 	flw, _ := flate.NewWriter(&buf, 9)
-	flw.Write(data)
+	flw.Write(rleData)
 	flw.Close()
 	return buf.Bytes()
 }
 
 func decompressPlane(data []byte) ([]byte, error) {
+	// Decompress FLATE first
 	flr := flate.NewReader(bytes.NewReader(data))
 	defer flr.Close()
 	
@@ -489,7 +487,79 @@ func decompressPlane(data []byte) ([]byte, error) {
 	if _, err := io.Copy(&buf, flr); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil
+	
+	// Then decode RLE
+	return runLengthDecode(buf.Bytes()), nil
+}
+
+func runLengthEncode(data []byte) []byte {
+	if len(data) == 0 {
+		return data
+	}
+	
+	var result bytes.Buffer
+	i := 0
+	
+	for i < len(data) {
+		currentByte := data[i]
+		runLength := 1
+		
+		// Count consecutive identical bytes (max 255)
+		for i+1 < len(data) && data[i+1] == currentByte && runLength < 255 {
+			i++
+			runLength++
+		}
+		
+		if runLength >= 3 {
+			// Use RLE for runs of 3 or more: [marker=255][byte][count]
+			result.WriteByte(255) // RLE marker
+			result.WriteByte(currentByte)
+			result.WriteByte(byte(runLength))
+		} else {
+			// For short runs, write literally
+			for j := 0; j < runLength; j++ {
+				// If byte is 255 (marker), escape it
+				if currentByte == 255 {
+					result.WriteByte(255)
+					result.WriteByte(255)
+					result.WriteByte(1) // Run of 1
+				} else {
+					result.WriteByte(currentByte)
+				}
+			}
+		}
+		
+		i++
+	}
+	
+	return result.Bytes()
+}
+
+func runLengthDecode(data []byte) []byte {
+	if len(data) == 0 {
+		return data
+	}
+	
+	var result bytes.Buffer
+	i := 0
+	
+	for i < len(data) {
+		if data[i] == 255 && i+2 < len(data) {
+			// RLE sequence: [255][byte][count]
+			byteVal := data[i+1]
+			count := int(data[i+2])
+			for j := 0; j < count; j++ {
+				result.WriteByte(byteVal)
+			}
+			i += 3
+		} else {
+			// Literal byte
+			result.WriteByte(data[i])
+			i++
+		}
+	}
+	
+	return result.Bytes()
 }
 
 func encrypt(data []byte, password string) ([]byte, error) {
@@ -655,44 +725,14 @@ func loadImageData(data []byte) bool {
 		return false
 	}
 	
-	// Read R plane
-	var rLen uint32
-	if err := binary.Read(buf, binary.LittleEndian, &rLen); err != nil {
-		return false
-	}
-	rCompressed := make([]byte, rLen)
-	if _, err := buf.Read(rCompressed); err != nil {
-		return false
-	}
-	rPlane, err := decompressPlane(rCompressed)
-	if err != nil {
+	// Read remaining compressed interleaved data
+	compressedData := make([]byte, buf.Len())
+	if _, err := buf.Read(compressedData); err != nil {
 		return false
 	}
 	
-	// Read G plane
-	var gLen uint32
-	if err := binary.Read(buf, binary.LittleEndian, &gLen); err != nil {
-		return false
-	}
-	gCompressed := make([]byte, gLen)
-	if _, err := buf.Read(gCompressed); err != nil {
-		return false
-	}
-	gPlane, err := decompressPlane(gCompressed)
-	if err != nil {
-		return false
-	}
-	
-	// Read B plane
-	var bLen uint32
-	if err := binary.Read(buf, binary.LittleEndian, &bLen); err != nil {
-		return false
-	}
-	bCompressed := make([]byte, bLen)
-	if _, err := buf.Read(bCompressed); err != nil {
-		return false
-	}
-	bPlane, err := decompressPlane(bCompressed)
+	// Decompress
+	interleavedBits, err := decompressPlane(compressedData)
 	if err != nil {
 		return false
 	}
@@ -704,28 +744,36 @@ func loadImageData(data []byte) bool {
 		imgData.Pix[i] = 255
 	}
 	
-	// Reconstruct image from binary planes at original position
+	// Reconstruct image from interleaved bits
 	bitIdx := 0
 	for y := 0; y < int(height); y++ {
 		for x := 0; x < int(width); x++ {
+			// Extract R bit
 			byteIdx := bitIdx / 8
 			bitPos := uint(7 - (bitIdx % 8))
-			
-			// Extract bits and convert to 0 or 255
 			r := byte(0)
-			if (rPlane[byteIdx] & (1 << bitPos)) != 0 {
+			if byteIdx < len(interleavedBits) && (interleavedBits[byteIdx]&(1<<bitPos)) != 0 {
 				r = 255
 			}
+			bitIdx++
 			
+			// Extract G bit
+			byteIdx = bitIdx / 8
+			bitPos = uint(7 - (bitIdx % 8))
 			g := byte(0)
-			if (gPlane[byteIdx] & (1 << bitPos)) != 0 {
+			if byteIdx < len(interleavedBits) && (interleavedBits[byteIdx]&(1<<bitPos)) != 0 {
 				g = 255
 			}
+			bitIdx++
 			
+			// Extract B bit
+			byteIdx = bitIdx / 8
+			bitPos = uint(7 - (bitIdx % 8))
 			b := byte(0)
-			if (bPlane[byteIdx] & (1 << bitPos)) != 0 {
+			if byteIdx < len(interleavedBits) && (interleavedBits[byteIdx]&(1<<bitPos)) != 0 {
 				b = 255
 			}
+			bitIdx++
 			
 			// Place at original position using stored offset
 			destX := int(offsetX) + x
@@ -737,8 +785,6 @@ func loadImageData(data []byte) bool {
 				imgData.Pix[idx+2] = b
 				imgData.Pix[idx+3] = 255
 			}
-			
-			bitIdx++
 		}
 	}
 	
