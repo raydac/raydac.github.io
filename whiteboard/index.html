@@ -51,8 +51,9 @@
             max-width: 100%;
         }
         .canvas-container.auto-resize-active {
-            margin: 0.5rem;
-            height: calc(100vh - 1rem);
+            margin: 0.25rem;
+            padding: 0.25rem;
+            height: calc(100vh - 0.5rem);
             display: flex;
             flex-direction: column;
         }
@@ -112,8 +113,9 @@
             max-height: 100%;
             max-width: 100%;
             width: auto !important;
-            height: auto !important;
+            height: 100% !important;
             object-fit: contain;
+            margin: 0;
         }
         .color-picker {
             display: flex;
@@ -285,7 +287,7 @@
             <hr class="my-2">
 
             <!-- Color and Width Controls -->
-            <div class="row mb-2 align-items-center">
+            <div class="row mb-1 align-items-center">
                 <div class="col-lg-8 mb-1 mb-lg-0">
                     <div class="color-picker" title="Select pen color">
                         <div class="color active" style="background:#000" data-r="0" data-g="0" data-b="0" title="Black"></div>
@@ -419,13 +421,19 @@
                 <div class="modal-body">
                     <h6 class="fw-bold">How to Use</h6>
                     <ul class="small">
-                        <li><strong>Drawing:</strong> Click and drag to draw. Select color and pen width before drawing.</li>
+                        <li><strong>Drawing:</strong> Click and drag to draw. Select color and pen width before drawing. Drawing continues even when mouse leaves canvas area.</li>
                         <li><strong>Clear:</strong> Removes all content from canvas (requires confirmation).</li>
                         <li><strong>Fill:</strong> Fills entire canvas with selected color.</li>
-                        <li><strong>Save PNG:</strong> Downloads canvas as PNG image file.</li>
-                        <li><strong>Import:</strong> Load image from URL (paste exported URL or base64 data).</li>
-                        <li><strong>Export:</strong> Generate shareable URL with canvas data (optional password protection).</li>
-                        <li><strong>Size:</strong> Change canvas dimensions while preserving drawing position.</li>
+                        <li><strong>Size:</strong> Change canvas dimensions (64-2048px). Drawing position is preserved during resize.</li>
+                        <li><strong>Save PNG:</strong> Downloads canvas as PNG image file with timestamp.</li>
+                        <li><strong>Import:</strong> Load image from URL. Paste exported URL or base64 data. No page reload - works entirely in memory.</li>
+                        <li><strong>Export:</strong> Generate shareable URL with canvas data. Optional password protection with AES-256-GCM encryption.</li>
+                    </ul>
+
+                    <h6 class="fw-bold mt-3">Options</h6>
+                    <ul class="small">
+                        <li><strong>Password protect:</strong> Encrypt exported image with password (AES-256-GCM). Password required to view.</li>
+                        <li><strong>Auto-resize to fit:</strong> Scale canvas display to fill available screen space while maintaining aspect ratio. Canvas resolution stays the same.</li>
                     </ul>
 
                     <h6 class="fw-bold mt-3">URL Parameters</h6>
@@ -440,43 +448,57 @@
                         <tbody>
                             <tr>
                                 <td><code>w</code></td>
-                                <td>Canvas width (64-2048)</td>
+                                <td>Canvas width in pixels (64-2048)</td>
                                 <td><code>?w=800</code></td>
                             </tr>
                             <tr>
                                 <td><code>h</code></td>
-                                <td>Canvas height (64-2048)</td>
+                                <td>Canvas height in pixels (64-2048)</td>
                                 <td><code>?h=600</code></td>
                             </tr>
                             <tr>
                                 <td><code>img</code></td>
-                                <td>Encoded image data</td>
-                                <td><code>?img=base64data...</code></td>
+                                <td>Encoded image data (base64)</td>
+                                <td><code>?img=H4sI...</code></td>
                             </tr>
                             <tr>
                                 <td><code>autofit</code></td>
-                                <td>Enable auto-resize (1/true)</td>
+                                <td>Enable auto-resize (1/true or 0/false)</td>
                                 <td><code>?autofit=1</code></td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h6 class="fw-bold mt-3">Examples</h6>
+                    <h6 class="fw-bold mt-3">URL Examples</h6>
                     <ul class="small mb-0">
                         <li><code>?w=1024&h=768</code> - Open with 1024×768 canvas</li>
                         <li><code>?autofit=1</code> - Open with auto-resize enabled</li>
                         <li><code>?w=800&h=600&autofit=true</code> - Custom size with auto-resize</li>
                         <li><code>?img=H4sI...</code> - Open with exported image data</li>
+                        <li><code>?w=640&h=480&img=...&autofit=1</code> - All parameters combined</li>
                     </ul>
 
-                    <h6 class="fw-bold mt-3">Features</h6>
+                    <h6 class="fw-bold mt-3">Technical Features</h6>
                     <ul class="small mb-0">
-                        <li><strong>Password Protection:</strong> Encrypt exported URLs with AES-256-GCM</li>
-                        <li><strong>Auto-resize:</strong> Scale canvas to fit screen while maintaining aspect ratio</li>
-                        <li><strong>Binary Compression:</strong> Efficient RLE+FLATE compression for minimal URL size</li>
-                        <li><strong>Position Preservation:</strong> Drawings maintain exact position on import/export</li>
-                        <li><strong>Touch Support:</strong> Works on mobile devices with touch drawing</li>
+                        <li><strong>Compression:</strong> RGB interleaving + RLE preprocessing + FLATE level 9 for minimal URL size</li>
+                        <li><strong>Encryption:</strong> AES-256-GCM authenticated encryption with SHA-256 key derivation</li>
+                        <li><strong>Position Preservation:</strong> Drawings maintain exact coordinates on export/import</li>
+                        <li><strong>Efficient Encoding:</strong> 1-bit per color channel (binary), Base64 URL-safe encoding</li>
+                        <li><strong>Touch Support:</strong> Full touch drawing support for mobile devices</li>
+                        <li><strong>No Server Storage:</strong> All data in URL or local memory - no uploads</li>
+                        <li><strong>Cross-Platform:</strong> Works on desktop, tablet, and mobile browsers</li>
                     </ul>
+
+                    <hr class="my-3">
+
+                    <div class="text-center">
+                        <p class="small mb-1"><strong>Author:</strong> Igor Maznitsa</p>
+                        <p class="small mb-0">
+                            <a href="https://www.igormaznitsa.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                🌐 www.igormaznitsa.com
+                            </a>
+                        </p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
