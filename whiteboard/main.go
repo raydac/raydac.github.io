@@ -48,6 +48,14 @@ func main() {
 	for i := range imgData.Pix {
 		imgData.Pix[i] = 255
 	}
+	
+	// Parse pen width from URL params
+	if urlParams.Call("has", "pen").Bool() {
+		p := urlParams.Call("get", "pen").String()
+		if val := parseIntSafe(p, 2); val >= 1 && val <= 32 {
+			penWidth = val
+		}
+	}
 
 	doc := js.Global().Get("document")
 	canvas = doc.Call("getElementById", "canvas")

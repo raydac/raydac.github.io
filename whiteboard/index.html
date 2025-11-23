@@ -457,6 +457,11 @@
                                 <td><code>?h=600</code></td>
                             </tr>
                             <tr>
+                                <td><code>pen</code></td>
+                                <td>Pen width in pixels (1-32)</td>
+                                <td><code>?pen=5</code></td>
+                            </tr>
+                            <tr>
                                 <td><code>img</code></td>
                                 <td>Encoded image data (base64)</td>
                                 <td><code>?img=H4sI...</code></td>
@@ -472,10 +477,11 @@
                     <h6 class="fw-bold mt-3">URL Examples</h6>
                     <ul class="small mb-0">
                         <li><code>?w=1024&h=768</code> - Open with 1024×768 canvas</li>
+                        <li><code>?pen=10</code> - Open with pen width set to 10 pixels</li>
                         <li><code>?autofit=1</code> - Open with auto-resize enabled</li>
-                        <li><code>?w=800&h=600&autofit=true</code> - Custom size with auto-resize</li>
+                        <li><code>?w=800&h=600&pen=5&autofit=true</code> - Custom size, pen width, and auto-resize</li>
                         <li><code>?img=H4sI...</code> - Open with exported image data</li>
-                        <li><code>?w=640&h=480&img=...&autofit=1</code> - All parameters combined</li>
+                        <li><code>?w=640&h=480&pen=3&img=...&autofit=1</code> - All parameters combined</li>
                     </ul>
 
                     <h6 class="fw-bold mt-3">Technical Features</h6>
@@ -539,6 +545,19 @@
             
             // Update canvas info
             updateCanvasInfo();
+            
+            // Update pen width from URL if present
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('pen')) {
+                const penWidth = parseInt(urlParams.get('pen'));
+                if (penWidth >= 1 && penWidth <= 32) {
+                    document.getElementById('widthSlider').value = penWidth;
+                    document.getElementById('widthValue').textContent = penWidth + 'px';
+                    if (wasmReady) {
+                        setWidth(penWidth);
+                    }
+                }
+            }
         });
 
         function updateCanvasInfo() {
