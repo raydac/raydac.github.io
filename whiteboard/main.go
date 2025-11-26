@@ -101,33 +101,58 @@ func parseIntSafe(s string, defaultVal int) int {
 	return val
 }
 
+
 func mouseDown(this js.Value, args []js.Value) interface{} {
-	e := args[0]
-	rect := canvas.Call("getBoundingClientRect")
-	
-	// Get client coordinates
-	clientX := e.Get("clientX").Int()
-	clientY := e.Get("clientY").Int()
-	
-	// Get canvas position
-	rectLeft := rect.Get("left").Int()
-	rectTop := rect.Get("top").Int()
-	
-	// Get canvas display size and actual size
-	rectWidth := rect.Get("width").Float()
-	rectHeight := rect.Get("height").Float()
-	
-	// Calculate scale factors
-	scaleX := float64(canvasWidth) / rectWidth
-	scaleY := float64(canvasHeight) / rectHeight
-	
-	// Calculate actual canvas coordinates
-	lastX = int(float64(clientX-rectLeft) * scaleX)
-	lastY = int(float64(clientY-rectTop) * scaleY)
-	
-	drawing = true
-	drawPoint(lastX, lastY)
-	return nil
+    e := args[0]
+    rect := canvas.Call("getBoundingClientRect")
+    
+    // Get client coordinates
+    clientX := e.Get("clientX").Int()
+    clientY := e.Get("clientY").Int()
+    
+    // Get canvas position
+    rectLeft := rect.Get("left").Int()
+    rectTop := rect.Get("top").Int()
+    
+    // Get canvas bounding rect size
+    rectWidth := rect.Get("width").Float()
+    rectHeight := rect.Get("height").Float()
+    
+    // Calculate actual displayed size considering object-fit: contain
+    canvasAspect := float64(canvasWidth) / float64(canvasHeight)
+    rectAspect := rectWidth / rectHeight
+    
+    var displayWidth, displayHeight float64
+    var offsetX, offsetY float64
+    
+    if canvasAspect > rectAspect {
+	// Canvas is wider - fits to width, letterbox top/bottom
+	displayWidth = rectWidth
+	displayHeight = rectWidth / canvasAspect
+	offsetX = 0
+	offsetY = (rectHeight - displayHeight) / 2
+    } else {
+	// Canvas is taller - fits to height, pillarbox left/right
+	displayHeight = rectHeight
+	displayWidth = rectHeight * canvasAspect
+	offsetX = (rectWidth - displayWidth) / 2
+	offsetY = 0
+    }
+    
+    // Calculate scale factors based on actual display size
+    scaleX := float64(canvasWidth) / displayWidth
+    scaleY := float64(canvasHeight) / displayHeight
+    
+    // Calculate actual canvas coordinates accounting for offset
+    relX := float64(clientX-rectLeft) - offsetX
+    relY := float64(clientY-rectTop) - offsetY
+    
+    lastX = int(relX * scaleX)
+    lastY = int(relY * scaleY)
+    
+    drawing = true
+    drawPoint(lastX, lastY)
+    return nil
 }
 
 func mouseMove(this js.Value, args []js.Value) interface{} {
