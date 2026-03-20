@@ -987,7 +987,7 @@ func resizeCanvasJS(this js.Value, args []js.Value) interface{} {
 	ctx.Set("fillStyle", "white")
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
 
-	// Copy old image centered
+	// Center the old content in the new canvas.
 	offsetX := (canvasWidth - oldWidth) / 2
 	offsetY := (canvasHeight - oldHeight) / 2
 	if offsetX < 0 {
@@ -997,13 +997,12 @@ func resizeCanvasJS(this js.Value, args []js.Value) interface{} {
 		offsetY = 0
 	}
 
-	// Copy pixel data
+	// Copy pixel data with centering offset applied.
 	for y := 0; y < oldHeight && y < canvasHeight; y++ {
 		for x := 0; x < oldWidth && x < canvasWidth; x++ {
 			srcIdx := y*oldWidth*4 + x*4
 			destX := x + offsetX
 			destY := y + offsetY
-
 			if destX >= 0 && destX < canvasWidth && destY >= 0 && destY < canvasHeight {
 				dstIdx := destY*imgData.Stride + destX*4
 				if srcIdx+3 < len(oldData) {
@@ -1016,13 +1015,63 @@ func resizeCanvasJS(this js.Value, args []js.Value) interface{} {
 		}
 	}
 
-	// Update canvas display
+	// Shift all recorded stroke coordinates by the same offset applied to pixels.
+	// Without this the vector history still references old-canvas positions, so
+	// export/replay would draw strokes at the wrong location after a resize.
+	if offsetX != 0 || offsetY != 0 {
+		shiftVecCmds(offsetX, offsetY)
+	}
+
+	// Update canvas display.
 	imgJSData := ctx.Call("createImageData", canvasWidth, canvasHeight)
 	data8 := imgJSData.Get("data")
 	js.CopyBytesToJS(data8, imgData.Pix)
 	ctx.Call("putImageData", imgJSData, 0, 0)
 
 	return true
+}
+
+// shiftVecCmds translates all stroke coordinates in the vector history by
+// (dx, dy). Called after a resize that centers the old content, so the vector
+// record stays in sync with the visual pixel positions on the new canvas.
+func shiftVecCmds(dx, dy int) {
+	for _, cmd := range vecCmds {
+		s, ok := cmd.(*vecCmdStroke)
+		if !ok || len(s.pts) == 0 {
+			continue
+		}
+		// Rebuild absolute coordinates, shift each one, re-encode as deltas.
+		// pts[0] is stored as absolute (x, y); pts[1..] are int16 deltas.
+		abs := make([][2]int, len(s.pts))
+		abs[0][0] = int(s.pts[0][0]) + dx
+		abs[0][1] = int(s.pts[0][1]) + dy
+		for i := 1; i < len(s.pts); i++ {
+			abs[i][0] = abs[i-1][0] + int(s.pts[i][0])
+			abs[i][1] = abs[i-1][1] + int(s.pts[i][1])
+		}
+		// Re-encode: first point absolute, rest as int16 deltas.
+		s.pts[0] = [2]int16{int16(abs[0][0]), int16(abs[0][1])}
+		for i := 1; i < len(abs); i++ {
+			ddx := abs[i][0] - abs[i-1][0]
+			ddy := abs[i][1] - abs[i-1][1]
+			if ddx > 32767 {
+				ddx = 32767
+			}
+			if ddx < -32768 {
+				ddx = -32768
+			}
+			if ddy > 32767 {
+				ddy = 32767
+			}
+			if ddy < -32768 {
+				ddy = -32768
+			}
+			s.pts[i] = [2]int16{int16(ddx), int16(ddy)}
+		}
+		// Keep absX/absY in sync with the last point's new position.
+		s.absX += dx
+		s.absY += dy
+	}
 }
 
 func max(a, b int) int {
