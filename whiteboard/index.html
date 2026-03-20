@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>I.A.M. Whiteboard - Online Drawing & Sketch Tool</title>
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="I.A.M. Whiteboard - Free online drawing and sketching tool. Create, share, and collaborate on whiteboard drawings with password protection. Works on desktop and mobile.">
-    <meta name="keywords" content="whiteboard, online drawing, sketch tool, digital canvas, collaborative drawing, drawing app, whiteboard app, paint online, drawing board">
+    <meta name="description"
+        content="I.A.M. Whiteboard - Free online drawing and sketching tool. Create, share, and collaborate on whiteboard drawings with password protection. Works on desktop and mobile.">
+    <meta name="keywords"
+        content="whiteboard, online drawing, sketch tool, digital canvas, collaborative drawing, drawing app, whiteboard app, paint online, drawing board">
     <meta name="author" content="I.A.M. Whiteboard">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="I.A.M. Whiteboard - Online Drawing Tool">
-    <meta property="og:description" content="Free online whiteboard for drawing and sketching. Share your creations with secure links.">
+    <meta property="og:description"
+        content="Free online whiteboard for drawing and sketching. Share your creations with secure links.">
     <meta property="og:site_name" content="I.A.M. Whiteboard">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="I.A.M. Whiteboard - Online Drawing Tool">
-    <meta name="twitter:description" content="Free online whiteboard for drawing and sketching. Share your creations with secure links.">
-    
+    <meta name="twitter:description"
+        content="Free online whiteboard for drawing and sketching. Share your creations with secure links.">
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./favicon/favicon.ico">
-    
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
+
     <style>
         body {
             background: #f8f9fa;
@@ -39,17 +44,20 @@
             margin: 0;
             overflow-x: hidden;
         }
+
         body.auto-resize-active {
             overflow-y: hidden;
         }
+
         .canvas-container {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
             padding: 0.5rem;
             margin: 0.5rem auto;
             max-width: 100%;
         }
+
         .canvas-container.auto-resize-active {
             margin: 0.25rem;
             padding: 0.25rem;
@@ -57,7 +65,23 @@
             display: flex;
             flex-direction: column;
         }
+
         .canvas-wrapper {
+
+            background-color: #ccc;
+
+            background-image:
+                linear-gradient(45deg, #aaa 25%, transparent 25%),
+                linear-gradient(-45deg, #aaa 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #aaa 75%),
+                linear-gradient(-45deg, transparent 75%, #aaa 75%);
+            background-size: 40px 40px;
+            background-position:
+                0 0,
+                0 20px,
+                20px -20px,
+                -20px 0px;
+
             width: 100%;
             height: 100%;
             display: flex;
@@ -65,15 +89,18 @@
             align-items: center;
             overflow: hidden;
         }
+
         .canvas-wrapper.auto-resize-wrapper {
             flex: 1;
             min-height: 0;
         }
+
         .canvas-size-info {
             font-size: 0.875rem;
             color: #6c757d;
             font-weight: 500;
         }
+
         .btn-help {
             width: 30px;
             height: 30px;
@@ -88,16 +115,19 @@
             border-color: #0d6efd;
             color: white;
         }
+
         .btn-help:hover {
             background-color: #0b5ed7;
             border-color: #0a58ca;
             color: white;
         }
+
         .btn-help svg {
             width: 18px;
             height: 18px;
             fill: white;
         }
+
         canvas {
             border: 1px solid #dee2e6;
             cursor: crosshair;
@@ -109,6 +139,7 @@
             border-radius: 4px;
             touch-action: none;
         }
+
         canvas.auto-resize {
             max-height: 100%;
             max-width: 100%;
@@ -117,12 +148,14 @@
             object-fit: contain;
             margin: 0;
         }
+
         .color-picker {
             display: flex;
             gap: 4px;
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .color {
             width: 28px;
             height: 28px;
@@ -131,19 +164,23 @@
             border-radius: 4px;
             transition: all 0.2s;
         }
+
         .color:hover {
             transform: scale(1.1);
         }
+
         .color.active {
             border-color: #0d6efd;
             border-width: 3px;
             box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
         }
+
         .width-control {
             display: flex;
             align-items: center;
             gap: 6px;
         }
+
         .width-value {
             min-width: 45px;
             text-align: center;
@@ -155,77 +192,97 @@
             border-radius: 4px;
             border: 1px solid #dee2e6;
         }
+
         .btn {
             padding: 0.375rem 0.5rem;
             font-size: 0.875rem;
         }
+
         .form-check {
             font-size: 0.875rem;
             margin-bottom: 0;
         }
+
         .form-check-inline {
             margin-right: 0.5rem;
         }
+
         .form-control {
             padding: 0.375rem 0.5rem;
             font-size: 0.875rem;
         }
+
         .form-range {
             height: 1.2rem;
         }
+
         .modal-content {
             border-radius: 8px;
         }
+
         .modal-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 8px 8px 0 0;
             padding: 0.75rem 1rem;
         }
+
         .modal-header .btn-close {
             filter: brightness(0) invert(1);
         }
+
         .modal-body {
             padding: 1rem;
         }
+
         .modal-footer {
             padding: 0.75rem;
         }
+
         .modal-title {
             font-size: 1rem;
         }
+
         textarea.form-control {
             font-family: 'Courier New', monospace;
             font-size: 0.75rem;
         }
+
         .btn-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             color: white;
         }
+
         .btn-gradient:hover {
             background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
             color: white;
         }
+
         hr {
             margin: 0.5rem 0;
         }
+
         @media (max-width: 768px) {
             .color {
                 width: 24px;
                 height: 24px;
             }
+
             canvas {
                 max-width: 100%;
                 touch-action: none;
             }
+
             canvas.auto-resize {
                 max-height: 100%;
             }
+
             .canvas-wrapper.auto-resize-wrapper {
                 flex: 1;
                 min-height: 0;
             }
+
             .btn {
                 font-size: 0.8rem;
                 padding: 0.3rem 0.4rem;
@@ -233,6 +290,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="canvas-container">
@@ -274,14 +332,16 @@
                 </div>
                 <button class="btn btn-help" onclick="showHelp()" title="Help" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path
+                            d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                     </svg>
                 </button>
                 <span class="canvas-size-info ms-auto" id="canvasInfo">640×480</span>
             </div>
             <div id="passwordField" style="display:none;" class="mb-2">
-                <input type="password" class="form-control form-control-sm" id="exportPassword" placeholder="Enter password" style="max-width: 250px;">
+                <input type="password" class="form-control form-control-sm" id="exportPassword"
+                    placeholder="Enter password" style="max-width: 250px;">
             </div>
 
             <hr class="my-2">
@@ -290,19 +350,27 @@
             <div class="row mb-1 align-items-center">
                 <div class="col-lg-8 mb-1 mb-lg-0">
                     <div class="color-picker" title="Select pen color">
-                        <div class="color active" style="background:#000" data-r="0" data-g="0" data-b="0" title="Black"></div>
+                        <div class="color active" style="background:#000" data-r="0" data-g="0" data-b="0"
+                            title="Black"></div>
                         <div class="color" style="background:#f00" data-r="255" data-g="0" data-b="0" title="Red"></div>
-                        <div class="color" style="background:#0f0" data-r="0" data-g="255" data-b="0" title="Green"></div>
-                        <div class="color" style="background:#00f" data-r="0" data-g="0" data-b="255" title="Blue"></div>
-                        <div class="color" style="background:#ff0" data-r="255" data-g="255" data-b="0" title="Yellow"></div>
-                        <div class="color" style="background:#f0f" data-r="255" data-g="0" data-b="255" title="Magenta"></div>
-                        <div class="color" style="background:#0ff" data-r="0" data-g="255" data-b="255" title="Cyan"></div>
-                        <div class="color" style="background:#fff" data-r="255" data-g="255" data-b="255" title="White"></div>
+                        <div class="color" style="background:#0f0" data-r="0" data-g="255" data-b="0" title="Green">
+                        </div>
+                        <div class="color" style="background:#00f" data-r="0" data-g="0" data-b="255" title="Blue">
+                        </div>
+                        <div class="color" style="background:#ff0" data-r="255" data-g="255" data-b="0" title="Yellow">
+                        </div>
+                        <div class="color" style="background:#f0f" data-r="255" data-g="0" data-b="255" title="Magenta">
+                        </div>
+                        <div class="color" style="background:#0ff" data-r="0" data-g="255" data-b="255" title="Cyan">
+                        </div>
+                        <div class="color" style="background:#fff" data-r="255" data-g="255" data-b="255" title="White">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="width-control">
-                        <input type="range" class="form-range" id="widthSlider" min="1" max="32" value="2" title="Adjust pen width">
+                        <input type="range" class="form-range" id="widthSlider" min="1" max="32" value="2"
+                            title="Adjust pen width">
                         <span class="width-value" id="widthValue" title="Current pen width">2px</span>
                     </div>
                 </div>
@@ -350,7 +418,8 @@
                     <div id="importStatus" class="mt-2"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" onclick="pasteFromClipboard()">Paste from Clipboard</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="pasteFromClipboard()">Paste from
+                        Clipboard</button>
                     <button type="button" class="btn btn-primary" onclick="loadImportedImage()">Load Image</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
@@ -421,19 +490,25 @@
                 <div class="modal-body">
                     <h6 class="fw-bold">How to Use</h6>
                     <ul class="small">
-                        <li><strong>Drawing:</strong> Click and drag to draw. Select color and pen width before drawing. Drawing continues even when mouse leaves canvas area.</li>
+                        <li><strong>Drawing:</strong> Click and drag to draw. Select color and pen width before drawing.
+                            Drawing continues even when mouse leaves canvas area.</li>
                         <li><strong>Clear:</strong> Removes all content from canvas (requires confirmation).</li>
                         <li><strong>Fill:</strong> Fills entire canvas with selected color.</li>
-                        <li><strong>Size:</strong> Change canvas dimensions (64-2048px). Drawing position is preserved during resize.</li>
+                        <li><strong>Size:</strong> Change canvas dimensions (64-2048px). Drawing position is preserved
+                            during resize.</li>
                         <li><strong>Save PNG:</strong> Downloads canvas as PNG image file with timestamp.</li>
-                        <li><strong>Import:</strong> Load image from URL. Paste exported URL or base64 data. No page reload - works entirely in memory.</li>
-                        <li><strong>Export:</strong> Generate shareable URL with canvas data. Optional password protection with AES-256-GCM encryption.</li>
+                        <li><strong>Import:</strong> Load image from URL. Paste exported URL or base64 data. No page
+                            reload - works entirely in memory.</li>
+                        <li><strong>Export:</strong> Generate shareable URL with canvas data. Optional password
+                            protection with AES-256-GCM encryption.</li>
                     </ul>
 
                     <h6 class="fw-bold mt-3">Options</h6>
                     <ul class="small">
-                        <li><strong>Password protect:</strong> Encrypt exported image with password (AES-256-GCM). Password required to view.</li>
-                        <li><strong>Auto-resize to fit:</strong> Scale canvas display to fill available screen space while maintaining aspect ratio. Canvas resolution stays the same.</li>
+                        <li><strong>Password protect:</strong> Encrypt exported image with password (AES-256-GCM).
+                            Password required to view.</li>
+                        <li><strong>Auto-resize to fit:</strong> Scale canvas display to fill available screen space
+                            while maintaining aspect ratio. Canvas resolution stays the same.</li>
                     </ul>
 
                     <h6 class="fw-bold mt-3">URL Parameters</h6>
@@ -486,10 +561,14 @@
 
                     <h6 class="fw-bold mt-3">Technical Features</h6>
                     <ul class="small mb-0">
-                        <li><strong>Compression:</strong> RGB interleaving + RLE preprocessing + FLATE level 9 for minimal URL size</li>
-                        <li><strong>Encryption:</strong> AES-256-GCM authenticated encryption with SHA-256 key derivation</li>
-                        <li><strong>Position Preservation:</strong> Drawings maintain exact coordinates on export/import</li>
-                        <li><strong>Efficient Encoding:</strong> 1-bit per color channel (binary), Base64 URL-safe encoding</li>
+                        <li><strong>Compression:</strong> RGB interleaving + RLE preprocessing + FLATE level 9 for
+                            minimal URL size</li>
+                        <li><strong>Encryption:</strong> AES-256-GCM authenticated encryption with SHA-256 key
+                            derivation</li>
+                        <li><strong>Position Preservation:</strong> Drawings maintain exact coordinates on export/import
+                        </li>
+                        <li><strong>Efficient Encoding:</strong> 1-bit per color channel (binary), Base64 URL-safe
+                            encoding</li>
                         <li><strong>Touch Support:</strong> Full touch drawing support for mobile devices</li>
                         <li><strong>No Server Storage:</strong> All data in URL or local memory - no uploads</li>
                         <li><strong>Cross-Platform:</strong> Works on desktop, tablet, and mobile browsers</li>
@@ -500,7 +579,8 @@
                     <div class="text-center">
                         <p class="small mb-1"><strong>Author:</strong> Igor Maznitsa</p>
                         <p class="small mb-0">
-                            <a href="https://www.igormaznitsa.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                            <a href="https://www.igormaznitsa.com" target="_blank" rel="noopener noreferrer"
+                                class="text-decoration-none">
                                 🌐 www.igormaznitsa.com
                             </a>
                         </p>
@@ -522,7 +602,7 @@
         let exportModalInstance, importModalInstance, passwordModalInstance, sizeModalInstance, helpModalInstance;
 
         const go = new Go();
-        
+
         fetch("main.wasm")
             .then(response => response.arrayBuffer())
             .then(bytes => WebAssembly.instantiate(bytes, go.importObject))
@@ -536,16 +616,16 @@
                 alert('Failed to load WASM module. Make sure main.wasm is in the same directory.');
             });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             exportModalInstance = new bootstrap.Modal(document.getElementById('exportModal'));
             importModalInstance = new bootstrap.Modal(document.getElementById('importModal'));
             passwordModalInstance = new bootstrap.Modal(document.getElementById('passwordModal'));
             sizeModalInstance = new bootstrap.Modal(document.getElementById('sizeModal'));
             helpModalInstance = new bootstrap.Modal(document.getElementById('helpModal'));
-            
+
             // Update canvas info
             updateCanvasInfo();
-            
+
             // Update pen width from URL if present
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('pen')) {
@@ -565,7 +645,7 @@
             const w = urlParams.get('w') || '640';
             const h = urlParams.get('h') || '480';
             document.getElementById('canvasInfo').textContent = `${w}×${h}`;
-            
+
             // Update size modal inputs
             if (document.getElementById('canvasWidth')) {
                 document.getElementById('canvasWidth').value = w;
@@ -601,7 +681,7 @@
             const wrapper = canvas.parentElement;
             const container = wrapper.parentElement;
             const body = document.body;
-            
+
             if (e.target.checked) {
                 canvas.classList.add('auto-resize');
                 wrapper.classList.add('auto-resize-wrapper');
@@ -621,14 +701,14 @@
         const urlParams = new URLSearchParams(window.location.search);
         const autoResizeParam = urlParams.get('autofit');
         let savedAutoResize = localStorage.getItem('autoResize') === 'true';
-        
+
         // URL parameter overrides localStorage
         if (autoResizeParam !== null) {
             savedAutoResize = autoResizeParam === '1' || autoResizeParam === 'true';
             // Save to localStorage for future visits
             localStorage.setItem('autoResize', savedAutoResize);
         }
-        
+
         if (savedAutoResize) {
             document.getElementById('autoResize').checked = true;
             const canvas = document.getElementById('canvas');
@@ -655,21 +735,21 @@
                 alert('WASM not ready yet, please wait...');
                 return;
             }
-            
+
             const usePassword = document.getElementById('usePassword').checked;
             const password = usePassword ? document.getElementById('exportPassword').value : null;
-            
+
             if (usePassword && !password) {
                 alert('Please enter a password');
                 return;
             }
-            
+
             const data = exportImage(password);
             if (!data) {
                 alert('No content to export');
                 return;
             }
-            
+
             const urlParams = new URLSearchParams(window.location.search);
             let sizeParams = '';
             if (urlParams.has('w') || urlParams.has('h')) {
@@ -677,9 +757,9 @@
                 const h = urlParams.get('h') || '512';
                 sizeParams = `w=${w}&h=${h}&`;
             }
-            
+
             const url = window.location.origin + window.location.pathname + '?' + sizeParams + 'img=' + encodeURIComponent(data);
-            
+
             document.getElementById('exportUrl').value = url;
             document.getElementById('copyStatus').textContent = '';
             exportModalInstance.show();
@@ -688,7 +768,7 @@
         function copyToClipboard() {
             const textarea = document.getElementById('exportUrl');
             textarea.select();
-            
+
             navigator.clipboard.writeText(textarea.value).then(() => {
                 document.getElementById('copyStatus').innerHTML = '<div class="alert alert-success py-2">Copied to clipboard!</div>';
             }).catch(() => {
@@ -728,11 +808,11 @@
                 let imgData = '';
                 let newWidth = null;
                 let newHeight = null;
-                
+
                 if (url.includes('?')) {
                     const urlObj = new URL(url);
                     imgData = urlObj.searchParams.get('img');
-                    
+
                     // Get dimensions if present
                     const w = urlObj.searchParams.get('w');
                     const h = urlObj.searchParams.get('h');
@@ -751,7 +831,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const currentW = parseInt(urlParams.get('w') || '512');
                 const currentH = parseInt(urlParams.get('h') || '512');
-                
+
                 if (newWidth && newHeight && (newWidth !== currentW || newHeight !== currentH)) {
                     // Need to resize - use internal resize then load
                     if (confirm(`This image requires canvas size ${newWidth}×${newHeight}. Resize canvas?`)) {
@@ -781,7 +861,7 @@
                     for (let i = 0; i < decoded.length; i++) {
                         decodedBytes[i] = decoded.charCodeAt(i);
                     }
-                    
+
                     if (loadImageData(decodedBytes)) {
                         document.getElementById('importStatus').innerHTML = '<div class="alert alert-success py-2">Image loaded successfully!</div>';
                         setTimeout(() => importModalInstance.hide(), 1500);
@@ -799,26 +879,26 @@
                 alert('WASM not ready yet, please wait...');
                 return;
             }
-            
+
             // Call Go function to resize canvas
             if (typeof resizeCanvas !== 'undefined') {
                 resizeCanvas(newWidth, newHeight);
-                
+
                 // Update navbar
                 document.getElementById('canvasInfo').textContent = `${newWidth}×${newHeight}`;
-                
+
                 // Update URL without reload
                 const newUrl = new URL(window.location);
                 newUrl.searchParams.set('w', newWidth);
                 newUrl.searchParams.set('h', newHeight);
                 window.history.replaceState({}, '', newUrl);
-                
+
                 // Load the image data if provided
                 if (imgDataToLoad) {
                     setTimeout(() => {
                         try {
                             const decoded = atob(imgDataToLoad.replace(/-/g, '+').replace(/_/g, '/'));
-                            
+
                             if (decoded.startsWith('ENC:')) {
                                 window.tempImgData = imgDataToLoad;
                                 passwordModalInstance.show();
@@ -845,30 +925,30 @@
                 document.getElementById('passwordError').textContent = 'Please enter a password';
                 return;
             }
-            
+
             if (window.tempImgData) {
                 // Import flow - we have the base64 encoded data
                 const imgData = window.tempImgData;
-                
+
                 try {
                     // Temporarily update location search for Go to read
                     const originalSearch = window.location.search;
                     const tempParams = new URLSearchParams(originalSearch);
                     tempParams.set('img', imgData);
-                    
+
                     // Update URL temporarily
                     const newSearch = '?' + tempParams.toString();
                     window.history.replaceState({}, '', newSearch);
-                    
+
                     // Try to decrypt and load
                     const success = tryLoadWithPassword(password);
-                    
+
                     // Restore original URL (remove img parameter if it wasn't there)
                     if (!originalSearch.includes('img=')) {
                         const restoreParams = new URLSearchParams(originalSearch);
                         window.history.replaceState({}, '', originalSearch || window.location.pathname);
                     }
-                    
+
                     if (success) {
                         document.getElementById('passwordError').textContent = '';
                         passwordModalInstance.hide();
@@ -913,9 +993,9 @@
 
         function handleSavePNG() {
             const canvas = document.getElementById('canvas');
-            
+
             // Create a download link
-            canvas.toBlob(function(blob) {
+            canvas.toBlob(function (blob) {
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
@@ -940,7 +1020,7 @@
         function applyCanvasSize() {
             const width = parseInt(document.getElementById('canvasWidth').value);
             const height = parseInt(document.getElementById('canvasHeight').value);
-            
+
             // Validate
             if (isNaN(width) || width < 64 || width > 2048) {
                 document.getElementById('sizeError').textContent = 'Width must be between 64 and 2048';
@@ -950,37 +1030,37 @@
                 document.getElementById('sizeError').textContent = 'Height must be between 64 and 2048';
                 return;
             }
-            
+
             // Get current URL params
             const urlParams = new URLSearchParams(window.location.search);
             const currentW = parseInt(urlParams.get('w') || '512');
             const currentH = parseInt(urlParams.get('h') || '512');
-            
+
             // Check if size changed
             if (width == currentW && height == currentH) {
                 sizeModalInstance.hide();
                 return;
             }
-            
+
             if (!wasmReady) {
                 alert('WASM not ready yet, please wait...');
                 return;
             }
-            
+
             // Resize canvas internally without reload
             if (typeof resizeCanvas !== 'undefined') {
                 const success = resizeCanvas(width, height);
-                
+
                 if (success) {
                     // Update navbar
                     document.getElementById('canvasInfo').textContent = `${width}×${height}`;
-                    
+
                     // Update URL without reload (only update w and h params, keep img if exists)
                     const newUrl = new URL(window.location);
                     newUrl.searchParams.set('w', width);
                     newUrl.searchParams.set('h', height);
                     window.history.replaceState({}, '', newUrl);
-                    
+
                     // Close modal
                     sizeModalInstance.hide();
                 } else {
@@ -993,19 +1073,19 @@
 
         // Touch support for mobile
         const canvas = document.getElementById('canvas');
-        
+
         function getTouchPos(canvasEl, touchEvent) {
             const rect = canvasEl.getBoundingClientRect();
             const scaleX = canvasEl.width / rect.width;
             const scaleY = canvasEl.height / rect.height;
-            
+
             return {
                 x: (touchEvent.clientX - rect.left) * scaleX,
                 y: (touchEvent.clientY - rect.top) * scaleY
             };
         }
-        
-        canvas.addEventListener('touchstart', function(e) {
+
+        canvas.addEventListener('touchstart', function (e) {
             e.preventDefault();
             const touch = e.touches[0];
             const rect = canvas.getBoundingClientRect();
@@ -1017,7 +1097,7 @@
             canvas.dispatchEvent(mouseEvent);
         }, { passive: false });
 
-        canvas.addEventListener('touchmove', function(e) {
+        canvas.addEventListener('touchmove', function (e) {
             e.preventDefault();
             const touch = e.touches[0];
             const rect = canvas.getBoundingClientRect();
@@ -1029,7 +1109,7 @@
             canvas.dispatchEvent(mouseEvent);
         }, { passive: false });
 
-        canvas.addEventListener('touchend', function(e) {
+        canvas.addEventListener('touchend', function (e) {
             e.preventDefault();
             const mouseEvent = new MouseEvent('mouseup', {
                 bubbles: true
@@ -1038,4 +1118,5 @@
         }, { passive: false });
     </script>
 </body>
+
 </html>
