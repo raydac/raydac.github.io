@@ -58,8 +58,16 @@ type vecCmdFill struct{ r, g, b byte }
 
 func (v vecCmdFill) isVecCmd() {}
 
-var vecCmds []vecCmd           // full drawing history
-var vecCurStroke *vecCmdStroke // stroke currently being built
+var vecCmds []vecCmd           // full undo/redo history (all commands ever committed)
+var historyPos int             // number of commands currently applied; undo/redo moves this
+var vecCurStroke *vecCmdStroke // stroke currently being built (not yet committed)
+
+// historyPush appends cmd at historyPos, discarding any redo-able commands ahead
+// of the cursor (new action always clears the redo stack).
+func historyPush(cmd vecCmd) {
+	vecCmds = append(vecCmds[:historyPos], cmd)
+	historyPos++
+}
 
 func vecStartStroke(x, y int) {
 	w := penWidth
@@ -103,7 +111,7 @@ func vecEndStroke() {
 		vecCurStroke = nil
 		return
 	}
-	vecCmds = append(vecCmds, vecCurStroke)
+	historyPush(vecCurStroke)
 	vecCurStroke = nil
 }
 
@@ -174,6 +182,10 @@ func main() {
 	js.Global().Set("fillCanvas", js.FuncOf(fillCanvas))
 	js.Global().Set("loadImageData", js.FuncOf(loadImageDataJS))
 	js.Global().Set("resizeCanvas", js.FuncOf(resizeCanvasJS))
+	js.Global().Set("undoCanvas", js.FuncOf(undoJS))
+	js.Global().Set("redoCanvas", js.FuncOf(redoJS))
+	js.Global().Set("canUndoCanvas", js.FuncOf(canUndoJS))
+	js.Global().Set("canRedoCanvas", js.FuncOf(canRedoJS))
 
 	select {}
 }
@@ -405,9 +417,7 @@ func setWidth(this js.Value, args []js.Value) interface{} {
 
 func clearCanvas(this js.Value, args []js.Value) interface{} {
 	vecEndStroke()
-	// A clear makes all prior commands invisible - drop the entire history
-	// and start fresh. This keeps the exported URL as short as possible.
-	vecCmds = []vecCmd{vecCmdClear{}}
+	historyPush(vecCmdClear{})
 	ctx.Set("fillStyle", "white")
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
 	for i := range imgData.Pix {
@@ -418,8 +428,7 @@ func clearCanvas(this js.Value, args []js.Value) interface{} {
 
 func fillCanvas(this js.Value, args []js.Value) interface{} {
 	vecEndStroke()
-	// A fill also makes all prior commands invisible - same reset logic.
-	vecCmds = []vecCmd{vecCmdFill{r: penColor.R, g: penColor.G, b: penColor.B}}
+	historyPush(vecCmdFill{r: penColor.R, g: penColor.G, b: penColor.B})
 	ctx.Set("fillStyle", colorToHex(penColor))
 	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
 	for y := 0; y < canvasHeight; y++ {
@@ -450,12 +459,17 @@ func exportImage(this js.Value, args []js.Value) interface{} {
 
 	vecEndStroke() // commit any in-progress stroke
 
-	if len(vecCmds) == 0 {
+	active := vecCmds[:historyPos]
+	if len(active) == 0 {
 		return ""
 	}
 
+	// Trim to the suffix after the last clear/fill: commands before a full-canvas
+	// overwrite are invisible and would only inflate the URL.
+	trimmed := trimHistory(active)
+
 	// Serialise and FLATE-compress the command log.
-	payload := encodeVecCmds(vecCmds)
+	payload := encodeVecCmds(trimmed)
 
 	var data []byte
 	if password != "" {
@@ -790,6 +804,7 @@ func replayVecCmds(payload []byte) bool {
 		imgData.Pix[i] = 255
 	}
 	vecCmds = nil
+	historyPos = 0
 	vecCurStroke = nil
 
 	for i := 0; i < cmdCount; i++ {
@@ -859,7 +874,7 @@ func replayVecCmds(payload []byte) bool {
 				dy := pts[j][1] - pts[j-1][1]
 				vs.pts = append(vs.pts, [2]int16{int16(dx), int16(dy)})
 			}
-			vecCmds = append(vecCmds, vs)
+			historyPush(vs)
 
 		case vecTagClear:
 			ctx.Set("fillStyle", "white")
@@ -867,7 +882,7 @@ func replayVecCmds(payload []byte) bool {
 			for i := range imgData.Pix {
 				imgData.Pix[i] = 255
 			}
-			vecCmds = append(vecCmds, vecCmdClear{})
+			historyPush(vecCmdClear{})
 
 		case vecTagFill:
 			if pos+3 > len(payload) {
@@ -886,7 +901,7 @@ func replayVecCmds(payload []byte) bool {
 				imgData.Pix[i+2] = b
 				imgData.Pix[i+3] = 255
 			}
-			vecCmds = append(vecCmds, vecCmdFill{r: r, g: g, b: b})
+			historyPush(vecCmdFill{r: r, g: g, b: b})
 
 		default:
 			return false // unknown tag - corrupt data
@@ -1046,7 +1061,7 @@ func resizeCanvasJS(this js.Value, args []js.Value) interface{} {
 	// Without this the vector history still references old-canvas positions, so
 	// export/replay would draw strokes at the wrong location after a resize.
 	if offsetX != 0 || offsetY != 0 {
-		shiftVecCmds(offsetX, offsetY)
+		shiftVecCmds(offsetX, offsetY, historyPos)
 	}
 
 	// Update canvas display.
@@ -1061,8 +1076,116 @@ func resizeCanvasJS(this js.Value, args []js.Value) interface{} {
 // shiftVecCmds translates all stroke coordinates in the vector history by
 // (dx, dy). Called after a resize that centers the old content, so the vector
 // record stays in sync with the visual pixel positions on the new canvas.
-func shiftVecCmds(dx, dy int) {
-	for _, cmd := range vecCmds {
+// trimHistory returns the minimal suffix of cmds that produces the same visual
+// result: everything before the last CMD_CLEAR or CMD_FILL is invisible.
+func trimHistory(cmds []vecCmd) []vecCmd {
+	last := 0
+	for i, cmd := range cmds {
+		switch cmd.(type) {
+		case vecCmdClear, vecCmdFill:
+			last = i
+		}
+	}
+	// Keep from the last full-canvas overwrite onward (inclusive).
+	switch cmds[last].(type) {
+	case vecCmdClear, vecCmdFill:
+		return cmds[last:]
+	}
+	return cmds
+}
+
+// applyHistoryAt replays vecCmds[0:pos] onto a blank canvas.
+// Used by both undo and redo.
+func applyHistoryAt(pos int) {
+	ctx.Set("fillStyle", "white")
+	ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
+	for i := range imgData.Pix {
+		imgData.Pix[i] = 255
+	}
+	for _, cmd := range vecCmds[:pos] {
+		switch c := cmd.(type) {
+		case *vecCmdStroke:
+			hex := colorToHex(color.RGBA{c.r, c.g, c.b, 255})
+			w := int(c.width)
+			// Reconstruct absolute points from delta encoding.
+			x := int(c.pts[0][0])
+			y := int(c.pts[0][1])
+			if len(c.pts) == 1 {
+				ctx.Set("fillStyle", hex)
+				ctx.Call("beginPath")
+				ctx.Call("arc", x, y, w/2, 0, 2*3.14159)
+				ctx.Call("fill")
+			} else {
+				ctx.Set("strokeStyle", hex)
+				ctx.Set("lineWidth", w)
+				ctx.Set("lineCap", "round")
+				ctx.Set("lineJoin", "round")
+				ctx.Call("beginPath")
+				ctx.Call("moveTo", x, y)
+				for _, p := range c.pts[1:] {
+					x += int(p[0])
+					y += int(p[1])
+					ctx.Call("lineTo", x, y)
+				}
+				ctx.Call("stroke")
+			}
+		case vecCmdClear:
+			ctx.Set("fillStyle", "white")
+			ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
+			for i := range imgData.Pix {
+				imgData.Pix[i] = 255
+			}
+		case vecCmdFill:
+			hex := colorToHex(color.RGBA{c.r, c.g, c.b, 255})
+			ctx.Set("fillStyle", hex)
+			ctx.Call("fillRect", 0, 0, canvasWidth, canvasHeight)
+			for i := 0; i < len(imgData.Pix); i += 4 {
+				imgData.Pix[i] = c.r
+				imgData.Pix[i+1] = c.g
+				imgData.Pix[i+2] = c.b
+				imgData.Pix[i+3] = 255
+			}
+		}
+	}
+	// Sync imgData from canvas after replay.
+	jsID := ctx.Call("getImageData", 0, 0, canvasWidth, canvasHeight)
+	js.CopyBytesToGo(imgData.Pix, jsID.Get("data"))
+}
+
+// undoJS undoes the last committed command. Returns true if undo was possible.
+func undoJS(this js.Value, args []js.Value) interface{} {
+	vecEndStroke() // commit any in-progress stroke first
+	if historyPos == 0 {
+		return false
+	}
+	historyPos--
+	applyHistoryAt(historyPos)
+	return true
+}
+
+// redoJS re-applies the next command after the current position.
+// Returns true if redo was possible.
+func redoJS(this js.Value, args []js.Value) interface{} {
+	if historyPos >= len(vecCmds) {
+		return false
+	}
+	historyPos++
+	applyHistoryAt(historyPos)
+	return true
+}
+
+// canUndoJS returns true when there is at least one command to undo.
+func canUndoJS(this js.Value, args []js.Value) interface{} {
+	return historyPos > 0
+}
+
+// canRedoJS returns true when there are commands ahead of the current position.
+func canRedoJS(this js.Value, args []js.Value) interface{} {
+	return historyPos < len(vecCmds)
+}
+
+func shiftVecCmds(dx, dy, limit int) {
+	for _, cmd := range vecCmds[:limit] {
 		s, ok := cmd.(*vecCmdStroke)
 		if !ok || len(s.pts) == 0 {
 			continue
