@@ -70,6 +70,7 @@ func historyPush(cmd vecCmd) {
 }
 
 func vecStartStroke(x, y int) {
+	vecEndStroke() // commit any open stroke before starting a new one
 	w := penWidth
 	if w > 255 {
 		w = 255
@@ -173,6 +174,9 @@ func main() {
 	canvas.Call("addEventListener", "mouseleave", js.FuncOf(mouseLeave))
 	canvas.Call("addEventListener", "mouseenter", js.FuncOf(mouseEnter))
 	canvas.Call("addEventListener", "contextmenu", js.FuncOf(contextMenu))
+	// Also listen for mouseup on the document so releasing the button outside
+	// the canvas boundary still commits the stroke and clears drawing state.
+	doc.Call("addEventListener", "mouseup", js.FuncOf(mouseUp))
 
 	js.Global().Set("setColor", js.FuncOf(setColor))
 	js.Global().Set("setWidth", js.FuncOf(setWidth))
@@ -274,8 +278,8 @@ func mouseUp(this js.Value, args []js.Value) interface{} {
 }
 
 func mouseLeave(this js.Value, args []js.Value) interface{} {
-	vecEndStroke() // commit stroke cleanly; re-entry starts a new segment
 	if drawing {
+		vecEndStroke() // commit current segment; re-entry will start a new one
 		e := args[0]
 		rect := canvas.Call("getBoundingClientRect")
 		x, y := canvasCoords(e.Get("clientX").Int(), e.Get("clientY").Int(), rect)
