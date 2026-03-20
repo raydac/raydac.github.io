@@ -1093,6 +1093,10 @@
             canvas.dispatchEvent(mouseEvent);
         }, { passive: false });
 
+        canvas.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+        });
+
         canvas.addEventListener('touchmove', function (e) {
             e.preventDefault();
             const touch = e.touches[0];

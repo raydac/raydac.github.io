@@ -164,6 +164,7 @@ func main() {
 	canvas.Call("addEventListener", "mouseup", js.FuncOf(mouseUp))
 	canvas.Call("addEventListener", "mouseleave", js.FuncOf(mouseLeave))
 	canvas.Call("addEventListener", "mouseenter", js.FuncOf(mouseEnter))
+	canvas.Call("addEventListener", "contextmenu", js.FuncOf(contextMenu))
 
 	js.Global().Set("setColor", js.FuncOf(setColor))
 	js.Global().Set("setWidth", js.FuncOf(setWidth))
@@ -226,6 +227,13 @@ func canvasCoords(clientX, clientY int, rect js.Value) (int, int) {
 
 func mouseDown(this js.Value, args []js.Value) interface{} {
 	e := args[0]
+	if e.Get("button").Int() == 2 {
+		// Right-click: do nothing here. The browser also fires contextmenu after
+		// mousedown, which is where the line is drawn. If we updated lastX/lastY
+		// here we would overwrite the anchor before contextMenu can use it.
+		return nil
+	}
+	// Left click: normal freehand drawing.
 	rect := canvas.Call("getBoundingClientRect")
 	lastX, lastY = canvasCoords(e.Get("clientX").Int(), e.Get("clientY").Int(), rect)
 	drawing = true
@@ -286,6 +294,25 @@ func mouseEnter(this js.Value, args []js.Value) interface{} {
 		drawLine(lastX, lastY, x, y)
 		lastX, lastY = x, y
 	}
+	return nil
+}
+
+// contextMenu fires on right-click. Draws a straight line from the last known
+// position (lastX, lastY) to the click point, then updates lastX/lastY to that
+// point so subsequent right-clicks chain lines. Suppresses the browser menu.
+func contextMenu(this js.Value, args []js.Value) interface{} {
+	e := args[0]
+	e.Call("preventDefault")
+	rect := canvas.Call("getBoundingClientRect")
+	x, y := canvasCoords(e.Get("clientX").Int(), e.Get("clientY").Int(), rect)
+	// End any in-progress freehand stroke cleanly before drawing the line.
+	vecEndStroke()
+	// Record and draw the straight line as a two-point stroke.
+	vecStartStroke(lastX, lastY)
+	vecAddPoint(x, y)
+	vecEndStroke()
+	drawLine(lastX, lastY, x, y)
+	lastX, lastY = x, y
 	return nil
 }
 
