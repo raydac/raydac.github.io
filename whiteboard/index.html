@@ -292,14 +292,21 @@
         <div class="canvas-container">
             <!-- Action Buttons - Moved to top -->
             <div class="d-flex flex-wrap gap-1 mb-2">
-                <button class="btn btn-outline-dark" onclick="handleSize()">Size</button>
-                <button class="btn btn-outline-dark" onclick="handleClear()">Clear</button>
-                <button class="btn btn-outline-primary" onclick="handleFill()">Fill</button>
-                <button class="btn btn-outline-warning" onclick="handleRedo()">Redo</button>
-                <button class="btn btn-outline-warning" onclick="handleUndo()">Undo</button>
-                <button class="btn btn-outline-info" onclick="handleImport()">Import</button>
-                <button class="btn btn-outline-success" onclick="handleExport()">Share</button>
-                <button class="btn btn-outline-success" onclick="handleSavePNG()">Save PNG</button>
+                <button title="Change canvas size while keeping the current image" class="btn btn-outline-dark"
+                    onclick="handleSize()">Size</button>
+                <button title="Clear the canvas" class="btn btn-outline-dark" onclick="handleClear()">Clear</button>
+                <button title="Fill the canvas with the selected color" class="btn btn-outline-primary"
+                    onclick="handleFill()">Fill</button>
+                <button title="Redo the last undone action" class="btn btn-outline-warning"
+                    onclick="handleRedo()">Redo</button>
+                <button title="Undo the last action" class="btn btn-outline-warning"
+                    onclick="handleUndo()">Undo</button>
+                <button title="Import an image from a generated URL" class="btn btn-outline-info"
+                    onclick="handleImport()">Import</button>
+                <button title="Generate a shareable URL with the image" class="btn btn-outline-success"
+                    onclick="handleExport()">Share</button>
+                <button title="Download the image as a PNG file" class="btn btn-outline-success"
+                    onclick="handleSavePNG()">Save PNG</button>
             </div>
 
             <!-- Password Protection and Canvas Info -->
