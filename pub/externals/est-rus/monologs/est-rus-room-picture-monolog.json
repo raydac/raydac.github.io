@@ -1,0 +1,109 @@
+{
+  "path": "Estonian-Russian/Monologs",
+  "menuName": "Describing a room / Описание комнаты по-эстонски",
+  "description": "Estonian-Russian picture-description monolog about a room",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Pildil on väike tuba.",
+      "B": "На картинке маленькая комната."
+    },
+    {
+      "A": "Toa keskel on laud.",
+      "B": "В середине комнаты стол."
+    },
+    {
+      "A": "Laua kõrval seisab tool.",
+      "B": "Рядом со столом стоит стул."
+    },
+    {
+      "A": "Paremal on suur aken.",
+      "B": "Справа большое окно."
+    },
+    {
+      "A": "Aknal on heledad kardinad.",
+      "B": "На окне светлые шторы."
+    },
+    {
+      "A": "Vasakul on voodi.",
+      "B": "Слева кровать."
+    },
+    {
+      "A": "Voodi peal on sinine tekk.",
+      "B": "На кровати синее одеяло."
+    },
+    {
+      "A": "Seina ääres on raamaturiiul.",
+      "B": "У стены книжная полка."
+    },
+    {
+      "A": "Põrandal on väike vaip.",
+      "B": "На полу маленький ковёр."
+    },
+    {
+      "A": "Tuba on puhas ja valgusküllane.",
+      "B": "Комната чистая и светлая."
+    },
+    {
+      "A": "Mulle tundub, et siin elab õpilane.",
+      "B": "Мне кажется, здесь живёт ученик."
+    },
+    {
+      "A": "Üldiselt on tuba mugav.",
+      "B": "В целом комната удобная."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In airport / В аэропорту по-эстонски",
+  "description": "Small Estonian-Russian airport dialog with short travel phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, kus on registreerimine?",
+      "B": "Здравствуйте, где регистрация?"
+    },
+    {
+      "A": "Registreerimine on seal paremal.",
+      "B": "Регистрация там справа."
+    },
+    {
+      "A": "Palun näidake passi.",
+      "B": "Пожалуйста, покажите паспорт."
+    },
+    {
+      "A": "Siin on minu pass.",
+      "B": "Вот мой паспорт."
+    },
+    {
+      "A": "Kas teil on pagas?",
+      "B": "У вас есть багаж?"
+    },
+    {
+      "A": "Jah, üks kohver.",
+      "B": "Да, один чемодан."
+    },
+    {
+      "A": "Pange kohver lindile.",
+      "B": "Поставьте чемодан на ленту."
+    },
+    {
+      "A": "Kas käsipagas sobib?",
+      "B": "Ручная кладь подходит?"
+    },
+    {
+      "A": "See mahub salongi.",
+      "B": "Она помещается в салон."
+    },
+    {
+      "A": "Kus on minu värav?",
+      "B": "Где мой выход?"
+    },
+    {
+      "A": "Teie värav on number viis.",
+      "B": "Ваш выход номер пять."
+    },
+    {
+      "A": "Millal pardaleminek algab?",
+      "B": "Когда начинается посадка?"
+    },
+    {
+      "A": "Pardaleminek algab kell kümme.",
+      "B": "Посадка начинается в десять."
+    },
+    {
+      "A": "Kas lend hilineb?",
+      "B": "Рейс задерживается?"
+    },
+    {
+      "A": "Ei, lend on õigel ajal.",
+      "B": "Нет, рейс вовремя."
+    },
+    {
+      "A": "Head reisi!",
+      "B": "Счастливого пути!"
+    }
+  ]
+}

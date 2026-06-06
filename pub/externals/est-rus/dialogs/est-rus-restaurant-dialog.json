@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a restaurant / В ресторане по-эстонски",
+  "description": "Small Estonian-Russian restaurant dialog with waiter and customer phrases for language and restaurant etiquette practice",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere tulemast!",
+      "B": "Добро пожаловать!"
+    },
+    {
+      "A": "Tere, laud kahele, palun.",
+      "B": "Здравствуйте, столик на двоих, пожалуйста."
+    },
+    {
+      "A": "Palun tulge minu järel.",
+      "B": "Пожалуйста, пройдите за мной."
+    },
+    {
+      "A": "Kas me saame menüüd vaadata?",
+      "B": "Можно посмотреть меню?"
+    },
+    {
+      "A": "Siin on menüü ja joogikaart.",
+      "B": "Вот меню и карта напитков."
+    },
+    {
+      "A": "Kas teil on päevapakkumine?",
+      "B": "У вас есть блюдо дня?"
+    },
+    {
+      "A": "Täna on lõhesupp väga hea.",
+      "B": "Сегодня суп с лососем очень хороший."
+    },
+    {
+      "A": "Ma võtaksin selle supi, palun.",
+      "B": "Я бы взял этот суп, пожалуйста."
+    },
+    {
+      "A": "Kas soovite vett?",
+      "B": "Хотите воду?"
+    },
+    {
+      "A": "Ilma gaasita, palun.",
+      "B": "Без газа, пожалуйста."
+    },
+    {
+      "A": "Teie toit tuleb varsti.",
+      "B": "Ваша еда скоро будет."
+    },
+    {
+      "A": "Kas saaksime leiba juurde?",
+      "B": "Можно ещё хлеба?"
+    },
+    {
+      "A": "Jah, toon kohe.",
+      "B": "Да, сейчас принесу."
+    },
+    {
+      "A": "Kas saaksime arve, palun?",
+      "B": "Можно счёт, пожалуйста?"
+    },
+    {
+      "A": "Kas maksate kaardiga?",
+      "B": "Вы платите картой?"
+    },
+    {
+      "A": "Jah, kaardiga, palun.",
+      "B": "Да, картой, пожалуйста."
+    }
+  ]
+}

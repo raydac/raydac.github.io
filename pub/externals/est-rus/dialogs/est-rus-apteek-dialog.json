@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a pharmacy / В аптеке по-эстонски",
+  "description": "Small Estonian-Russian pharmacy dialog with short medicine and dosage phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, mul on köha.",
+      "B": "Здравствуйте, у меня кашель."
+    },
+    {
+      "A": "Kas teil on palavik?",
+      "B": "У вас есть температура?"
+    },
+    {
+      "A": "Ei, ainult köha.",
+      "B": "Нет, только кашель."
+    },
+    {
+      "A": "Soovitan seda siirupit.",
+      "B": "Рекомендую этот сироп."
+    },
+    {
+      "A": "Kuidas seda võtta?",
+      "B": "Как это принимать?"
+    },
+    {
+      "A": "Võtke kaks korda päevas.",
+      "B": "Принимайте два раза в день."
+    },
+    {
+      "A": "Kas see sobib lastele?",
+      "B": "Это подходит детям?"
+    },
+    {
+      "A": "Jah, väiksemas koguses.",
+      "B": "Да, в меньшей дозе."
+    },
+    {
+      "A": "Kas teil on plaastrit?",
+      "B": "У вас есть пластырь?"
+    },
+    {
+      "A": "Jah, siin on plaastrid.",
+      "B": "Да, вот пластыри."
+    },
+    {
+      "A": "Kui palju see maksab?",
+      "B": "Сколько это стоит?"
+    },
+    {
+      "A": "See maksab kuus eurot.",
+      "B": "Это стоит шесть евро."
+    },
+    {
+      "A": "Kas saan kaardiga maksta?",
+      "B": "Можно оплатить картой?"
+    },
+    {
+      "A": "Jah, muidugi.",
+      "B": "Да, конечно."
+    },
+    {
+      "A": "Aitäh nõu eest.",
+      "B": "Спасибо за совет."
+    },
+    {
+      "A": "Saage ruttu terveks!",
+      "B": "Выздоравливайте скорее!"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a hospital / В больнице по-эстонски",
+  "description": "Small Estonian-Russian hospital dialog with short health and etiquette phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, mul on arsti aeg.",
+      "B": "Здравствуйте, у меня запись к врачу."
+    },
+    {
+      "A": "Palun näidake dokumenti.",
+      "B": "Пожалуйста, покажите документ."
+    },
+    {
+      "A": "Siin on minu dokument.",
+      "B": "Вот мой документ."
+    },
+    {
+      "A": "Mis teil valutab?",
+      "B": "Что у вас болит?"
+    },
+    {
+      "A": "Mul valutab pea.",
+      "B": "У меня болит голова."
+    },
+    {
+      "A": "Kas teil on palavik?",
+      "B": "У вас есть температура?"
+    },
+    {
+      "A": "Jah, natuke.",
+      "B": "Да, немного."
+    },
+    {
+      "A": "Palun istuge siia.",
+      "B": "Пожалуйста, сядьте сюда."
+    },
+    {
+      "A": "Kas see võtab kaua?",
+      "B": "Это займёт много времени?"
+    },
+    {
+      "A": "Ei, ainult paar minutit.",
+      "B": "Нет, только пару минут."
+    },
+    {
+      "A": "Hingake sügavalt.",
+      "B": "Дышите глубоко."
+    },
+    {
+      "A": "Kas mul on vaja analüüse?",
+      "B": "Мне нужны анализы?"
+    },
+    {
+      "A": "Ma kirjutan teile retsepti.",
+      "B": "Я выпишу вам рецепт."
+    },
+    {
+      "A": "Kus on lähim apteek?",
+      "B": "Где ближайшая аптека?"
+    },
+    {
+      "A": "Apteek on esimesel korrusel.",
+      "B": "Аптека на первом этаже."
+    },
+    {
+      "A": "Suur tänu abi eest.",
+      "B": "Большое спасибо за помощь."
+    }
+  ]
+}

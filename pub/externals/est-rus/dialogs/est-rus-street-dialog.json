@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "On the street / На улице по-эстонски",
+  "description": "Small Estonian-Russian street dialog with short direction and help phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Vabandage, kas te saate aidata?",
+      "B": "Извините, вы можете помочь?"
+    },
+    {
+      "A": "Jah, muidugi.",
+      "B": "Да, конечно."
+    },
+    {
+      "A": "Kus on lähim turismiinfo?",
+      "B": "Где ближайший туристический центр?"
+    },
+    {
+      "A": "Turismiinfo on väljakul.",
+      "B": "Туристический центр на площади."
+    },
+    {
+      "A": "Kas see on kaugel?",
+      "B": "Это далеко?"
+    },
+    {
+      "A": "Ei, see on viie minuti kaugusel.",
+      "B": "Нет, это в пяти минутах."
+    },
+    {
+      "A": "Kuhu ma pean minema?",
+      "B": "Куда мне нужно идти?"
+    },
+    {
+      "A": "Minge otse ja pöörake paremale.",
+      "B": "Идите прямо и поверните направо."
+    },
+    {
+      "A": "Kas bussipeatus on lähedal?",
+      "B": "Автобусная остановка рядом?"
+    },
+    {
+      "A": "Jah, see on üle tee.",
+      "B": "Да, она через дорогу."
+    },
+    {
+      "A": "Kas siin tohib teed ületada?",
+      "B": "Здесь можно перейти дорогу?"
+    },
+    {
+      "A": "Jah, kasutage ülekäigurada.",
+      "B": "Да, используйте переход."
+    },
+    {
+      "A": "Ma olen natuke eksinud.",
+      "B": "Я немного заблудился."
+    },
+    {
+      "A": "Ärge muretsege.",
+      "B": "Не волнуйтесь."
+    },
+    {
+      "A": "Suur tänu abi eest.",
+      "B": "Большое спасибо за помощь."
+    },
+    {
+      "A": "Pole tänu väärt.",
+      "B": "Не за что."
+    }
+  ]
+}

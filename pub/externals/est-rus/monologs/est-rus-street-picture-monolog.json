@@ -1,0 +1,109 @@
+{
+  "path": "Estonian-Russian/Monologs",
+  "menuName": "Describing a street / Описание улицы по-эстонски",
+  "description": "Estonian-Russian picture-description monolog about a city street",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Pildil on lai linnatänav.",
+      "B": "На картинке широкая городская улица."
+    },
+    {
+      "A": "Tänaval kõnnib mitu inimest.",
+      "B": "По улице идут несколько человек."
+    },
+    {
+      "A": "Paremal on väike kohvik.",
+      "B": "Справа маленькое кафе."
+    },
+    {
+      "A": "Vasakul on bussipeatus.",
+      "B": "Слева автобусная остановка."
+    },
+    {
+      "A": "Tee ääres seisavad autod.",
+      "B": "У дороги стоят машины."
+    },
+    {
+      "A": "Taamal on kõrged majad.",
+      "B": "На заднем плане высокие дома."
+    },
+    {
+      "A": "Ülekäiguraja juures ootab naine.",
+      "B": "У перехода ждёт женщина."
+    },
+    {
+      "A": "Ilm on pilvine, aga kuiv.",
+      "B": "Погода облачная, но сухая."
+    },
+    {
+      "A": "Inimesed kannavad jakke.",
+      "B": "Люди носят куртки."
+    },
+    {
+      "A": "Tänav tundub rahulik.",
+      "B": "Улица кажется спокойной."
+    },
+    {
+      "A": "Ma arvan, et on hommik.",
+      "B": "Я думаю, сейчас утро."
+    },
+    {
+      "A": "Pilt näitab tavalist linnapäeva.",
+      "B": "Картинка показывает обычный городской день."
+    }
+  ]
+}

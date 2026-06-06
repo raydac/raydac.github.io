@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a hotel / В отеле по-эстонски",
+  "description": "Small Estonian-Russian hotel dialog with short check-in and service phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, mul on broneering.",
+      "B": "Здравствуйте, у меня бронь."
+    },
+    {
+      "A": "Mis nimele broneering on?",
+      "B": "На какое имя бронь?"
+    },
+    {
+      "A": "Broneering on Ivanovi nimele.",
+      "B": "Бронь на имя Иванова."
+    },
+    {
+      "A": "Palun näidake passi.",
+      "B": "Пожалуйста, покажите паспорт."
+    },
+    {
+      "A": "Siin on minu pass.",
+      "B": "Вот мой паспорт."
+    },
+    {
+      "A": "Teie tuba on kolmandal korrusel.",
+      "B": "Ваш номер на третьем этаже."
+    },
+    {
+      "A": "Kas hommikusöök on hinnas?",
+      "B": "Завтрак включён в цену?"
+    },
+    {
+      "A": "Jah, hommikusöök on hinnas.",
+      "B": "Да, завтрак включён."
+    },
+    {
+      "A": "Mis kell on hommikusöök?",
+      "B": "Во сколько завтрак?"
+    },
+    {
+      "A": "Hommikusöök on kell kaheksa.",
+      "B": "Завтрак в восемь."
+    },
+    {
+      "A": "Kas toas on internet?",
+      "B": "В номере есть интернет?"
+    },
+    {
+      "A": "Jah, parool on kaardil.",
+      "B": "Да, пароль на карточке."
+    },
+    {
+      "A": "Mul on vaja lisarätikut.",
+      "B": "Мне нужно дополнительное полотенце."
+    },
+    {
+      "A": "Toome selle kohe.",
+      "B": "Мы принесём его сейчас."
+    },
+    {
+      "A": "Mis kell on väljaregistreerimine?",
+      "B": "Во сколько выезд?"
+    },
+    {
+      "A": "Väljaregistreerimine on kell kaksteist.",
+      "B": "Выезд в двенадцать."
+    }
+  ]
+}

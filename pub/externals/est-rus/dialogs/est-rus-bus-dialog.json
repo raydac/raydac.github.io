@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a bus / В автобусе по-эстонски",
+  "description": "Small Estonian-Russian bus dialog with short travel phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, kas see buss sõidab kesklinna?",
+      "B": "Здравствуйте, этот автобус едет в центр?"
+    },
+    {
+      "A": "Jah, see sõidab kesklinna.",
+      "B": "Да, он едет в центр."
+    },
+    {
+      "A": "Kust saab pileti osta?",
+      "B": "Где можно купить билет?"
+    },
+    {
+      "A": "Pileti saab osta juhilt.",
+      "B": "Билет можно купить у водителя."
+    },
+    {
+      "A": "Üks pilet, palun.",
+      "B": "Один билет, пожалуйста."
+    },
+    {
+      "A": "Palun valideerige pilet.",
+      "B": "Пожалуйста, отметьте билет."
+    },
+    {
+      "A": "Kas see koht on vaba?",
+      "B": "Это место свободно?"
+    },
+    {
+      "A": "Jah, palun istuge.",
+      "B": "Да, пожалуйста, садитесь."
+    },
+    {
+      "A": "Mis peatus on järgmine?",
+      "B": "Какая следующая остановка?"
+    },
+    {
+      "A": "Järgmine peatus on Turg.",
+      "B": "Следующая остановка - Рынок."
+    },
+    {
+      "A": "Kas ma pean siin maha minema?",
+      "B": "Мне нужно выходить здесь?"
+    },
+    {
+      "A": "Ei, sõitke veel kaks peatust.",
+      "B": "Нет, проедьте ещё две остановки."
+    },
+    {
+      "A": "Palun laske mind mööda.",
+      "B": "Пожалуйста, пропустите меня."
+    },
+    {
+      "A": "Väljapääs on eespool.",
+      "B": "Выход впереди."
+    },
+    {
+      "A": "Kas see on lõpp-peatus?",
+      "B": "Это конечная остановка?"
+    },
+    {
+      "A": "Ei, veel üks peatus.",
+      "B": "Нет, ещё одна остановка."
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "path": "Estonian-Russian",
+  "modules": [
+    "!IMAGES"
+  ],
+  "menuName": "Public Transport / Общественный транспорт по-эстонски",
+  "description": "Public transport words and everyday travel phrases with Russian translations",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "shuffled": true,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Buss",
+      "B": "Автобус"
+    },
+    {
+      "A": "Tramm",
+      "B": "Трамвай"
+    },
+    {
+      "A": "Troll",
+      "B": "Троллейбус"
+    },
+    {
+      "A": "Rong",
+      "B": "Поезд"
+    },
+    {
+      "A": "Metroo",
+      "B": "Метро"
+    },
+    {
+      "A": "Peatus",
+      "B": "Остановка"
+    },
+    {
+      "A": "Bussijaam",
+      "B": "Автовокзал"
+    },
+    {
+      "A": "Raudteejaam",
+      "B": "Железнодорожный вокзал"
+    },
+    {
+      "A": "Pilet",
+      "B": "Билет"
+    },
+    {
+      "A": "Ühiskaart",
+      "B": "Транспортная карта"
+    },
+    {
+      "A": "Sõiduplaan",
+      "B": "Расписание"
+    },
+    {
+      "A": "Marsruut",
+      "B": "Маршрут"
+    },
+    {
+      "A": "Juht",
+      "B": "Водитель"
+    },
+    {
+      "A": "Reisija",
+      "B": "Пассажир"
+    },
+    {
+      "A": "Kontrolör",
+      "B": "Контролёр"
+    },
+    {
+      "A": "Sisenemine",
+      "B": "Вход"
+    },
+    {
+      "A": "Väljumine",
+      "B": "Выход"
+    },
+    {
+      "A": "Istekoht",
+      "B": "Сидячее место"
+    },
+    {
+      "A": "Järgmine peatus",
+      "B": "Следующая остановка"
+    },
+    {
+      "A": "Lõpp-peatus",
+      "B": "Конечная остановка"
+    },
+    {
+      "A": "Kus on lähim peatus?",
+      "B": "Где ближайшая остановка?"
+    },
+    {
+      "A": "Millal buss tuleb?",
+      "B": "Когда придёт автобус?"
+    },
+    {
+      "A": "Kas see buss sõidab kesklinna?",
+      "B": "Этот автобус едет в центр?"
+    },
+    {
+      "A": "Ma tahan osta pileti.",
+      "B": "Я хочу купить билет."
+    },
+    {
+      "A": "Palun üks pilet.",
+      "B": "Один билет, пожалуйста."
+    },
+    {
+      "A": "Kas ma saan kaardiga maksta?",
+      "B": "Можно оплатить картой?"
+    },
+    {
+      "A": "Ma väljun järgmises peatuses.",
+      "B": "Я выхожу на следующей остановке."
+    },
+    {
+      "A": "Vabandust, kas see koht on vaba?",
+      "B": "Извините, это место свободно?"
+    },
+    {
+      "A": "Kus ma pean ümber istuma?",
+      "B": "Где мне нужно пересесть?"
+    },
+    {
+      "A": "Ma jäin bussist maha.",
+      "B": "Я опоздал на автобус."
+    },
+    {
+      "A": "Piletiautomaat",
+      "B": "Билетный автомат"
+    },
+    {
+      "A": "Kuupilet",
+      "B": "Месячный проездной"
+    },
+    {
+      "A": "Ühe suuna pilet",
+      "B": "Билет в одну сторону"
+    },
+    {
+      "A": "Edasi-tagasi pilet",
+      "B": "Билет туда и обратно"
+    },
+    {
+      "A": "Sooduspilet",
+      "B": "Льготный билет"
+    },
+    {
+      "A": "Hilinemine",
+      "B": "Опоздание"
+    },
+    {
+      "A": "Väljumisaeg",
+      "B": "Время отправления"
+    },
+    {
+      "A": "Saabumisaeg",
+      "B": "Время прибытия"
+    },
+    {
+      "A": "Ooteplatvorm",
+      "B": "Платформа ожидания"
+    },
+    {
+      "A": "Kas siin peatub tramm?",
+      "B": "Здесь останавливается трамвай?"
+    },
+    {
+      "A": "Kui kaua sõit kestab?",
+      "B": "Сколько длится поездка?"
+    },
+    {
+      "A": "Kas pilet tuleb valideerida?",
+      "B": "Нужно ли валидировать билет?"
+    },
+    {
+      "A": "Ma pean teisele bussile minema.",
+      "B": "Мне нужно пересесть на другой автобус."
+    },
+    {
+      "A": "Palun öelge, kui oleme kohal.",
+      "B": "Скажите, пожалуйста, когда мы приедем."
+    },
+    {
+      "A": "See rong väljub viie minuti pärast.",
+      "B": "Этот поезд отправляется через пять минут."
+    },
+    {
+      "A": "Lennujaam",
+      "B": "Аэропорт"
+    },
+    {
+      "A": "Lend",
+      "B": "Рейс"
+    },
+    {
+      "A": "Registreerimine",
+      "B": "Регистрация на рейс"
+    },
+    {
+      "A": "Pardakaart",
+      "B": "Посадочный талон"
+    },
+    {
+      "A": "Pagas",
+      "B": "Багаж"
+    },
+    {
+      "A": "Käsipagas",
+      "B": "Ручная кладь"
+    },
+    {
+      "A": "Passikontroll",
+      "B": "Паспортный контроль"
+    },
+    {
+      "A": "Toll",
+      "B": "Таможня"
+    },
+    {
+      "A": "Värav",
+      "B": "Выход на посадку"
+    },
+    {
+      "A": "Kus on pagasi väljastamine?",
+      "B": "Где выдача багажа?"
+    }
+  ]
+}

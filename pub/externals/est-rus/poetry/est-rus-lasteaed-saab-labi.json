@@ -1,0 +1,89 @@
+{
+  "path": "Estonian-Russian/poetry",
+  "menuName": "Tarmo Selte - Lasteaed saab läbi / Тармо Селте - Детский сад заканчивается",
+  "description": "Estonian-Russian poem for learning line by line",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Lasteaed saab läbi",
+      "B": "Детский сад заканчивается"
+    },
+    {
+      "A": "Oli rõõme, oli kurbust,",
+      "B": "Были радости, была грусть,"
+    },
+    {
+      "A": "Unejonni, palju uudsust,",
+      "B": "Капризы перед сном, много нового,"
+    },
+    {
+      "A": "Uusi sõpru, õpetajaid,",
+      "B": "Новые друзья, воспитатели,"
+    },
+    {
+      "A": "Kes kõik saatsid lõpetajaid",
+      "B": "Которые все провожали выпускников"
+    },
+    {
+      "A": "Kooli, head vaid soovides",
+      "B": "В школу, желая только добра"
+    },
+    {
+      "A": "Ning mitte nutta proovides",
+      "B": "И стараясь не плакать"
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "path": "Estonian-Russian",
+  "modules": [
+    "!IMAGES"
+  ],
+  "menuName": "Numerals / Числительные по-эстонски",
+  "description": "Estonian numerals with unambiguous Russian translations, declined forms in context, and everyday phrases with numbers",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "shuffled": true,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Null kraadi",
+      "B": "Ноль градусов"
+    },
+    {
+      "A": "Üks õun",
+      "B": "Одно яблоко"
+    },
+    {
+      "A": "Kaks raamatut",
+      "B": "Две книги"
+    },
+    {
+      "A": "Kolm päeva",
+      "B": "Три дня"
+    },
+    {
+      "A": "Neli inimest",
+      "B": "Четыре человека"
+    },
+    {
+      "A": "Viis eurot",
+      "B": "Пять евро"
+    },
+    {
+      "A": "Kuus tundi",
+      "B": "Шесть часов"
+    },
+    {
+      "A": "Seitse päeva nädalas",
+      "B": "Семь дней в неделю"
+    },
+    {
+      "A": "Kaheksa minutit",
+      "B": "Восемь минут"
+    },
+    {
+      "A": "Üheksa kuud",
+      "B": "Девять месяцев"
+    },
+    {
+      "A": "Kümme sõna",
+      "B": "Десять слов"
+    },
+    {
+      "A": "Üksteist lehte",
+      "B": "Одиннадцать листов"
+    },
+    {
+      "A": "Kaksteist tooli",
+      "B": "Двенадцать стульев"
+    },
+    {
+      "A": "Kolmteist akent",
+      "B": "Тринадцать окон"
+    },
+    {
+      "A": "Neliteist küsimust",
+      "B": "Четырнадцать вопросов"
+    },
+    {
+      "A": "Viisteist vastust",
+      "B": "Пятнадцать ответов"
+    },
+    {
+      "A": "Kuusteist kirja",
+      "B": "Шестнадцать писем"
+    },
+    {
+      "A": "Seitseteist peatust",
+      "B": "Семнадцать остановок"
+    },
+    {
+      "A": "Kaheksateist õpilast",
+      "B": "Восемнадцать учеников"
+    },
+    {
+      "A": "Üheksateist ülesannet",
+      "B": "Девятнадцать заданий"
+    },
+    {
+      "A": "Kakskümmend lauset",
+      "B": "Двадцать предложений"
+    },
+    {
+      "A": "Kakskümmend üks eurot",
+      "B": "Двадцать один евро"
+    },
+    {
+      "A": "Kolmkümmend sekundit",
+      "B": "Тридцать секунд"
+    },
+    {
+      "A": "Nelikümmend kilomeetrit",
+      "B": "Сорок километров"
+    },
+    {
+      "A": "Viiskümmend senti",
+      "B": "Пятьдесят центов"
+    },
+    {
+      "A": "Kuuskümmend aastat",
+      "B": "Шестьдесят лет"
+    },
+    {
+      "A": "Seitsekümmend protsenti",
+      "B": "Семьдесят процентов"
+    },
+    {
+      "A": "Kaheksakümmend meetrit",
+      "B": "Восемьдесят метров"
+    },
+    {
+      "A": "Üheksakümmend grammi",
+      "B": "Девяносто граммов"
+    },
+    {
+      "A": "Sada krooni",
+      "B": "Сто крон"
+    },
+    {
+      "A": "Tuhat elanikku",
+      "B": "Тысяча жителей"
+    },
+    {
+      "A": "Esimene korrus",
+      "B": "Первый этаж"
+    },
+    {
+      "A": "Teine tund",
+      "B": "Второй урок"
+    },
+    {
+      "A": "Kolmas katse",
+      "B": "Третья попытка"
+    },
+    {
+      "A": "Ma tahan ühte piletit.",
+      "B": "Я хочу один билет."
+    },
+    {
+      "A": "Me ostame kahe euro eest vett.",
+      "B": "Мы покупаем воду за два евро."
+    },
+    {
+      "A": "Mul on kolm venda.",
+      "B": "У меня три брата."
+    },
+    {
+      "A": "Ta on kolmkümmend aastat vana.",
+      "B": "Ему тридцать лет."
+    },
+    {
+      "A": "Meie koht on kaheksandas reas.",
+      "B": "Наше место на восьмом ряду."
+    },
+    {
+      "A": "Me sõidame kahekümne neljandas bussis.",
+      "B": "Мы едем в двадцать четвертом автобусе."
+    }
+  ]
+}

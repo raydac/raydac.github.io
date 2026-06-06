@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "With police / С полицией по-эстонски",
+  "description": "Small Estonian-Russian police dialog with short help and document phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, kas te vajate abi?",
+      "B": "Здравствуйте, вам нужна помощь?"
+    },
+    {
+      "A": "Jah, ma olen eksinud.",
+      "B": "Да, я заблудился."
+    },
+    {
+      "A": "Palun jääge rahulikuks.",
+      "B": "Пожалуйста, сохраняйте спокойствие."
+    },
+    {
+      "A": "Ma ei leia oma hotelli.",
+      "B": "Я не могу найти свой отель."
+    },
+    {
+      "A": "Palun näidake dokumenti.",
+      "B": "Пожалуйста, покажите документ."
+    },
+    {
+      "A": "Siin on minu pass.",
+      "B": "Вот мой паспорт."
+    },
+    {
+      "A": "Kus te peatute?",
+      "B": "Где вы остановились?"
+    },
+    {
+      "A": "Ma peatun selles hotellis.",
+      "B": "Я остановился в этой гостинице."
+    },
+    {
+      "A": "Kas teil on telefoni number?",
+      "B": "У вас есть номер телефона?"
+    },
+    {
+      "A": "Jah, siin on number.",
+      "B": "Да, вот номер."
+    },
+    {
+      "A": "Kas midagi on kadunud?",
+      "B": "Что-то пропало?"
+    },
+    {
+      "A": "Jah, minu rahakott kadus.",
+      "B": "Да, мой кошелёк пропал."
+    },
+    {
+      "A": "Kirjutame avalduse.",
+      "B": "Напишем заявление."
+    },
+    {
+      "A": "Palun rääkige aeglasemalt.",
+      "B": "Пожалуйста, говорите медленнее."
+    },
+    {
+      "A": "Me aitame teid.",
+      "B": "Мы вам поможем."
+    },
+    {
+      "A": "Suur tänu abi eest.",
+      "B": "Большое спасибо за помощь."
+    }
+  ]
+}

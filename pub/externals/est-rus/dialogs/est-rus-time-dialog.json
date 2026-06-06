@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "Time / Время по-эстонски",
+  "description": "Small Estonian-Russian time dialog with short clock and schedule phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Vabandage, mis kell on?",
+      "B": "Извините, который час?"
+    },
+    {
+      "A": "Kell on üheksa.",
+      "B": "Сейчас девять часов."
+    },
+    {
+      "A": "Kas meil on aega?",
+      "B": "У нас есть время?"
+    },
+    {
+      "A": "Jah, meil on kümme minutit.",
+      "B": "Да, у нас десять минут."
+    },
+    {
+      "A": "Millal kohtumine algab?",
+      "B": "Когда начинается встреча?"
+    },
+    {
+      "A": "Kohtumine algab kell kümme.",
+      "B": "Встреча начинается в десять."
+    },
+    {
+      "A": "Ma jään natuke hiljaks.",
+      "B": "Я немного опаздываю."
+    },
+    {
+      "A": "Pole hullu.",
+      "B": "Ничего страшного."
+    },
+    {
+      "A": "Kas buss tuleb varsti?",
+      "B": "Автобус скоро придёт?"
+    },
+    {
+      "A": "Jah, viie minuti pärast.",
+      "B": "Да, через пять минут."
+    },
+    {
+      "A": "Mis kell me lahkume?",
+      "B": "Во сколько мы уходим?"
+    },
+    {
+      "A": "Me lahkume pool üksteist.",
+      "B": "Мы уходим в половине одиннадцатого."
+    },
+    {
+      "A": "Kas täna on kiire päev?",
+      "B": "Сегодня напряжённый день?"
+    },
+    {
+      "A": "Jah, väga kiire.",
+      "B": "Да, очень напряжённый."
+    },
+    {
+      "A": "Kohtume õhtul.",
+      "B": "Встретимся вечером."
+    },
+    {
+      "A": "Jah, näeme hiljem.",
+      "B": "Да, увидимся позже."
+    }
+  ]
+}

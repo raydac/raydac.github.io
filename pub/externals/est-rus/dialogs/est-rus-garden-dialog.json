@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a garden / В саду по-эстонски",
+  "description": "Small Estonian-Russian garden dialog with short plant and etiquette phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, teie aed on ilus.",
+      "B": "Здравствуйте, ваш сад красивый."
+    },
+    {
+      "A": "Aitäh, mulle meeldib aiatöö.",
+      "B": "Спасибо, мне нравится садоводство."
+    },
+    {
+      "A": "Mis lilled need on?",
+      "B": "Что это за цветы?"
+    },
+    {
+      "A": "Need on tulbid.",
+      "B": "Это тюльпаны."
+    },
+    {
+      "A": "Kas ma võin neid nuusutada?",
+      "B": "Можно их понюхать?"
+    },
+    {
+      "A": "Jah, palun.",
+      "B": "Да, пожалуйста."
+    },
+    {
+      "A": "Kas siin kasvavad tomatid?",
+      "B": "Здесь растут помидоры?"
+    },
+    {
+      "A": "Jah, need on kasvuhoones.",
+      "B": "Да, они в теплице."
+    },
+    {
+      "A": "Kas aed vajab vett?",
+      "B": "Саду нужна вода?"
+    },
+    {
+      "A": "Jah, täna on kuiv ilm.",
+      "B": "Да, сегодня сухая погода."
+    },
+    {
+      "A": "Kas ma võin aidata kasta?",
+      "B": "Можно помочь полить?"
+    },
+    {
+      "A": "Jah, võtke see kastekann.",
+      "B": "Да, возьмите эту лейку."
+    },
+    {
+      "A": "Kuhu ma võin astuda?",
+      "B": "Куда можно наступать?"
+    },
+    {
+      "A": "Palun käige ainult teerajal.",
+      "B": "Пожалуйста, ходите только по дорожке."
+    },
+    {
+      "A": "Aitäh õpetuse eest.",
+      "B": "Спасибо за объяснение."
+    },
+    {
+      "A": "Tulge jälle külla.",
+      "B": "Приходите ещё в гости."
+    }
+  ]
+}

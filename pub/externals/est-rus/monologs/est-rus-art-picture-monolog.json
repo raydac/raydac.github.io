@@ -1,0 +1,109 @@
+{
+  "path": "Estonian-Russian/Monologs",
+  "menuName": "Describing an art picture / Описание картины по-эстонски",
+  "description": "Estonian-Russian picture-description monolog about an artwork",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Pildil on värviline maal.",
+      "B": "На картинке цветная картина."
+    },
+    {
+      "A": "Esiplaanil on noor naine.",
+      "B": "На переднем плане молодая женщина."
+    },
+    {
+      "A": "Ta istub suure puu all.",
+      "B": "Она сидит под большим деревом."
+    },
+    {
+      "A": "Taustal paistab sinine järv.",
+      "B": "На заднем плане видно синее озеро."
+    },
+    {
+      "A": "Taevas on hele ja rahulik.",
+      "B": "Небо светлое и спокойное."
+    },
+    {
+      "A": "Kunstnik kasutab sooje värve.",
+      "B": "Художник использует тёплые цвета."
+    },
+    {
+      "A": "Naise kleit on punane.",
+      "B": "Платье женщины красное."
+    },
+    {
+      "A": "Puu lehed on tumerohelised.",
+      "B": "Листья дерева тёмно-зелёные."
+    },
+    {
+      "A": "Maal tekitab rahuliku tunde.",
+      "B": "Картина создаёт спокойное чувство."
+    },
+    {
+      "A": "Mulle meeldib valgus pildil.",
+      "B": "Мне нравится свет на картине."
+    },
+    {
+      "A": "Minu arvates on see ilus töö.",
+      "B": "По моему мнению, это красивая работа."
+    },
+    {
+      "A": "See pilt sobib muuseumi.",
+      "B": "Эта картина подходит для музея."
+    }
+  ]
+}

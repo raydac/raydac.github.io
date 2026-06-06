@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a taxi / В такси по-эстонски",
+  "description": "Small Estonian-Russian taxi dialog with short travel and payment phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, kas see takso on vaba?",
+      "B": "Здравствуйте, это такси свободно?"
+    },
+    {
+      "A": "Jah, kuhu sõidame?",
+      "B": "Да, куда едем?"
+    },
+    {
+      "A": "Lennujaama, palun.",
+      "B": "В аэропорт, пожалуйста."
+    },
+    {
+      "A": "Palun pange turvavöö kinni.",
+      "B": "Пожалуйста, пристегните ремень."
+    },
+    {
+      "A": "Kui kaua sõit kestab?",
+      "B": "Сколько длится поездка?"
+    },
+    {
+      "A": "Umbes kakskümmend minutit.",
+      "B": "Примерно двадцать минут."
+    },
+    {
+      "A": "Kas saame sõita kesklinna kaudu?",
+      "B": "Можно ехать через центр?"
+    },
+    {
+      "A": "See tee on lühem.",
+      "B": "Эта дорога короче."
+    },
+    {
+      "A": "Palun sõitke aeglasemalt.",
+      "B": "Пожалуйста, езжайте медленнее."
+    },
+    {
+      "A": "Sõidan rahulikumalt.",
+      "B": "Поеду спокойнее."
+    },
+    {
+      "A": "Kui palju see maksab?",
+      "B": "Сколько это стоит?"
+    },
+    {
+      "A": "See maksab viisteist eurot.",
+      "B": "Это стоит пятнадцать евро."
+    },
+    {
+      "A": "Peatuge siin, palun.",
+      "B": "Остановитесь здесь, пожалуйста."
+    },
+    {
+      "A": "Kas maksate kaardiga?",
+      "B": "Вы платите картой?"
+    },
+    {
+      "A": "Jah, kaardiga.",
+      "B": "Да, картой."
+    },
+    {
+      "A": "Aitäh ja head päeva!",
+      "B": "Спасибо и хорошего дня!"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "resources": [
+    {
+      "resource": "./est-rus/est-rus-colors.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-airport-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-apteek-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-bus-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-cinema-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-foodstore-kassa-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-garden-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-hospital-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-hotel-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-museum-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-police-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-restaurant-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-street-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-taxi-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-time-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-tourist-hotel-dialog.json"
+    },
+    {
+      "resource": "./est-rus/dialogs/est-rus-work-dialog.json"
+    },
+    {
+      "resource": "./est-rus/monologs/est-rus-art-picture-monolog.json"
+    },
+    {
+      "resource": "./est-rus/monologs/est-rus-room-picture-monolog.json"
+    },
+    {
+      "resource": "./est-rus/monologs/est-rus-street-picture-monolog.json"
+    },
+    {
+      "resource": "./est-rus/poetry/est-rus-lasteaed-saab-labi.json"
+    },
+    {
+      "resource": "./est-rus/poetry/est-rus-kooli.json"
+    },
+    {
+      "resource": "./est-rus/est-rus-public-transport.json"
+    },
+    {
+      "resource": "./est-rus/est-rus-pronouns.json"
+    },
+    {
+      "resource": "./est-rus/est-rus-numerals.json"
+    },
+    {
+      "resource": "./est-rus/est-rus-shopping.json"
+    },
+    {
+      "resource": "./est-rus/est-rus-fruits-images.json"
+    }
+  ]
+}

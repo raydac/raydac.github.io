@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a cinema / В кино по-эстонски",
+  "description": "Small Estonian-Russian cinema dialog with short ticket and etiquette phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, kaks piletit, palun.",
+      "B": "Здравствуйте, два билета, пожалуйста."
+    },
+    {
+      "A": "Millisele filmile?",
+      "B": "На какой фильм?"
+    },
+    {
+      "A": "Õhtusele seansile, palun.",
+      "B": "На вечерний сеанс, пожалуйста."
+    },
+    {
+      "A": "Kas soovite kohti keskele?",
+      "B": "Хотите места в центре?"
+    },
+    {
+      "A": "Jah, keskele, palun.",
+      "B": "Да, в центре, пожалуйста."
+    },
+    {
+      "A": "Teie kohad on seitsmendas reas.",
+      "B": "Ваши места в седьмом ряду."
+    },
+    {
+      "A": "Kust saab popkorni osta?",
+      "B": "Где можно купить попкорн?"
+    },
+    {
+      "A": "Popkorni saab osta seal.",
+      "B": "Попкорн можно купить там."
+    },
+    {
+      "A": "Üks väike popkorn, palun.",
+      "B": "Один маленький попкорн, пожалуйста."
+    },
+    {
+      "A": "Kas soovite ka jooki?",
+      "B": "Хотите ещё напиток?"
+    },
+    {
+      "A": "Vesi, palun.",
+      "B": "Воду, пожалуйста."
+    },
+    {
+      "A": "Film algab viie minuti pärast.",
+      "B": "Фильм начнётся через пять минут."
+    },
+    {
+      "A": "Palun lülitage telefon välja.",
+      "B": "Пожалуйста, выключите телефон."
+    },
+    {
+      "A": "Panen telefoni hääletuks.",
+      "B": "Я поставлю телефон на беззвучный режим."
+    },
+    {
+      "A": "Kas siin võib istuda?",
+      "B": "Здесь можно сидеть?"
+    },
+    {
+      "A": "Jah, see on teie koht.",
+      "B": "Да, это ваше место."
+    }
+  ]
+}

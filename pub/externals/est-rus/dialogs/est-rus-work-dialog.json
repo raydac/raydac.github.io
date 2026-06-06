@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "At work / На работе по-эстонски",
+  "description": "Small Estonian-Russian work dialog with short office and task phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere hommikust!",
+      "B": "Доброе утро!"
+    },
+    {
+      "A": "Tere, kuidas läheb?",
+      "B": "Здравствуйте, как дела?"
+    },
+    {
+      "A": "Täna on palju tööd.",
+      "B": "Сегодня много работы."
+    },
+    {
+      "A": "Kas teil on hetk aega?",
+      "B": "У вас есть минутка?"
+    },
+    {
+      "A": "Jah, muidugi.",
+      "B": "Да, конечно."
+    },
+    {
+      "A": "Mul on üks küsimus.",
+      "B": "У меня один вопрос."
+    },
+    {
+      "A": "Palun saatke fail mulle.",
+      "B": "Пожалуйста, отправьте мне файл."
+    },
+    {
+      "A": "Saadan selle kohe.",
+      "B": "Я отправлю его сейчас."
+    },
+    {
+      "A": "Millal koosolek algab?",
+      "B": "Когда начинается собрание?"
+    },
+    {
+      "A": "Koosolek algab kell kaks.",
+      "B": "Собрание начинается в два."
+    },
+    {
+      "A": "Mis on tähtaeg?",
+      "B": "Какой срок?"
+    },
+    {
+      "A": "Tähtaeg on reedel.",
+      "B": "Срок в пятницу."
+    },
+    {
+      "A": "Palun andke mulle teada.",
+      "B": "Пожалуйста, сообщите мне."
+    },
+    {
+      "A": "Jah, ma annan teada.",
+      "B": "Да, я сообщу."
+    },
+    {
+      "A": "Aitäh koostöö eest.",
+      "B": "Спасибо за сотрудничество."
+    },
+    {
+      "A": "Head õhtut!",
+      "B": "Хорошего вечера!"
+    }
+  ]
+}

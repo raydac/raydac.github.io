@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "In a museum / В музее по-эстонски",
+  "description": "Small Estonian-Russian museum dialog with short ticket and etiquette phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere, üks pilet, palun.",
+      "B": "Здравствуйте, один билет, пожалуйста."
+    },
+    {
+      "A": "Kas soovite täispiletit?",
+      "B": "Вы хотите полный билет?"
+    },
+    {
+      "A": "Jah, täispilet, palun.",
+      "B": "Да, полный билет, пожалуйста."
+    },
+    {
+      "A": "Pilet maksab kaheksa eurot.",
+      "B": "Билет стоит восемь евро."
+    },
+    {
+      "A": "Kas saan kaardiga maksta?",
+      "B": "Можно оплатить картой?"
+    },
+    {
+      "A": "Jah, kaardiga saab.",
+      "B": "Да, картой можно."
+    },
+    {
+      "A": "Kus on näitus?",
+      "B": "Где выставка?"
+    },
+    {
+      "A": "Näitus on teisel korrusel.",
+      "B": "Выставка на втором этаже."
+    },
+    {
+      "A": "Kas siin võib pildistada?",
+      "B": "Здесь можно фотографировать?"
+    },
+    {
+      "A": "Jah, aga ilma välguta.",
+      "B": "Да, но без вспышки."
+    },
+    {
+      "A": "Kus on audiogiid?",
+      "B": "Где аудиогид?"
+    },
+    {
+      "A": "Audiogiid on kassas.",
+      "B": "Аудиогид на кассе."
+    },
+    {
+      "A": "Palun olge vaikselt.",
+      "B": "Пожалуйста, говорите тише."
+    },
+    {
+      "A": "Jah, vabandust.",
+      "B": "Да, извините."
+    },
+    {
+      "A": "Muuseum suletakse kell kuus.",
+      "B": "Музей закрывается в шесть."
+    },
+    {
+      "A": "Aitäh, näitus oli huvitav.",
+      "B": "Спасибо, выставка была интересной."
+    }
+  ]
+}

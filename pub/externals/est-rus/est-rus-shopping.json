@@ -1,0 +1,325 @@
+{
+  "path": "Estonian-Russian",
+  "modules": [
+    "!IMAGES"
+  ],
+  "menuName": "Shopping / Покупки по-эстонски",
+  "description": "Shopping words and everyday store phrases with Russian translations",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "shuffled": true,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Pood",
+      "B": "Магазин"
+    },
+    {
+      "A": "Turg",
+      "B": "Рынок"
+    },
+    {
+      "A": "Ost",
+      "B": "Покупка"
+    },
+    {
+      "A": "Müüja",
+      "B": "Продавец"
+    },
+    {
+      "A": "Klient",
+      "B": "Клиент"
+    },
+    {
+      "A": "Kassa",
+      "B": "Касса"
+    },
+    {
+      "A": "Korv",
+      "B": "Корзина"
+    },
+    {
+      "A": "Kott",
+      "B": "Пакет"
+    },
+    {
+      "A": "Hind",
+      "B": "Цена"
+    },
+    {
+      "A": "Allahindlus",
+      "B": "Скидка"
+    },
+    {
+      "A": "Kviitung",
+      "B": "Чек"
+    },
+    {
+      "A": "Sularaha",
+      "B": "Наличные"
+    },
+    {
+      "A": "Pangakaart",
+      "B": "Банковская карта"
+    },
+    {
+      "A": "Maksta",
+      "B": "Платить"
+    },
+    {
+      "A": "Proovima",
+      "B": "Примерять"
+    },
+    {
+      "A": "Suurus",
+      "B": "Размер"
+    },
+    {
+      "A": "Värv",
+      "B": "Цвет"
+    },
+    {
+      "A": "See on kallis.",
+      "B": "Это дорого."
+    },
+    {
+      "A": "See on odav.",
+      "B": "Это дёшево."
+    },
+    {
+      "A": "Kui palju see maksab?",
+      "B": "Сколько это стоит?"
+    },
+    {
+      "A": "Ma otsin kingitust.",
+      "B": "Я ищу подарок."
+    },
+    {
+      "A": "Kas teil on suurem suurus?",
+      "B": "У вас есть размер побольше?"
+    },
+    {
+      "A": "Kas teil on teine värv?",
+      "B": "У вас есть другой цвет?"
+    },
+    {
+      "A": "Ma võtan selle.",
+      "B": "Я возьму это."
+    },
+    {
+      "A": "Ma ei võta seda.",
+      "B": "Я это не возьму."
+    },
+    {
+      "A": "Kas ma saan seda proovida?",
+      "B": "Можно это примерить?"
+    },
+    {
+      "A": "Palun andke mulle kott.",
+      "B": "Дайте мне пакет, пожалуйста."
+    },
+    {
+      "A": "Kas saab kaardiga maksta?",
+      "B": "Можно оплатить картой?"
+    },
+    {
+      "A": "Ma maksan sularahas.",
+      "B": "Я плачу наличными."
+    },
+    {
+      "A": "Palun kviitungit.",
+      "B": "Чек, пожалуйста."
+    },
+    {
+      "A": "Toidupood",
+      "B": "Продуктовый магазин"
+    },
+    {
+      "A": "Riidepood",
+      "B": "Магазин одежды"
+    },
+    {
+      "A": "Kingapood",
+      "B": "Обувной магазин"
+    },
+    {
+      "A": "Apteek",
+      "B": "Аптека"
+    },
+    {
+      "A": "Ostukeskus",
+      "B": "Торговый центр"
+    },
+    {
+      "A": "Lahti",
+      "B": "Открыто"
+    },
+    {
+      "A": "Suletud",
+      "B": "Закрыто"
+    },
+    {
+      "A": "Uus",
+      "B": "Новый"
+    },
+    {
+      "A": "Kasutatud",
+      "B": "Бывший в употреблении"
+    },
+    {
+      "A": "Kvaliteet",
+      "B": "Качество"
+    },
+    {
+      "A": "Kas see on müügil?",
+      "B": "Это продаётся?"
+    },
+    {
+      "A": "Kas teil on odavam variant?",
+      "B": "У вас есть вариант дешевле?"
+    },
+    {
+      "A": "Ma tahan seda vahetada.",
+      "B": "Я хочу это обменять."
+    },
+    {
+      "A": "Ma tahan raha tagasi.",
+      "B": "Я хочу вернуть деньги."
+    },
+    {
+      "A": "Kus on proovikabiin?",
+      "B": "Где примерочная?"
+    },
+    {
+      "A": "Liha",
+      "B": "Мясо"
+    },
+    {
+      "A": "Veiseliha",
+      "B": "Говядина"
+    },
+    {
+      "A": "Sealiha",
+      "B": "Свинина"
+    },
+    {
+      "A": "Kanaliha",
+      "B": "Куриное мясо"
+    },
+    {
+      "A": "Kalkuniliha",
+      "B": "Мясо индейки"
+    },
+    {
+      "A": "Lambaliha",
+      "B": "Баранина"
+    },
+    {
+      "A": "Hakkliha",
+      "B": "Фарш"
+    },
+    {
+      "A": "Kanafilee",
+      "B": "Куриное филе"
+    },
+    {
+      "A": "Kas see on veiseliha või sealiha?",
+      "B": "Это говядина или свинина?"
+    },
+    {
+      "A": "Ma soovin pool kilo hakkliha.",
+      "B": "Я хочу полкило фарша."
+    },
+    {
+      "A": "Kas teil on värsket kanafileed?",
+      "B": "У вас есть свежее куриное филе?"
+    },
+    {
+      "A": "Piim",
+      "B": "Молоко"
+    },
+    {
+      "A": "Juust",
+      "B": "Сыр"
+    },
+    {
+      "A": "Või",
+      "B": "Масло"
+    },
+    {
+      "A": "Jogurt",
+      "B": "Йогурт"
+    },
+    {
+      "A": "Kohupiim",
+      "B": "Творог"
+    },
+    {
+      "A": "Hapukoor",
+      "B": "Сметана"
+    },
+    {
+      "A": "Koor",
+      "B": "Сливки"
+    },
+    {
+      "A": "Keefir",
+      "B": "Кефир"
+    },
+    {
+      "A": "Munad",
+      "B": "Яйца"
+    },
+    {
+      "A": "Kas teil on värskeid mune?",
+      "B": "У вас есть свежие яйца?"
+    }
+  ]
+}

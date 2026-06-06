@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "At a foodstore checkout / На кассе магазина по-эстонски",
+  "description": "Small Estonian-Russian grocery checkout dialog with short payment phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Tere päevast!",
+      "B": "Добрый день!"
+    },
+    {
+      "A": "Tere, siin on minu ostud.",
+      "B": "Здравствуйте, вот мои покупки."
+    },
+    {
+      "A": "Palun pange kaup lindile.",
+      "B": "Пожалуйста, положите товары на ленту."
+    },
+    {
+      "A": "Jah, kohe.",
+      "B": "Да, сейчас."
+    },
+    {
+      "A": "Kas teil on kliendikaart?",
+      "B": "У вас есть карта клиента?"
+    },
+    {
+      "A": "Ei, mul ei ole.",
+      "B": "Нет, у меня нет."
+    },
+    {
+      "A": "Kas soovite kotti?",
+      "B": "Хотите пакет?"
+    },
+    {
+      "A": "Jah, üks kott, palun.",
+      "B": "Да, один пакет, пожалуйста."
+    },
+    {
+      "A": "Kas maksate kaardiga?",
+      "B": "Вы платите картой?"
+    },
+    {
+      "A": "Jah, kaardiga.",
+      "B": "Да, картой."
+    },
+    {
+      "A": "Palun sisestage PIN-kood.",
+      "B": "Пожалуйста, введите ПИН-код."
+    },
+    {
+      "A": "Makse läks läbi.",
+      "B": "Оплата прошла."
+    },
+    {
+      "A": "Kas soovite tšekki?",
+      "B": "Хотите чек?"
+    },
+    {
+      "A": "Jah, palun.",
+      "B": "Да, пожалуйста."
+    },
+    {
+      "A": "Aitäh ostu eest.",
+      "B": "Спасибо за покупку."
+    },
+    {
+      "A": "Head päeva!",
+      "B": "Хорошего дня!"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "path": "Estonian-Russian/Dialogs",
+  "menuName": "Finding a hotel / Как найти отель по-эстонски",
+  "description": "Small Estonian-Russian city tourist dialog with short hotel direction phrases",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Vabandage, kas te saate aidata?",
+      "B": "Извините, вы можете помочь?"
+    },
+    {
+      "A": "Jah, muidugi.",
+      "B": "Да, конечно."
+    },
+    {
+      "A": "Ma otsin hotelli.",
+      "B": "Я ищу отель."
+    },
+    {
+      "A": "Mis hotelli te otsite?",
+      "B": "Какой отель вы ищете?"
+    },
+    {
+      "A": "Ma otsin hotelli Keskus.",
+      "B": "Я ищу отель Центр."
+    },
+    {
+      "A": "See on vanalinna lähedal.",
+      "B": "Он рядом со старым городом."
+    },
+    {
+      "A": "Kas see on kaugel?",
+      "B": "Это далеко?"
+    },
+    {
+      "A": "Ei, kümme minutit jalgsi.",
+      "B": "Нет, десять минут пешком."
+    },
+    {
+      "A": "Kuhu ma pean minema?",
+      "B": "Куда мне нужно идти?"
+    },
+    {
+      "A": "Minge otse ja pöörake vasakule.",
+      "B": "Идите прямо и поверните налево."
+    },
+    {
+      "A": "Kas ma näen silti?",
+      "B": "Я увижу вывеску?"
+    },
+    {
+      "A": "Jah, silt on suur.",
+      "B": "Да, вывеска большая."
+    },
+    {
+      "A": "Kas buss läheb sinna?",
+      "B": "Автобус туда идёт?"
+    },
+    {
+      "A": "Jah, buss number kolm.",
+      "B": "Да, автобус номер три."
+    },
+    {
+      "A": "Suur tänu juhatuse eest.",
+      "B": "Большое спасибо за указания."
+    },
+    {
+      "A": "Head teed!",
+      "B": "Счастливого пути!"
+    }
+  ]
+}

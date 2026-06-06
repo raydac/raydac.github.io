@@ -1,0 +1,97 @@
+{
+  "path": "Estonian-Russian/poetry",
+  "menuName": "Tarmo Selter - Kooli / Тармо Селтер - В школу",
+  "description": "Estonian-Russian poem for learning line by line",
+  "langA": "Eesti",
+  "langB": "Русский",
+  "modules": [
+    "!IMAGES"
+  ],
+  "shuffled": false,
+  "inputEqu": [
+    {
+      "key": [
+        "a",
+        "A"
+      ],
+      "value": [
+        "ä",
+        "Ä"
+      ]
+    },
+    {
+      "key": [
+        "o",
+        "O"
+      ],
+      "value": [
+        "õ",
+        "Õ",
+        "ö",
+        "Ö"
+      ]
+    },
+    {
+      "key": [
+        "u",
+        "U"
+      ],
+      "value": [
+        "ü",
+        "Ü"
+      ]
+    },
+    {
+      "key": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ],
+      "value": [
+        "е",
+        "Е",
+        "ё",
+        "Ё"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "A": "Kooli",
+      "B": "В школу"
+    },
+    {
+      "A": "Kooli läheb suur ja väike,",
+      "B": "В школу идёт большой и маленький,"
+    },
+    {
+      "A": "Lasteaeda pisem veel,",
+      "B": "А самый маленький ещё в детский сад,"
+    },
+    {
+      "A": "Ühele loob silma läike,",
+      "B": "У одного появляется блеск в глазах,"
+    },
+    {
+      "A": "Teisel jälle rõõmus meel,",
+      "B": "У другого снова радостное настроение,"
+    },
+    {
+      "A": "Sest on kooli tulla hea",
+      "B": "Потому что хорошо приходить в школу"
+    },
+    {
+      "A": "Suure naeratusega,",
+      "B": "С большой улыбкой,"
+    },
+    {
+      "A": "Õpetajat armsat pea",
+      "B": "Дорогого учителя помни"
+    },
+    {
+      "A": "Meeles lilleõiega.",
+      "B": "С цветком в памяти."
+    }
+  ]
+}
